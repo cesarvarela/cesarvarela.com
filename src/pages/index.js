@@ -60,7 +60,7 @@ const projectItems =
       description: `A chatbots visual development platform built on top of Microsoft Bot Framework`,
     }
   ]
-  
+
 const skills =
   [
     {
@@ -103,6 +103,12 @@ const skills =
           {
             name: "Express"
           },
+          {
+            name: "Next.js"
+          },
+          {
+            name: "GraphQL"
+          }
         ]
     },
 
@@ -123,7 +129,7 @@ const skills =
             name: "Unity 3D"
           },
           {
-            name: "LAMP"
+            name: "MERN"
           }
         ]
     },
@@ -145,6 +151,9 @@ const skills =
           },
           {
             name: "Sketch"
+          },
+          {
+            name: "Figma"
           },
           {
             name: "Chrome DEV tools"
