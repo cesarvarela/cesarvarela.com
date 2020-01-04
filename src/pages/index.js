@@ -1,6 +1,5 @@
 import React from "react"
 import { Header } from '../components/Header'
-import { Menu } from '../components/Menu'
 import { Contact } from '../components/Contact'
 import { About } from '../components/About'
 import { Footer } from '../components/Footer'
@@ -43,21 +42,15 @@ const socialItems =
       link: 'https://twitter.com/cesarpo'
     },
   ]
+
 const projectItems =
   [
-    // {
-    //   key: 'poatm',
-    //   link: 'https://poandthemachines.com',
-    //   img: './poatm.png',
-    //   title: 'Po and the machines',
-    //   description: `This is where I host all my personal projects. I do all the design and development over there, please check it out and try my games!`,
-    // },
     {
-      key: 'tbm',
-      link: 'https://www.thebotmakers.com',
-      img: './tbm.png',
-      title: 'The Bot Makers',
-      description: `A chatbots development studio I've started along with some friends. Need a chatbot? Don't hesitate and talk with us!`,
+      key: 'ff',
+      link: 'https://fb.gg/play/friendsfeud',
+      img: './friendsfeud.png',
+      title: 'Friends Feud',
+      description: `A Facebook Instant game that lets you guess the most popular answer of a 100 person survey.`,
     },
     {
       key: 'botsfactory',
@@ -67,37 +60,7 @@ const projectItems =
       description: `A chatbots visual development platform built on top of Microsoft Bot Framework`,
     }
   ]
-const works =
-  [
-    {
-      img: "./thumb-botsfactory.png",
-      title: "Botsfactory",
-      description: "A chatbots development platform where I lead the Frontend and UX/UI efforts of the development team. ",
-      link: "https://www.botsfactory.io",
-      external: true
-    },
-    {
-      img: "./thumb-kavachess.png",
-      title: "Kava Chess",
-      description: "Concept, design (graphics and gameplay), and development.",
-      link: "https://itunes.apple.com/us/app/kava-chess/id1143682673",
-      external: true
-    },
-    {
-      img: "./thumb-stealthy.png",
-      title: "Stealhty - Work in progress",
-      description: "Concept, design (graphics and gameplay), and development.",
-      link: "https://poandthemachines.com/stealthy/",
-      external: true
-    },
-    {
-      img: "./thumb-totems.png",
-      title: "The day of the Totems",
-      description: "Concept, design (graphics and gameplay), and development.",
-      link: "https://poandthemachines.com/thedayofthetotems/",
-      external: true
-    }
-  ]
+  
 const skills =
   [
     {
@@ -195,12 +158,8 @@ const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
     <Header />
-    <hr className="dot hidden-md-down" />
-    <Menu />
-    <hr className="dot" />
-    <Works items={works} />
-    <About skills={skills} />
     <Projects items={projectItems} />
+    <About skills={skills} />
     <Social items={socialItems} />
     <Contact />
     <Footer />

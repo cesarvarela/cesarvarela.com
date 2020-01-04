@@ -4,7 +4,7 @@ import { Section } from './Section'
 export class Contact extends React.Component {
 
 	render() {
-		return <Section id="contact" preHeading="Communication is Key" heading="Contact">
+		return <Section id="contact" subtitle="Contact">
 			<div className="row">
 				<div className="col-md-6 text-md-right">
 					<img src={require("../images/MECard.gif")} alt="qr con datos de contacto" />
@@ -15,9 +15,6 @@ export class Contact extends React.Component {
 					<ul className="list-unstyled">
 						<li>
 							<a href="mailto:mail@cesarvarela.com">mail@cesarvarela.com</a>
-						</li>
-						<li>
-							<a href="tel:+598%2094%20085%20280">+598 94 085 280</a>
 						</li>
 					</ul>
 				</div>
