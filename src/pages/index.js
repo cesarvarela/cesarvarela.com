@@ -5,7 +5,6 @@ import { About } from '../components/About'
 import { Footer } from '../components/Footer'
 import { Social } from '../components/Social'
 import { Projects } from '../components/Projects'
-import { Works } from '../components/Works'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 

@@ -1,6 +1,16 @@
 import React from 'react'
-import classnames from 'classnames'
 import { Section } from './Section'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStackOverflow, faLinkedin, faGithub, faLastfm, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
+
+const iconsMap = {
+    'stack-overflow': <FontAwesomeIcon icon={faStackOverflow} />,
+    'linkedin': <FontAwesomeIcon icon={faLinkedin} />,
+    'github': <FontAwesomeIcon icon={faGithub} />,
+    'lastfm': <FontAwesomeIcon icon={faLastfm} />,
+    'facebook': <FontAwesomeIcon icon={faFacebook} />,
+    'twitter': <FontAwesomeIcon icon={faTwitter} />,
+}
 
 export class Social extends React.Component {
 
@@ -11,7 +21,7 @@ export class Social extends React.Component {
                     this.props.items.map((item, index) => {
                         return <li key={index} className="item">
                             <a href={item.link} target="_blank">
-                                <i className={classnames('fa fa-' + item.key)} aria-hidden="true"></i>
+                                {iconsMap[item.key]}
                             </a>
                         </li>
                     })
