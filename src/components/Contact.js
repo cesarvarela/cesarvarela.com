@@ -1,23 +1,17 @@
 import React from 'react'
 import { Section } from './Section'
+import MECard from '../images/MECard.png'
 
 export class Contact extends React.Component {
 
 	render() {
 		return <Section id="contact" subtitle="Contact">
-			<div className="row">
-				<div className="col-md-6 text-md-right">
-					<img src={require("../images/MECard.gif")} alt="qr con datos de contacto" />
-				</div>
-				<div className="col-md-6">
-					<h5>Scan this to get my contact info to your smartphone.</h5>
-					<p>Or you can:</p>
-					<ul className="list-unstyled">
-						<li>
-							<a href="mailto:mail@cesarvarela.com">mail@cesarvarela.com</a>
-						</li>
-					</ul>
-				</div>
+			<div className="mecard">
+				<img src={MECard} alt="qr" />
+				<p>Scan this to get my contact info to your smartphone.</p>
+			</div>
+			<div className="mail">
+				<a href="mailto:mail@cesarvarela.com">mail@cesarvarela.com</a>
 			</div>
 		</Section>
 	}

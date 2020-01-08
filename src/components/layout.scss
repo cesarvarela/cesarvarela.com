@@ -137,25 +137,12 @@ section#social {
     padding: 0;
     li {
       margin: 0;
-      padding: 12px;
+      padding: 18px;
       display: inline-block;
       a {
         color: #000;
-        i {
-          font-size: 48px;
-        }
+        font-size: 48px;
       }
-    }
-  }
-}
-
-section#contact {
-  .container {
-    h5 {
-      margin-top: 1rem;
-    }
-    img {
-      height: 230px;
     }
   }
 }
@@ -171,6 +158,24 @@ section#about {
     a {
       color: $text-dark;
       text-decoration: none;
+    }
+  }
+}
+
+section#contact {
+  .content {
+    .mecard {
+      max-width: 240px;
+      margin: 0 auto;
+      img {
+        width: 100%;
+      }
+    }
+    .mail {
+      margin: 36px auto 0;
+      a {
+        text-decoration: none;
+      }
     }
   }
 }
