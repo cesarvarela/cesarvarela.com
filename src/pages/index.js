@@ -91,7 +91,7 @@ const skills =
         ]
     },
     {
-      name: "FRAMEWORKS/LIBRARIES",
+      name: "Frameworks/Libraries",
       items:
         [
           {
@@ -113,7 +113,7 @@ const skills =
     },
 
     {
-      name: "STACKS/PLATFORMS",
+      name: "Stacks/Platforms",
       items:
         [
           {
@@ -134,7 +134,7 @@ const skills =
         ]
     },
     {
-      name: "SOFTWARE",
+      name: "Software",
       items:
         [
           {

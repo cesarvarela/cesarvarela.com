@@ -1,37 +1,25 @@
 import React from 'react'
-import { SkillItem } from './SkillItem'
 import { Section } from './Section'
+import ToolCard from './ToolCard'
+import cv from '../downloads/cesarvarela.com-CV.pdf'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDownload } from '@fortawesome/free-solid-svg-icons'
 
 export function About({ skills }) {
 
     return <Section id="about" subtitle="tech">
         <div className="skills">
-            <h3>Skills</h3>
-            <p>Analysis, design and software development.</p>
+            <p className="description">Over the years I've worked on <b>many</b> different projects each with different requirements and challenges, here are some of the tools that helped me</p>
 
-            <h3>Technologies</h3>
-            <p>Over the years I've worked on lots of different projects with different requirements and challenges, here is some of the tools that helped me get thorugh them.</p>
-
-            <div className="row">
+            <div className="tool-cards">
                 {
-                    skills.map((skillList) => {
-                        return <div>
-                            <h4>{skillList.name}</h4>
-                            <ul>
-                                {
-                                    skillList.items.map((item, index) => {
-                                        return <SkillItem name={item.name} key={index} />
-                                    })
-                                }
-                            </ul>
-                        </div>
-                    })
+                    skills.map((skillList) => <ToolCard title={skillList.name} items={skillList.items} />)
                 }
             </div>
         </div>
 
-        <h3 className="cv"><a target="_blank" href="/assets/curriculum.pdf">
-            You can also download my CV here <i className="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
+        <h3 className="cv"><a href={cv} download>
+            You can also download my CV here <FontAwesomeIcon icon={faDownload} /></a>
         </h3>
     </Section>
 }
