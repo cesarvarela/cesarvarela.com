@@ -45,32 +45,6 @@ section {
   }
 }
 
-.card {
-  border: 1px solid #c4c4c4;
-  text-align: left;
-  .image {
-    background-size: cover;
-    padding-bottom: 50%;
-    background-position: center;
-    border-bottom: 1px solid #c4c4c4;
-  }
-  h3 {
-    padding: 12px;
-    margin: 0;
-  }
-  p {
-    padding: 12px;
-    margin: 0;
-  }
-  a {
-    padding: 12px;
-    margin: 0;
-    text-decoration: none;
-    display: block;
-    color: $text-dark;
-  }
-}
-
 .tool-card {
   border: 1px solid #c4c4c4;
 
