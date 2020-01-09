@@ -31,7 +31,7 @@ const StyledCard = styled.div`
 
 export default function Card({ src, title, description, href }) {
 
-    return <StyledCard>
+    return <StyledCard className="card">
         <div className="image" style={{ backgroundImage: `url(${src})` }} />
         <h3>{title}</h3>
         <p>{description}</p>
