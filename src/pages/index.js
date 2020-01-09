@@ -1,8 +1,8 @@
 import React from "react"
-import { Header } from '../components/Header'
-import { Contact } from '../components/Contact'
-import { About } from '../components/About'
-import { Footer } from '../components/Footer'
+import { Header } from '../components/sections/Header'
+import { Contact } from '../components/sections/Contact'
+import { About } from '../components/sections/About'
+import { Footer } from '../components/sections/Footer'
 import { Social } from '../components/Social'
 import { Projects } from '../components/Projects'
 import Layout from "../components/layout"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section } from './Section'
+import { Section } from '../Section'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStackOverflow, faLinkedin, faGithub, faLastfm, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
 

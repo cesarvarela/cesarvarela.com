@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section } from './Section'
+import { Section } from '../Section'
 import MECard from '../images/MECard.png'
 
 export class Contact extends React.Component {
