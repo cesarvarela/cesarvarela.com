@@ -1,6 +1,6 @@
 import React from 'react'
 import { Section } from '../Section'
-import MECard from '../images/MECard.png'
+import MECard from '../../images/MECard.png'
 
 export class Contact extends React.Component {
 

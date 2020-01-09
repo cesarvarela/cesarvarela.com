@@ -1,7 +1,6 @@
 import React from 'react'
 import { Section } from '../Section'
-import picture from '../images/po.png'
-
+import picture from '../../images/po.png'
 
 export function Header() {
 

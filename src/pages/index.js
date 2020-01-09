@@ -3,7 +3,7 @@ import { Header } from '../components/sections/Header'
 import { Contact } from '../components/sections/Contact'
 import { About } from '../components/sections/About'
 import { Footer } from '../components/sections/Footer'
-import { Social } from '../components/Social'
+import { Social } from '../components/sections/Social'
 import { Projects } from '../components/Projects'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
