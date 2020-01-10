@@ -6,14 +6,18 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import ListCard from '../ListCard'
 import styled from 'styled-components'
 
-
 const Cards = styled.div`
-    display: flex;
-    flex-wrap: wrap;
     margin: 36px auto 0;
+    @media (min-width: 768px) {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 
-    & > .tool-card {
-        flex: 1;
+    & > .list-card {
+        @media (min-width: 768px) {
+            width: 40%;
+        }        
         margin: 12px;
     }
 `

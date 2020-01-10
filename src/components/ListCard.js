@@ -25,7 +25,7 @@ const List = styled.ul`
 
 export default function ListCard({ title, items }) {
 
-    return <StyledListCard>
+    return <StyledListCard className="list-card">
         <h4>{title}</h4>
         <List>
             {
