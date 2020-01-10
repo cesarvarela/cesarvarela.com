@@ -6,6 +6,12 @@ import { sessionContext } from './session'
 
 const Toggle = styled.div`
     cursor: pointer;
+    width: 30px;
+    height: 30px;
+    & > svg.svg-inline--fa.fa-w-16 {
+        width: 100%;
+        height: 100%;
+    }
 `
 
 export default function ThemeToggle() {

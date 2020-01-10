@@ -9,7 +9,8 @@ import { sessionContext } from "./session"
 
 const Controls = styled.div`
   margin: 12px auto 0;
-  text-align: center;
+  display: flex;
+  justify-content: center;
 `
 
 const Layout = ({ children }) => {
