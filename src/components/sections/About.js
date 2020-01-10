@@ -41,7 +41,7 @@ export function About({ skills }) {
             <Description className="description">Over the years I've worked on <b>many</b> different projects each with different requirements and challenges, here are some of the tools that helped me</Description>
             <Cards>
                 {
-                    skills.map((skillList) => <ListCard title={skillList.name} items={skillList.items} />)
+                    skills.map((skillList) => <ListCard key={skillList.name} title={skillList.name} items={skillList.items} />)
                 }
             </Cards>
         </div>

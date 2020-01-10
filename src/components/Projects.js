@@ -20,7 +20,8 @@ export class Projects extends React.Component {
         return <Section id="projects" subtitle="Current Projects">
             <Cards>
                 {
-                    this.props.items.map((item, index) => <Card
+                    this.props.items.map((item) => <Card
+                        key={item.title}
                         src={context(item.img)}
                         title={item.title}
                         description={item.description}
