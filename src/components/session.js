@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { lightTheme, darkTheme } from './theme'
 
 const sessionContext = React.createContext(null)
@@ -19,7 +19,7 @@ const themeFromBrowser = () => {
 
 const themeFromLocalStorage = () => {
 
-    const stored = localStorage.getItem('theme')
+    const stored = window.localStorage.getItem('theme')
 
     return stored ? stored === 'light' ? lightTheme : darkTheme : null
 }

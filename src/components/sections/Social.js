@@ -37,7 +37,7 @@ export class Social extends React.Component {
                 {
                     this.props.items.map((item, index) => {
                         return <li key={index} className="item">
-                            <Link href={item.link} target="_blank">
+                            <Link href={item.link} target="_blank" rel="noopener">
                                 {iconsMap[item.key]}
                             </Link>
                         </li>

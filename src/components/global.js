@@ -1,6 +1,4 @@
 import { createGlobalStyle } from 'styled-components'
-import { darkTheme, lightTheme } from './theme'
-
 
 export const GlobalStyles = createGlobalStyle`
   *,

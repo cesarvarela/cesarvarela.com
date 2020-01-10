@@ -9,6 +9,6 @@ const StyledFooter = styled.footer`
 export function Footer() {
 
     return <StyledFooter>
-        <p>© 2020 Cesar Varela 👋 Thanks for visiting!</p>
+        <p>© 2020 Cesar Varela <span role="img" aria-label="waving hand">👋</span> Thanks for visiting!</p>
     </StyledFooter>
 }
