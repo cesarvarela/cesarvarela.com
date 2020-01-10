@@ -2,6 +2,7 @@ import React from 'react'
 import { Section } from '../Section'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStackOverflow, faLinkedin, faGithub, faLastfm, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import styled from 'styled-components'
 
 const iconsMap = {
     'stack-overflow': <FontAwesomeIcon icon={faStackOverflow} />,
@@ -12,21 +13,37 @@ const iconsMap = {
     'twitter': <FontAwesomeIcon icon={faTwitter} />,
 }
 
+const List = styled.u`
+    list-style-type: none;
+    padding: 0;
+
+    & > li {
+      margin: 0;
+      padding: 18px;
+      display: inline-block;
+    }
+`
+
+const Link = styled.a`
+    color: ${({ theme }) => theme.color};
+    font-size: 48px;
+`
+
 export class Social extends React.Component {
 
     render() {
         return <Section id="social" subtitle="social">
-            <ul>
+            <List>
                 {
                     this.props.items.map((item, index) => {
                         return <li key={index} className="item">
-                            <a href={item.link} target="_blank">
+                            <Link href={item.link} target="_blank">
                                 {iconsMap[item.key]}
-                            </a>
+                            </Link>
                         </li>
                     })
                 }
-            </ul>
+            </List>
         </Section>
     }
 }

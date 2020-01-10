@@ -7,6 +7,7 @@ import { Social } from '../components/sections/Social'
 import { Projects } from '../components/Projects'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { SessionProvider } from "../components/session"
 
 const socialItems =
   [
@@ -163,15 +164,17 @@ const skills =
 
 
 const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <Header />
-    <Projects items={projectItems} />
-    <About skills={skills} />
-    <Social items={socialItems} />
-    <Contact />
-    <Footer />
-  </Layout>
+  <SessionProvider>
+    <Layout>
+      <SEO title="Home" />
+      <Header />
+      <Projects items={projectItems} />
+      <About skills={skills} />
+      <Social items={socialItems} />
+      <Contact />
+      <Footer />
+    </Layout>
+  </SessionProvider>
 )
 
 export default IndexPage

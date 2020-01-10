@@ -1,25 +1,46 @@
 import React from 'react'
 import { Section } from '../Section'
-import ToolCard from '../ToolCard'
 import cv from '../../downloads/cesarvarela.com-CV.pdf'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
+import ListCard from '../ListCard'
+import styled from 'styled-components'
+
+
+const Cards = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    margin: 36px auto 0;
+
+    & > .tool-card {
+        flex: 1;
+        margin: 12px;
+    }
+`
+
+const Description = styled.p`
+    font-size: 24px;
+    margin: 0 auto;
+`
+
+const CVLink = styled.a`
+    margin-top: 36px;
+    color:  ${({ theme }) => theme.color};
+    text-decoration: none;
+    display: inline-block;
+`
 
 export function About({ skills }) {
 
     return <Section id="about" subtitle="tech">
         <div className="skills">
-            <p className="description">Over the years I've worked on <b>many</b> different projects each with different requirements and challenges, here are some of the tools that helped me</p>
-
-            <div className="tool-cards">
+            <Description className="description">Over the years I've worked on <b>many</b> different projects each with different requirements and challenges, here are some of the tools that helped me</Description>
+            <Cards>
                 {
-                    skills.map((skillList) => <ToolCard title={skillList.name} items={skillList.items} />)
+                    skills.map((skillList) => <ListCard title={skillList.name} items={skillList.items} />)
                 }
-            </div>
+            </Cards>
         </div>
-
-        <h3 className="cv"><a href={cv} download>
-            You can also download my CV here <FontAwesomeIcon icon={faDownload} /></a>
-        </h3>
+        <CVLink href={cv} download>You can also download my CV here <FontAwesomeIcon icon={faDownload} /></CVLink>
     </Section>
 }

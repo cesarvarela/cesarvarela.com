@@ -1,15 +1,16 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
-import React from "react"
+import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import "./layout.scss"
+import { GlobalStyles } from './global'
+import styled, { ThemeProvider } from 'styled-components'
+import ThemeToggle from "./ThemeToggle"
+import { sessionContext } from "./session"
+
+const Controls = styled.div`
+  margin: 12px auto 0;
+  text-align: center;
+`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -22,11 +23,15 @@ const Layout = ({ children }) => {
     }
   `)
 
-  return (
-    <>
-      <main>{children}</main>
-    </>
-  )
+  const session = useContext(sessionContext)
+
+  return <ThemeProvider theme={session.theme}>
+    <GlobalStyles />
+    <Controls>
+      <ThemeToggle />
+    </Controls>
+    <main>{children}</main>
+  </ThemeProvider>
 }
 
 Layout.propTypes = {
