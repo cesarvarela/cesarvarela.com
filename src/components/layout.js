@@ -8,7 +8,7 @@ import ThemeToggle from "./ThemeToggle"
 import { sessionContext } from "./session"
 
 const Controls = styled.div`
-  margin: 12px auto 0;
+  padding: 12px 0 0;
   display: flex;
   justify-content: center;
 `
@@ -26,12 +26,16 @@ const Layout = ({ children }) => {
 
   const session = useContext(sessionContext)
 
+  console.log('in layout theme', session)
+
   return <ThemeProvider theme={session.theme}>
     <GlobalStyles />
-    <Controls>
-      <ThemeToggle />
-    </Controls>
-    <main className={session.theme.name}>{children}</main>
+    <main className={session.theme.name}>
+      <Controls>
+        <ThemeToggle />
+      </Controls>
+      {children}
+    </main>
   </ThemeProvider>
 }
 

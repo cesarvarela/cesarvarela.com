@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { lightTheme, darkTheme } from './theme'
+import React, { useState, useEffect } from 'react'
+import { lightTheme, darkTheme, ssrTheme } from './theme'
 
 const sessionContext = React.createContext(null)
 const { Consumer, Provider } = sessionContext
 
 const themeFromBrowser = () => {
 
-    if (typeof window !== 'undefined' && window.matchMedia) {
+    if (window.matchMedia) {
 
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             return darkTheme
@@ -22,28 +22,44 @@ const themeFromBrowser = () => {
 
 const themeFromLocalStorage = () => {
 
-    const stored = typeof window !== 'undefined' && window.localStorage.getItem('theme')
+    const stored = window.localStorage.getItem('theme')
 
     return stored ? stored === 'light' ? lightTheme : darkTheme : null
 }
 
 function SessionProvider({ children }) {
 
-    const initialTheme = themeFromLocalStorage() || themeFromBrowser() || lightTheme
-    const [theme, setTheme] = useState(initialTheme)
+    const [theme, setTheme] = useState(ssrTheme)
 
     const value = {
         theme,
         toggleTheme() {
 
-            const theme = this.theme.name === 'light' ? darkTheme : lightTheme
+            const newTheme = theme.name === 'light' ? darkTheme : lightTheme
 
-            setTheme(theme)
-            localStorage.setItem('theme', theme.name)
+            setTheme(newTheme)
+            localStorage.setItem('theme', newTheme.name)
         }
+    }
+
+    useEffect(() => {
+
+        const initialTheme = themeFromLocalStorage() || themeFromBrowser() || ssrTheme
+        setTheme(initialTheme)
+    }, [])
+
+    return <Provider value={value}>{children}</Provider>
+}
+
+function SessionProviderSsr({ children }) {
+
+    const theme = ssrTheme
+
+    const value = {
+        theme,
     }
 
     return <Provider value={value}>{children}</Provider>
 }
 
-export { Consumer as SessionContext, SessionProvider, sessionContext }
+export { Consumer as SessionContext, SessionProvider, SessionProviderSsr, sessionContext }

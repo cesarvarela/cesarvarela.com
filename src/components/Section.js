@@ -7,9 +7,9 @@ const StyledSection = styled.section`
     text-align: center;
 
     & > h1, & > h2 {
-        background: ${({ theme }) => theme.heading.background};
+        background: ${({ theme }) => theme.color};
+        color: ${({ theme }) => theme.background};
         padding: 12px 24px;
-        color: ${({ theme }) => theme.heading.color};
         display: inline-block;
         margin: 0 auto;
         text-transform: lowercase;

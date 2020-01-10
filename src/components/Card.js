@@ -35,6 +35,6 @@ export default function Card({ src, title, description, href }) {
         <div className="image" style={{ backgroundImage: `url(${src})` }} />
         <h3>{title}</h3>
         <p>{description}</p>
-        <a href={href} target="_blank" rel="noopener">View more <FontAwesomeIcon icon={faExternalLinkAlt} /></a>
+        <a href={href} target="_blank" rel="noopener noreferrer">View more <FontAwesomeIcon icon={faExternalLinkAlt} /></a>
     </StyledCard>
 }
