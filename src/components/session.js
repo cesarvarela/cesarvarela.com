@@ -6,7 +6,7 @@ const { Consumer, Provider } = sessionContext
 
 const themeFromBrowser = () => {
 
-    if (typeof window !== undefined && window.matchMedia) {
+    if (typeof window !== 'undefined' && window.matchMedia) {
 
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             return darkTheme
@@ -22,7 +22,7 @@ const themeFromBrowser = () => {
 
 const themeFromLocalStorage = () => {
 
-    const stored = typeof window !== undefined && window.localStorage.getItem('theme')
+    const stored = typeof window !== 'undefined' && window.localStorage.getItem('theme')
 
     return stored ? stored === 'light' ? lightTheme : darkTheme : null
 }
