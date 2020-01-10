@@ -25,7 +25,7 @@ const StyledCard = styled.div`
         margin: 0;
         text-decoration: none;
         display: block;
-        color: $text-dark;
+        color: ${({ theme }) => theme.color};
     }
 `
 
