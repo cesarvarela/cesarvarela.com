@@ -6,12 +6,15 @@ const { Consumer, Provider } = sessionContext
 
 const themeFromBrowser = () => {
 
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return darkTheme
-    }
-    else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    if (typeof window !== undefined && window.matchMedia) {
 
-        return lightTheme
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return darkTheme
+        }
+        else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+
+            return lightTheme
+        }
     }
 
     return null
@@ -19,7 +22,7 @@ const themeFromBrowser = () => {
 
 const themeFromLocalStorage = () => {
 
-    const stored = window.localStorage.getItem('theme')
+    const stored = typeof window !== undefined && window.localStorage.getItem('theme')
 
     return stored ? stored === 'light' ? lightTheme : darkTheme : null
 }
