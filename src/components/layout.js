@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
     <Controls>
       <ThemeToggle />
     </Controls>
-    <main>{children}</main>
+    <main className={session.theme.name}>{children}</main>
   </ThemeProvider>
 }
 
