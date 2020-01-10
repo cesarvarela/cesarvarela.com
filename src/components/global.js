@@ -1,4 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
+import { darkTheme, lightTheme } from './theme'
+
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -8,11 +10,11 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background: ${({ theme }) => theme.background};
-    color: ${({ theme }) => theme.color};
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     transition: all 0.25s linear;
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.color};
   }
 `
