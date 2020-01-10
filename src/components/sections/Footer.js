@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const StyledFooter = styled.footer`
     text-align: center;
-    margin: 50px auto 20px;
+    padding: 36px 0 12px;
 `
 
 export function Footer() {
