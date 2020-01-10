@@ -12,7 +12,7 @@ const Cards = styled.div`
     }
 `
 
-let context = require.context("../images/projects", true, /^\.\/.*\.png$/)
+const context = require.context("../images/projects", true, /^\.\/.*\.png$/)
 
 export class Projects extends React.Component {
 

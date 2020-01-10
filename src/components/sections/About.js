@@ -36,15 +36,13 @@ const CVLink = styled.a`
 
 export function About({ skills }) {
 
-    return <Section id="about" subtitle="tech">
-        <div className="skills">
-            <Description className="description">Over the years I've worked on <b>many</b> different projects each with different requirements and challenges, here are some of the tools that helped me</Description>
-            <Cards>
-                {
-                    skills.map((skillList) => <ListCard key={skillList.name} title={skillList.name} items={skillList.items} />)
-                }
-            </Cards>
-        </div>
+    return <Section subtitle="tech">
+        <Description>Over the years I've worked on <b>many</b> different projects each with different requirements and challenges, here are some of the tools that helped me</Description>
+        <Cards>
+            {
+                skills.map((skillList) => <ListCard key={skillList.name} title={skillList.name} items={skillList.items} />)
+            }
+        </Cards>
         <CVLink href={cv} download>You can also download my CV here <FontAwesomeIcon icon={faDownload} /></CVLink>
-    </Section>
+    </Section >
 }
