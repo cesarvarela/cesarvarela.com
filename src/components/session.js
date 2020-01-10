@@ -26,9 +26,8 @@ const themeFromLocalStorage = () => {
 
 function SessionProvider({ children }) {
 
-    const initialTheme = themeFromLocalStorage() || themeFromBrowser()
-
-    const [theme, setTheme] = useState(initialTheme ? initialTheme : lightTheme)
+    const initialTheme = themeFromLocalStorage() || themeFromBrowser() || lightTheme
+    const [theme, setTheme] = useState(initialTheme)
 
     const value = {
         theme,
