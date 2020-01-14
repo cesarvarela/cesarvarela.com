@@ -4,11 +4,17 @@ import styled from 'styled-components'
 import Card from '../Card'
 
 const Cards = styled.div`
-    display: flex;
     margin: 12px auto 0;
+
+    @media (min-width: 768px) {
+        display: flex;
+    }
+
     & > .card {
-        flex: 1;
         margin: 12px;
+        @media (min-width: 768px) {
+            flex: 1;
+        }
     }
 `
 
@@ -17,7 +23,7 @@ const context = require.context("../../images/projects", true, /^\.\/.*\.png$/)
 export class Projects extends React.Component {
 
     render() {
-        return <Section id="projects" subtitle="Current Projects">
+        return <Section id="projects" subtitle="Latest Projects">
             <Cards>
                 {
                     this.props.items.map((item) => <Card
