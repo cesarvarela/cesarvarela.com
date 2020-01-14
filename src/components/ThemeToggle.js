@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
-import { sessionContext } from './session'
+import { sessionContext } from '../hooks/session'
 
 const Toggle = styled.div`
     cursor: pointer;

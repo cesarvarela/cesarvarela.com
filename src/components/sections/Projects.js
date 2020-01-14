@@ -1,7 +1,7 @@
 import React from 'react'
-import { Section } from './Section'
+import { Section } from '../Section'
 import styled from 'styled-components'
-import Card from './Card'
+import Card from '../Card'
 
 const Cards = styled.div`
     display: flex;
@@ -12,7 +12,7 @@ const Cards = styled.div`
     }
 `
 
-const context = require.context("../images/projects", true, /^\.\/.*\.png$/)
+const context = require.context("../../images/projects", true, /^\.\/.*\.png$/)
 
 export class Projects extends React.Component {
 

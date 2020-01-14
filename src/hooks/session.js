@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { lightTheme, darkTheme, ssrTheme } from './theme'
+import { lightTheme, darkTheme, ssrTheme } from '../lib/theme'
 
 const sessionContext = React.createContext(null)
 const { Consumer, Provider } = sessionContext

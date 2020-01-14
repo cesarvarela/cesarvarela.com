@@ -2,10 +2,10 @@ import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import { GlobalStyles } from './global'
+import { GlobalStyles } from './Global'
 import styled, { ThemeProvider } from 'styled-components'
 import ThemeToggle from "./ThemeToggle"
-import { sessionContext } from "./session"
+import { sessionContext } from "../hooks/session"
 
 const Controls = styled.div`
   padding: 12px 0 0;
@@ -25,8 +25,6 @@ const Layout = ({ children }) => {
   `)
 
   const session = useContext(sessionContext)
-
-  console.log('in layout theme', session)
 
   return <ThemeProvider theme={session.theme}>
     <GlobalStyles />
