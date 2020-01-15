@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import ListCard from '../ListCard'
 import styled from 'styled-components'
+import { useStaticQuery, graphql } from "gatsby"
 
 const Cards = styled.div`
     margin: 36px auto 0;
@@ -34,7 +35,21 @@ const CVLink = styled.a`
     display: inline-block;
 `
 
-export function About({ skills }) {
+export function About() {
+
+    const { site: { siteMetadata: { skills } } } = useStaticQuery(graphql`
+    query{
+        site {
+            siteMetadata {
+                skills {
+                    name
+                    items {
+                        name
+                    }
+                }
+            }
+        }
+    }`)
 
     return <Section subtitle="tech">
         <Description>Over the years I've worked on <b>many</b> different projects each with different requirements and challenges, here are some of the tools that helped me</Description>

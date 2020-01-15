@@ -3,6 +3,7 @@ import { Section } from '../Section'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStackOverflow, faLinkedin, faGithub, faLastfm, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import styled from 'styled-components'
+import { useStaticQuery, graphql } from "gatsby"
 
 const iconsMap = {
     'stack-overflow': <FontAwesomeIcon icon={faStackOverflow} />,
@@ -29,21 +30,32 @@ const Link = styled.a`
     font-size: 48px;
 `
 
-export class Social extends React.Component {
+export function Social() {
 
-    render() {
-        return <Section id="social" subtitle="social">
-            <List>
-                {
-                    this.props.items.map((item, index) => {
-                        return <li key={index} className="item">
-                            <Link href={item.link} target="_blank" rel="noopener">
-                                {iconsMap[item.key]}
-                            </Link>
-                        </li>
-                    })
+    const { site: { siteMetadata: { socialItems: items } } } = useStaticQuery(graphql`
+    query {
+        site{
+            siteMetadata {
+                socialItems {
+                    description
+                    link
+                    key
                 }
-            </List>
-        </Section>
-    }
+            }
+        }
+    }`)
+
+    return <Section id="social" subtitle="social">
+        <List>
+            {
+                items.map((item, index) => {
+                    return <li key={index} className="item">
+                        <Link href={item.link} target="_blank" rel="noopener">
+                            {iconsMap[item.key]}
+                        </Link>
+                    </li>
+                })
+            }
+        </List>
+    </Section>
 }
