@@ -18,15 +18,13 @@ const EmailLink = styled.a`
 	color: ${({ theme }) => theme.color};
 `
 
-export class Contact extends React.Component {
+export function Contact() {
 
-	render() {
-		return <Section id="contact" subtitle="Contact">
-			<MECard>
-				<img src={qr} alt="qr" />
-				<p>Scan this to get my contact info to your smartphone.</p>
-			</MECard>
-			<EmailLink href="mailto:mail@cesarvarela.com">mail@cesarvarela.com</EmailLink>
-		</Section>
-	}
+	return <Section id="contact" subtitle="Contact">
+		<MECard>
+			<img src={qr} alt="qr" />
+			<p>Scan this to get my contact info to your smartphone.</p>
+		</MECard>
+		<EmailLink href="mailto:mail@cesarvarela.com">mail@cesarvarela.com</EmailLink>
+	</Section>
 }
