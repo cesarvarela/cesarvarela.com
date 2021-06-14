@@ -1,6 +1,6 @@
 import React from 'react'
 import { Section } from '../Section'
-import cv from '../../downloads/cesarvarela.com-CV.pdf'
+import cv from '../../downloads/cesarvarela-CV.pdf'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import ListCard from '../ListCard'
