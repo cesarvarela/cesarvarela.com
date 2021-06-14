@@ -1,0 +1,16 @@
+[
+    {
+        "key": "ff",
+        "link": "https: //fb.gg/play/friendsfeud",
+        "img": "../images/projects/friendsfeud.png",
+        "title": "Friends Feud",
+        "description": "A Facebook Instant game that lets you guess the most popular answer of a 100 person survey."
+    },
+    {
+        "key": "botsfactory",
+        "link": "https://www.botsfactory.io",
+        "img": "../images/projects/bf.png",
+        "title": "BotsFactory",
+        "description": "A chatbots visual development platform built on top of Microsoft Bot Framework"
+    }
+]

@@ -19,34 +19,32 @@ const Cards = styled.div`
     }
 `
 
-const context = require.context("../../images/projects", true, /^\.\/.*\.png$/)
-
 export function Projects() {
 
-    const { site: { siteMetadata: { projectItems: items } } } = useStaticQuery(graphql`
-    query {
-        site {
-            siteMetadata {
-                projectItems {
-                    key
-                    link
-                    img
-                    title
-                    description
-                }
+    const { items } = useStaticQuery(graphql`query MyQuery {
+        items: allProjectsJson {
+          nodes {
+            description
+            link
+            key
+            title
+            img {
+              childImageSharp {
+                gatsbyImageData(backgroundColor:"#FFFFFF", layout: FULL_WIDTH, aspectRatio: 2, transformOptions:{cropFocus: CENTER})
+              }
             }
+          }
         }
-    }`)
+      }
+      `)
+
+    console.log(items)
 
     return <Section id="projects" subtitle="Latest Projects">
         <Cards>
             {
-                items.map((item) => <Card
-                    key={item.title}
-                    src={context(item.img)}
-                    title={item.title}
-                    description={item.description}
-                    href={item.link}
+                items.nodes.map(node => <Card
+                    {...node}
                 />)
             }
         </Cards>

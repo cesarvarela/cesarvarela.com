@@ -37,24 +37,6 @@ module.exports = {
         },
       ],
 
-    projectItems:
-      [
-        {
-          key: 'ff',
-          link: 'https://fb.gg/play/friendsfeud',
-          img: './friendsfeud.png',
-          title: 'Friends Feud',
-          description: `A Facebook Instant game that lets you guess the most popular answer of a 100 person survey.`,
-        },
-        {
-          key: 'botsfactory',
-          link: 'https://www.botsfactory.io',
-          img: './bf.png',
-          title: 'BotsFactory',
-          description: `A chatbots visual development platform built on top of Microsoft Bot Framework`,
-        }
-      ],
-
     skills:
       [
         {
@@ -157,16 +139,6 @@ module.exports = {
       ]
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -179,6 +151,29 @@ module.exports = {
         icon: `src/images/icon.png`, // This path is relative to the root of the site.
       },
     },
+
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+
+    `gatsby-plugin-react-helmet`,
+
+    `gatsby-transformer-json`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/data`,
+      },
+    },
+
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+
     `gatsby-plugin-sass`,
     `gatsby-plugin-styled-components`,
     // this (optional) plugin enables Progressive Web App + Offline functionality

@@ -2,16 +2,11 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 const StyledCard = styled.div`
     border: 1px solid #c4c4c4;
     text-align: left;
-    & > .image {
-        background-size: cover;
-        padding-bottom: 50%;
-        background-position: center;
-        border-bottom: 1px solid #c4c4c4;
-    }
     & > h3 {
         padding: 12px;
         margin: 0;
@@ -29,10 +24,13 @@ const StyledCard = styled.div`
     }
 `
 
-export default function Card({ src, title, description, href }) {
+export default function Card({ src, title, description, href, img }) {
+
+    const image = getImage(img)
 
     return <StyledCard className="card">
-        <div className="image" style={{ backgroundImage: `url(${src})` }} />
+
+        <GatsbyImage image={image} alt="project image" />
         <h3>{title}</h3>
         <p>{description}</p>
         <a href={href} target="_blank" rel="noopener noreferrer">View more <FontAwesomeIcon icon={faExternalLinkAlt} /></a>
