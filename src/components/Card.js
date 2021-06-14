@@ -24,7 +24,7 @@ const StyledCard = styled.div`
     }
 `
 
-export default function Card({ src, title, description, href, img }) {
+export default function Card({ src, title, description, link, img }) {
 
     const image = getImage(img)
 
@@ -33,6 +33,6 @@ export default function Card({ src, title, description, href, img }) {
         <GatsbyImage image={image} alt="project image" />
         <h3>{title}</h3>
         <p>{description}</p>
-        <a href={href} target="_blank" rel="noopener noreferrer">View more <FontAwesomeIcon icon={faExternalLinkAlt} /></a>
+        <a href={link} target="_blank" rel="noopener noreferrer">View more <FontAwesomeIcon icon={faExternalLinkAlt} /></a>
     </StyledCard>
 }

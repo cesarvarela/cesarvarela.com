@@ -38,8 +38,6 @@ export function Projects() {
       }
       `)
 
-    console.log(items)
-
     return <Section id="projects" subtitle="Latest Projects">
         <Cards>
             {

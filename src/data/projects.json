@@ -1,7 +1,7 @@
 [
     {
         "key": "ff",
-        "link": "https: //fb.gg/play/friendsfeud",
+        "link": "https://fb.gg/play/friendsfeud",
         "img": "../images/projects/friendsfeud.png",
         "title": "Friends Feud",
         "description": "A Facebook Instant game that lets you guess the most popular answer of a 100 person survey."
