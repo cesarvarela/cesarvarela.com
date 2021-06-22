@@ -7,12 +7,12 @@ import { useStaticQuery, graphql } from "gatsby"
 import picture from '../../images/po.png'
 
 const iconsMap = {
-    'stack-overflow': <StackOverflow size="large" />,
-    'linkedin': <Linkedin size="large" />,
-    'github': <Github size="large" />,
-    'lastfm': <Lastfm size="large" />,
-    'facebook': <Facebook size="large" />,
-    'twitter': <Twitter size="large" />,
+    'stack-overflow': <StackOverflow size="large" color="#fff" />,
+    'linkedin': <Linkedin size="large" color="#fff" />,
+    'github': <Github size="large" color="#fff" />,
+    'lastfm': <Lastfm size="large" color="#fff" />,
+    'facebook': <Facebook size="large" color="#fff" />,
+    'twitter': <Twitter size="large" color="#fff" />,
 }
 
 const List = styled.u`
