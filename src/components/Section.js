@@ -7,12 +7,12 @@ const StyledSection = styled.section`
     text-align: center;
 
     & > h1, & > h2 {
-        background: ${({ theme }) => theme.color};
-        color: ${({ theme }) => theme.background};
-        padding: 12px 24px;
+        color: ${({ theme }) => theme.color};
+        padding: 12px 24px 0;
         display: inline-block;
         margin: 0 auto;
-        text-transform: lowercase;
+        font-weight: 700;
+        letter-spacing: -0.04em;
     }
 
     & > h1 {
@@ -20,22 +20,22 @@ const StyledSection = styled.section`
     }
 
     & > h2 {
-        font-size: 36px;
+        font-size: 42px;
     }
 
     & > .content {
-        padding-top: 72px;
+        padding-top: 12px;
 
         @media (min-width: 768px) {
-            max-width: 700px;
+            max-width: 768px;
             margin: auto;
         }
     }
 `
 
-export function Section({ id, title, subtitle, children }) {
+export function Section({ id, title, subtitle, children, className }) {
 
-    return <StyledSection id={id}>
+    return <StyledSection id={id} className={className}>
         {
             title &&
             <h1>{title}</h1>
@@ -49,5 +49,5 @@ export function Section({ id, title, subtitle, children }) {
         <div className="content">
             {children}
         </div>
-    </StyledSection>
+    </StyledSection >
 }
