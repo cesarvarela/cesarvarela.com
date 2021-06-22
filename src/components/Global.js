@@ -7,11 +7,14 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto&display=swap');
+
   body {
     margin: 0;
     padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     transition: all 0.25s linear;
+    
     @media screen and (prefers-color-scheme: dark) {
       background: #333;
       color: #fff;
