@@ -1,5 +1,12 @@
 [
     {
+        "key": "dp",
+        "link": "https://github.com/cesarvarela/displayportals",
+        "img": "../images/projects/dp.png",
+        "title": "Display Portals",
+        "description": "Display Portals is a desktop app built that makes your life easier when dealing with multiple display setups"
+    },
+    {
         "key": "ff",
         "link": "https://fb.gg/play/friendsfeud",
         "img": "../images/projects/friendsfeud.png",

@@ -10,18 +10,21 @@ const StyledCard = styled.div`
     border-radius: 6px;
     background: ${({ theme }) => theme.backgropund};
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
     .image {
         border-bottom: 1px solid ${({ theme }) => theme.border};
     }
 
     & > h3 {
-        padding: 18px;
+        padding: 18px 18px 0;
         margin: 0;
     }
     & > p {
         padding: 18px;
         margin: 0;
+        flex: 1;
     }
     & > a {
         padding: 18px;
