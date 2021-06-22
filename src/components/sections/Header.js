@@ -1,9 +1,9 @@
 import React from 'react'
-import { Section } from '../Section'
+import { Section as SectionBase } from '../Section'
 import picture from '../../images/po.png'
 import styled from 'styled-components'
 import Button from '../Button'
-import cv from '../../downloads/cesarvarela-CV.pdf'
+import cv from '../../downloads/cesar-varela-resume.pdf'
 
 const Image = styled.img`
 	margin: 0 auto 0;
@@ -33,6 +33,13 @@ const Name = styled.h1`
 	letter-spacing: -0.04em;
 	font-size: 72px;
 	margin: 24px auto 0;
+`
+
+const Section = styled(SectionBase)`
+	margin-top: 60px;
+	::before{
+		display: none;
+	}
 `
 
 export function Header() {

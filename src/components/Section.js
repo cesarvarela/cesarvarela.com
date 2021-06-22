@@ -1,10 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
+import thing from '../images/thing.svg'
 
 const StyledSection = styled.section`
 
-    margin-top: 90px;
+    position: relative;
+    margin-top: 240px;
     text-align: center;
+
+    ::before {
+        background: #ff0;
+        width: 8px;
+        height: 120px;
+        content: '';
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+        bottom: -20px;
+        top: -150px;
+        background: url(${thing});
+    }
 
     & > h1, & > h2 {
         color: ${({ theme }) => theme.color};
