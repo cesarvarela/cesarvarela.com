@@ -5,18 +5,26 @@ import styled from 'styled-components'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 const StyledCard = styled.div`
-    border: 1px solid #c4c4c4;
     text-align: left;
+    box-shadow: ${({ theme }) => theme.boxShadow};
+    border-radius: 6px;
+    background: ${({ theme }) => theme.backgropund};
+    overflow: hidden;
+
+    .image {
+        border-bottom: 1px solid ${({ theme }) => theme.border};
+    }
+
     & > h3 {
-        padding: 12px;
+        padding: 18px;
         margin: 0;
     }
     & > p {
-        padding: 12px;
+        padding: 18px;
         margin: 0;
     }
     & > a {
-        padding: 12px;
+        padding: 18px;
         margin: 0;
         text-decoration: none;
         display: block;
@@ -29,8 +37,7 @@ export default function Card({ src, title, description, link, img }) {
     const image = getImage(img)
 
     return <StyledCard className="card">
-
-        <GatsbyImage image={image} alt="project image" />
+        <GatsbyImage image={image} alt="project image" className="image" />
         <h3>{title}</h3>
         <p>{description}</p>
         <a href={link} target="_blank" rel="noopener noreferrer">View more <FontAwesomeIcon icon={faExternalLinkAlt} /></a>
