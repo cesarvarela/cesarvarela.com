@@ -53,12 +53,10 @@ function Codewindow({ className, name, code }) {
                 <Dot color="#FFBD2E" />
                 <Dot color="#27C93F" />
             </Controls>
-
             <Name>{name}</Name>
-
         </Header>
         <Content>
-            <Refractor language="js" value={code} markers="" />
+            <Refractor language="js" value={code} />
         </Content>
     </Window>
 }

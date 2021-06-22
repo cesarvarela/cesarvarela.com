@@ -5,9 +5,11 @@ import styled from 'styled-components'
 
 const MECard = styled.div`
 	max-width: 240px;
-	margin: 0 auto;
+	margin: 48px auto 0;
 	& > img {
 		width: 100%;
+		box-shadow: ${({ theme }) => theme.boxShadow};
+		border-radius: 6px;
 	}
 	`
 
@@ -31,7 +33,7 @@ export function Contact() {
 	return <Section id="contact" subtitle="Contact">
 		<MECard>
 			<img src={qr} alt="qr" />
-			<p>Scan this to get my contact info to your smartphone.</p>
+			<p>Scan this to get my contact info on your smartphone.</p>
 		</MECard>
 		<Links>
 			<li>

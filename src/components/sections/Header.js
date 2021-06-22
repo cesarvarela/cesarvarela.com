@@ -27,11 +27,11 @@ const Resume = styled.div`
 `
 
 const Name = styled.h1`
-	background: -webkit-linear-gradient(263.37deg, #127FFF 15.75%, #D933AA 85.58%);
+	background: linear-gradient(266.96deg, #3FC5FF -21.03%, #FF3EC9 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	letter-spacing: -0.04em;
-	font-size: 64px;
+	font-size: 72px;
 	margin: 24px auto 0;
 `
 

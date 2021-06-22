@@ -25,6 +25,8 @@ const StyledSection = styled.section`
 
     & > .content {
         padding-top: 12px;
+        margin-left: 6px;
+        margin-right: 6px;
 
         @media (min-width: 768px) {
             max-width: 768px;
