@@ -1,11 +1,113 @@
 import React from 'react'
-import { Section } from '../Section'
-import cv from '../../downloads/cesarvarela-CV.pdf'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownload } from '@fortawesome/free-solid-svg-icons'
+import { Section as SectionBase } from '../Section'
 import ListCard from '../ListCard'
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from "gatsby"
+import Codewindow from '../CodeWindow'
+
+const code = `export default {
+    skills:
+    [
+        {
+            name: "Languages",
+            items:
+            [
+                {
+                name: "Javascript"
+                },
+                {
+                name: "Typescript"
+                },
+                {
+                name: "Swift"
+                },
+                {
+                name: "C#"
+                },
+                {
+                name: "ActionScript 3"
+                },
+                {
+                name: "PHP"
+                },
+                {
+                name: "GO"
+                },
+            ]
+        },
+        {
+            name: "Frameworks/Libraries",
+            items:
+            [
+                {
+                name: "React"
+                },
+                {
+                name: "Angular"
+                },
+                {
+                name: "Express"
+                },
+                {
+                name: "Next.js"
+                },
+                {
+                name: "GraphQL"
+                }
+            ]
+        },
+
+        {
+            name: "Stacks/Platforms",
+            items:
+            [
+                {
+                name: "Node.js"
+                },
+                {
+                name: "iOS"
+                },
+                {
+                name: ".NET"
+                },
+                {
+                name: "Unity 3D"
+                },
+                {
+                name: "MERN"
+                }
+            ]
+        },
+        {
+            name: "Software",
+            items:
+            [
+                {
+                name: "Visual Studio/ VSCode"
+                },
+                {
+                name: "Xcode"
+                },
+                {
+                name: "Photoshop"
+                },
+                {
+                name: "Unity 3D"
+                },
+                {
+                name: "Sketch"
+                },
+                {
+                name: "Figma"
+                },
+                {
+                name: "Chrome DEV tools"
+                }
+            ]
+        }
+    ]
+}
+`
 
 const Cards = styled.div`
     margin: 36px auto 0;
@@ -24,15 +126,15 @@ const Cards = styled.div`
 `
 
 const Description = styled.p`
-    font-size: 24px;
+    font-size: 18px;
+    line-height: 22px;
     margin: 0 auto;
 `
 
-const CVLink = styled.a`
-    margin-top: 36px;
-    color:  ${({ theme }) => theme.color};
-    text-decoration: none;
-    display: inline-block;
+const Section = styled(SectionBase)`
+    ${Codewindow} {
+        margin: 42px auto 0;
+    }
 `
 
 export function About() {
@@ -51,13 +153,8 @@ export function About() {
         }
     }`)
 
-    return <Section subtitle="tech">
+    return <Section subtitle="Tech">
         <Description>Over the years I've worked on <b>many</b> different projects each with different requirements and challenges, here are some of the tools that helped me</Description>
-        <Cards>
-            {
-                skills.map((skillList) => <ListCard key={skillList.name} title={skillList.name} items={skillList.items} />)
-            }
-        </Cards>
-        <CVLink href={cv} download>You can also download my CV here <FontAwesomeIcon icon={faDownload} /></CVLink>
+        <Codewindow name="skills.js" code={code} />
     </Section >
 }
