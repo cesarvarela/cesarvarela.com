@@ -3,6 +3,7 @@ import { Section as SectionBase } from '../Section'
 import picture from '../../images/po.png'
 import styled from 'styled-components'
 import Button from '../Button'
+import { Mouse } from 'grommet-icons';
 import cv from '../../downloads/cesar-varela-resume.pdf'
 
 const Image = styled.img`
@@ -37,8 +38,12 @@ const Name = styled.h1`
 
 const Section = styled(SectionBase)`
 	margin-top: 60px;
+	margin-bottom: -66px;
 	::before{
 		display: none;
+	}
+	.mouse {
+		margin-top: 60px;
 	}
 `
 
@@ -52,5 +57,6 @@ export function Header() {
 		<Resume>
 			Scroll down to know more about me or <Button href={cv} download>Download Resume</Button>
 		</Resume>
+		<Mouse className="mouse" size="large" />
 	</Section>
 }

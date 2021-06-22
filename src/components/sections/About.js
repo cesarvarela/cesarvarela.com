@@ -1,6 +1,5 @@
 import React from 'react'
 import { Section as SectionBase } from '../Section'
-import ListCard from '../ListCard'
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from "gatsby"
 import Codewindow from '../CodeWindow'
@@ -30,23 +29,6 @@ const code = `class Cesar extends Human {
 
 //TODO: messed up SEO of this section but was totally worth it xD
 `
-
-const Cards = styled.div`
-    margin: 36px auto 0;
-    @media (min-width: 768px) {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    & > .list-card {
-        @media (min-width: 768px) {
-            width: 40%;
-        }        
-        margin: 12px;
-    }
-`
-
 const Description = styled.p`
     font-size: 18px;
     line-height: 22px;

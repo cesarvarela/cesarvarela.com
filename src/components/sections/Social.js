@@ -1,28 +1,32 @@
 import React from 'react'
 import { Section as SectionBase } from '../Section'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStackOverflow, faLinkedin, faGithub, faLastfm, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { StackOverflow, Linkedin, Github, Lastfm, Facebook, Twitter } from 'grommet-icons';
+
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from "gatsby"
 import picture from '../../images/po.png'
 
 const iconsMap = {
-    'stack-overflow': <FontAwesomeIcon icon={faStackOverflow} />,
-    'linkedin': <FontAwesomeIcon icon={faLinkedin} />,
-    'github': <FontAwesomeIcon icon={faGithub} />,
-    'lastfm': <FontAwesomeIcon icon={faLastfm} />,
-    'facebook': <FontAwesomeIcon icon={faFacebook} />,
-    'twitter': <FontAwesomeIcon icon={faTwitter} />,
+    'stack-overflow': <StackOverflow size="large" />,
+    'linkedin': <Linkedin size="large" />,
+    'github': <Github size="large" />,
+    'lastfm': <Lastfm size="large" />,
+    'facebook': <Facebook size="large" />,
+    'twitter': <Twitter size="large" />,
 }
 
 const List = styled.u`
     list-style-type: none;
     padding: 0;
 
-    & > li {
+    li {
       margin: 0;
       padding: 6px;
       display: inline-block;
+        svg {
+            width: 32px;
+            height: 32px;
+        }
     }
 `
 
@@ -77,11 +81,12 @@ const Section = styled(SectionBase)`
 
     @media (min-width: 768px) {
         ${List} {
-            > li {
+            li {
                 padding: 12px;
-            }
-            ${Link} {
-                font-size: 48px;
+                svg {
+                    width: 48px;
+                    height: 48px;
+                }
             }
         }
     }

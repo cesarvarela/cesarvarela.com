@@ -1,17 +1,27 @@
 import React, { useContext } from "react"
-import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-
 import { GlobalStyles } from './Global'
 import styled, { ThemeProvider } from 'styled-components'
-import ThemeToggle from "./ThemeToggle"
+import ThemeToggleBase from "./ThemeToggle"
 import { sessionContext } from "../hooks/session"
 
 const Controls = styled.div`
-  padding: 12px 0 0;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12px;
+  align-items: center;
+  max-width: 768px;
+  margin: 0 auto;
 `
+
+const ThemeToggle = styled(ThemeToggleBase)`
+`
+
+const Hello = styled.div`
+  font-size: 12px;
+`
+
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -30,15 +40,12 @@ const Layout = ({ children }) => {
     <GlobalStyles />
     <main className={session.theme.name}>
       <Controls>
+        <Hello>Weeeelcome, stranger!</Hello>
         <ThemeToggle />
       </Controls>
       {children}
     </main>
   </ThemeProvider>
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout

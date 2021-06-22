@@ -1,20 +1,14 @@
 import React, { useContext } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
 import { sessionContext } from '../hooks/session'
+import { Moon, Sun } from 'grommet-icons';
 
 const Toggle = styled.div`
     cursor: pointer;
-    width: 30px;
-    height: 30px;
-    & > svg.svg-inline--fa.fa-w-16 {
-        width: 100%;
-        height: 100%;
-    }
+    width: 24px;
+    height: 24px;
 `
-
-export default function ThemeToggle() {
+function ThemeToggle({ className }) {
 
     const session = useContext(sessionContext)
 
@@ -23,5 +17,7 @@ export default function ThemeToggle() {
         session.toggleTheme()
     }
 
-    return <Toggle onClick={onClick}><FontAwesomeIcon icon={session.theme.name === 'light' ? faMoon : faSun} /></Toggle>
+    return <Toggle className={className} onClick={onClick}> {session.theme.name === 'light' ? <Moon /> : <Sun />}</Toggle>
 }
+
+export default styled(ThemeToggle)``
