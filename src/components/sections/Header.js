@@ -52,7 +52,7 @@ export function Header() {
 	return <Section id="head">
 		<Image src={picture} alt="po face" />
 		<Name>Cesar Varela</Name>
-		<Quote className="quote">Mostly self-thought, I've been a <b>Software Developer &amp; Consultant</b> for more than 15 years, always with an eye on both Design and User Experience.</Quote>
+		<Quote className="quote">Mostly self-thought, I've been a <b>Full Stack Engineer &amp; Consultant</b> for more than 15 years, always with an eye on both Design and User Experience.</Quote>
 
 		<Resume>
 			Scroll down to know more about me or <Button href={cv} download>Download Resume</Button>
