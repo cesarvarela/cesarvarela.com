@@ -58,7 +58,7 @@ function Codewindow({ className, name, code }) {
 
         </Header>
         <Content>
-            <Refractor language="js" value={code} markers="" />,
+            <Refractor language="js" value={code} markers="" />
         </Content>
     </Window>
 }
