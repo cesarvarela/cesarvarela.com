@@ -14,9 +14,12 @@ const Image = styled.img`
 	border-radius: 100%;
 `
 
-const Quote = styled.p`
+const Quote = styled.div`
 	margin: 12px auto 0;
 	font-size: 18px;
+	.small {
+		font-size: 14px;
+	}
 `
 
 const Resume = styled.div`
@@ -52,7 +55,12 @@ export function Header() {
 	return <Section id="head">
 		<Image src={picture} alt="po face" />
 		<Name>Cesar Varela</Name>
-		<Quote className="quote">Mostly self-thought, I've been a <b>Full Stack Engineer &amp; Consultant</b> for more than 15 years, always with an eye on both Design and User Experience.</Quote>
+
+		<Quote className="quote">
+			<p>Greetings 👋! </p>
+			<p>I'm a full-stack engineer with over 15 years of professional experience in startup and big-tech environments focused on delivering the best UX &amp; UI possible.</p>
+			<p className="small">In other words, I relish working on functional, pretty things that drive engagement and earn new customers. I'll give your product, be it Web, Mobile, or Desktop, a handmade feel that will bring uniqueness to your brand while paying close attention to accessibility and performance so that you can reach the broadest audience possible.</p>
+		</Quote>
 
 		<Resume>
 			Scroll down to know more about me or <Button href={cv} download>Download Resume</Button>
