@@ -1,5 +1,12 @@
 [
     {
+        "key": "stahp",
+        "link": "https://github.com/cesarvarela/stahp",
+        "img": "../images/projects/stahp.png",
+        "title": "Stahp",
+        "description": "Stahp is a break reminder app that features custom themes from the community."
+    },
+    {
         "key": "dp",
         "link": "https://github.com/cesarvarela/displayportals",
         "img": "../images/projects/dp.png",
