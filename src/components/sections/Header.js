@@ -58,8 +58,7 @@ export function Header() {
 
 		<Quote className="quote">
 			<p>Greetings 👋! </p>
-			<p>I'm a full-stack engineer with over 15 years of professional experience in startup and big-tech environments focused on delivering the best UX &amp; UI possible.</p>
-			<p className="small">In other words, I relish working on functional, pretty things that drive engagement and earn new customers. I'll give your product, be it Web, Mobile, or Desktop, a handmade feel that will bring uniqueness to your brand while paying close attention to accessibility and performance so that you can reach the broadest audience possible.</p>
+			<p>I'm a full-stack engineer with over 15 years of professional experience in startup and big-tech environments focused on delivering the best UX &amp; UI.</p>
 		</Quote>
 
 		<Resume>
