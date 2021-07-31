@@ -1,0 +1,147 @@
+---
+title:  How to add a blog to an existing Gatsby site (yes, I'm starting one)
+date: 2021-07-30
+---
+
+# How to add a blog to an existing Gatsby site (yes, I'm starting one)
+
+I decided to start a blog and keep a record of my development adventures. 
+
+I'm a to the point kind of guy so let's get to it:
+
+## Adding Mdx
+
+Why MDX, you may ask? Markdown is great, but sometimes you need more expressiveness yet, especially for a development blog and if you want to do unique things. With MDX, you can write pure Markdown or go crazy and add React components everywhere (which I'm planning to do 🙌)
+
+```shell
+yarn add gatsby-plugin-mdx @mdx-js/mdx @mdx-js/react
+```
+or
+```shell
+npm i --save  gatsby-plugin-mdx @mdx-js/mdx @mdx-js/react
+```
+You can now add the `gatsby-plugin-mdx` plugin to your `gatsby-config.js` :
+
+```js
+plugins: [
+`gatsby-plugin-mdx`
+]
+```
+With this done, you can create your first post at `src/blog/some-post-slug.mdx`, and if you navigate to `https://localhost:8000/blog/some-post-slug`, you'll see your first post!
+
+But it looks like 💩💩💩
+
+## Specifying a layout
+
+The mdx plugin we just added lets you specify layout components for your mdx files. I'll only use mdx for my blog, so setting a default layout will be enough for me, but you can specify different configurations if you need to.
+
+```js
+{ 
+	resolve: `gatsby-plugin-mdx`, 
+	options: { 
+		defaultLayouts: {
+			default: require.resolve("./src/components/PostLayout.js"),
+		},
+	},
+},
+```
+## Creating the layout
+
+For a simple blog, you need nothing different from standard Gatsby layouts. You'll get the content of the post on the `children` property. The only part that needs special consideration is adding a list of the latest blog posts, for which you need three things:
+
+### 1 - Add this to your  `gatsby-config.js`:
+
+Setup `gatsby-source-filesystem` to create nodes for the `src/pages/blog` folder (otherwise, they won't show in the next step):
+
+```js
+{
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/src/pages/blog`,
+      },
+},
+```
+
+### 2 - Getting a list of the latest five posts sorted by date:
+
+```grqphql
+  allMdx(sort: {fields: frontmatter___date, order: DESC}, limit: 6) {
+    edges {
+      node {
+        frontmatter {
+          title
+          date
+        }
+        slug
+      }
+    }
+  }
+```
+
+Yes, because we want to show five posts and we'll always get the current post in the first place of the list, we'll ask for six and filter out the current one:
+
+```jsx
+  const posts = allMdx.edges.filter(({ node }) => !location.pathname.includes(node.slug))
+```
+
+### 3 - Link to the other posts
+
+It could look something like this:
+
+```jsx
+ <List>
+      {posts.map(({ node }) => <Item key={node.slug}>
+        <Link to={`/blog/${node.slug}`}>
+          {node.frontmatter.title}
+        </Link>
+      </Item>)}
+    </List>
+```
+
+## Wrapping up
+
+This is good enough for the first version of a blog. I'll add custom components to show `jsx` better than I'm doing now in another post. We'll use `gatsby-node.js` to specify our custom frontmatter fields, create a custom slug URL, so we don't have to hardcode the `/blog` path in our links and more.
+
+
+### An example of the complete layout file (because I know you are looking for it)
+
+PostLayout.js
+```jsx
+import React from "react"
+import { useStaticQuery, graphql } from 'gatsby'
+
+export default function PostLayout({ children }) {
+
+    const data = useStaticQuery(graphql`
+   query PostLayoutQuery {
+    allMdx(sort: {fields: frontmatter___date, order: DESC}, limit: 6) {
+      edges {
+        node {
+          frontmatter {
+            title
+            date
+          }
+          slug
+        }
+      }
+    }
+  }
+  `)
+    const posts = allMdx.edges.filter(({ node }) => !location.pathname.includes(node.slug))
+
+    return <div>
+        <main>
+            {children}
+            <h3>Latest posts</h3>
+            <ul>
+                {posts.map(({ node }) => <li key={node.slug}>
+                    <Link to={`/blog/${node.slug}`}>
+                        {node.frontmatter.title}
+                    </Link>
+                </li>)}
+            </ul>
+        </main>
+    </div>
+}
+```
