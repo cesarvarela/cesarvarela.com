@@ -1,0 +1,123 @@
+---
+title:  How to customize the look of your MDX Gastby blog
+date: 2021-07-31
+---
+
+# How to customize the look of your MDX Gastby blog
+
+This post is the continuation of How to add a blog to your Gatsby site. What we did in the first part works, but it probably won't look the best.
+
+## Using MdxProvider
+
+Just rendering the `{children}` prop that we receive in our layout file works, but if we want to have total control over how the HTML components are rendered and make it easier to use custom ones, we have to use the `MDXProvider`:
+
+```jsx
+import React from "react"
+import { MDXProvider } from "@mdx-js/react"
+
+const PostLayout = ({ children, path }) => {
+
+    return <div>
+        <MDXProvider>
+            {children}
+        </MDXProvider>
+    </div>
+}
+
+export default PostLayout
+```
+
+Now we have opened the door world of MDX customization:
+
+## Customizing how built-in HTML components are rendered, using the components prop
+
+Not sure why would someone want to do this, but you can for example render evenry `h1` as an image or Rick Astley... you get the idea of how powerfull this can be:
+
+```jsx
+<MDXProvider components={{ h1: ({ children }) => <img src="rickroll.jpg" />}} >
+            {children}
+</MDXProvider>
+```
+In my case, I want to control how the `pre` and `code` elements get rendered. Display a macOS-like window for the `pre` element (when using triple backticks), and make it a bit more distinguishable from the standard text when using the `code` tag (when using single backticks).
+
+## Adding syntax highlighting to code examples
+
+For this, we need to customize how the `pre` tags render. We'll use `prism-react-renderer` that does an excellent job at it.
+
+```shell
+yarn add prism-react-renderer
+```
+or
+```shell
+npm i prism-react-renderer --save
+```
+And then define our`CodeWindow` component:
+
+```jsx
+import React from 'react'
+import Highlight, { defaultProps } from 'prism-react-renderer'
+
+function CodeWindow({ children }) {
+    const { props: { children: source } } = children
+    return <div>
+        <Highlight {...defaultProps} code={source} language="javascript">
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre className={className} style={{ ...style, padding: '20px' }}>
+                    {tokens.map((line, i) => (
+                        <div key={i} {...getLineProps({ line, key: i })}>
+                            {line.map((token, key) => (
+                                <span key={key} {...getTokenProps({ token, key })} />
+                            ))}
+                        </div>
+                    ))}
+                </pre>
+            )}
+        </Highlight >
+    </div>
+}
+```
+
+You can read more about how the code inside the `Highlight` component works here: https://mdxjs.com/guides/syntax-highlighting
+
+*depending on the structure of your components, the source code is in a `children` prop of the `children` prop that is passed to our `CodeWindow` component (childrenception)*
+
+```jsx
+// source is the actual string inside the triple backticks
+ const { props: { children: source } } = children
+```
+
+We can now set this to the `components` prop of our `MDXProvider`
+
+```jsx
+const components = {
+    pre: props => <CodeWindow {...props} />,
+}
+
+const PostLayout = ({ children }) => {
+    return <div>
+        <MDXProvider components={components}>
+            {children}
+        </MDXProvider>
+    </div>
+}
+```
+
+Voila! Syntax highlighting for our mdx documents! 
+
+### Bonus: Highlighting different languages
+
+Mdx passes the string that's next to the tripple backticks as a class of our custom component, `language-${name}`:
+
+```jsx
+// source is the actual string inside the triple backticks
+ const { props: { children: source, className: languageClass } } = children
+
+// to get the actual name
+ const language = classLanguage.replace(/language-/, '')
+```
+
+Then you can pass the language to the `Highlight` component:
+
+```
+<Highlight {...defaultProps} code={source} language="javascript">
+```

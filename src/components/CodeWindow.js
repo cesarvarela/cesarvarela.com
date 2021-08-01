@@ -1,10 +1,6 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
-import Refractor from 'react-refractor'
-import js from 'refractor/lang/javascript'
-import './prism-dark.css'
-
-Refractor.registerLanguage(js)
+import styled from 'styled-components'
+import Highlight, { defaultProps } from 'prism-react-renderer'
 
 const Header = styled.div`
     display: flex;
@@ -32,8 +28,7 @@ const Dot = ({ color }) => <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/200
 const Content = styled.div`
     > pre {
         margin: 0;
-        height: 400px;
-        overflow-y: scroll;
+        text-align: initial;
     }
 `
 
@@ -43,22 +38,33 @@ const Window = styled.div`
     border-radius: 6px;
 `
 
-function Codewindow({ className, name, code }) {
+function CodeWindow({ className, title, language = "javascript", source }) {
 
     return <Window className={className}>
-
         <Header>
             <Controls>
                 <Dot color="#FF5F56" />
                 <Dot color="#FFBD2E" />
                 <Dot color="#27C93F" />
             </Controls>
-            <Name>{name}</Name>
+            <Name>{title}</Name>
         </Header>
         <Content>
-            <Refractor language="js" value={code} />
+            <Highlight {...defaultProps} code={source} language={language}>
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                    <pre className={className} style={{ ...style, padding: '20px' }}>
+                        {tokens.map((line, i) => (
+                            <div key={i} {...getLineProps({ line, key: i })}>
+                                {line.map((token, key) => (
+                                    <span key={key} {...getTokenProps({ token, key })} />
+                                ))}
+                            </div>
+                        ))}
+                    </pre>
+                )}
+            </Highlight>
         </Content>
     </Window>
 }
 
-export default styled(Codewindow)``
+export default CodeWindow

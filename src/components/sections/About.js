@@ -35,8 +35,10 @@ const Description = styled.p`
     margin: 0 auto;
 `
 
+const StyledCodeWindow = styled(Codewindow)``
+
 const Section = styled(SectionBase)`
-    ${Codewindow} {
+    ${StyledCodeWindow} {
         margin: 42px auto 0;
     }
 `
@@ -59,6 +61,6 @@ export function About() {
 
     return <Section subtitle="Tech">
         <Description>Over the years I've worked on <b>many</b> different projects each with different requirements and challenges, here are some of the tools that helped me</Description>
-        <Codewindow name="skills.js" code={code} />
+        <StyledCodeWindow title="skills.js" source={code} />
     </Section >
 }
