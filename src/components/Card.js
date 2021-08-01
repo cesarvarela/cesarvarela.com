@@ -2,6 +2,8 @@ import React from 'react'
 import { View } from 'grommet-icons';
 import styled from 'styled-components'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { getColor } from '../lib/theme';
+import External from '../images/external.svg'
 
 const StyledCard = styled.div`
     text-align: left;
@@ -30,10 +32,15 @@ const StyledCard = styled.div`
         margin: 0;
         text-decoration: none;
         display: block;
-        color: ${({ theme }) => theme.color};
+        color: ${getColor('foreground')};
         svg {
+            width: 12px;
+            height: 12px;
             margin-left: 6px;
             vertical-align: middle;
+            path  {
+                fill: ${getColor('foreground')};
+            }
         }
     }
 `
@@ -46,6 +53,6 @@ export default function Card({ src, title, description, link, img }) {
         <GatsbyImage image={image} alt="project image" className="image" />
         <h3>{title}</h3>
         <p>{description}</p>
-        <a href={link} target="_blank" rel="noopener noreferrer">View more <View size="medium" /></a>
+        <a href={link} target="_blank" rel="noopener noreferrer">View more <External /></a>
     </StyledCard>
 }
