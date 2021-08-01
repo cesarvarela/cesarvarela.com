@@ -3,8 +3,8 @@ import { Section as SectionBase } from '../Section'
 import picture from '../../images/po.png'
 import styled from 'styled-components'
 import Button from '../Button'
-import { Mouse } from 'grommet-icons';
 import cv from '../../downloads/cesar-varela-resume.pdf'
+import ScrollSvg from '../../images/scroll.svg'
 
 const Image = styled.img`
 	margin: 0 auto 0;
@@ -39,6 +39,15 @@ const Name = styled.h1`
 	margin: 24px auto 0;
 `
 
+const Scroll = styled(ScrollSvg)`
+    width: 24px;
+    height: 24px;
+	margin: 24px;
+	path {
+		fill: #fff;
+	}
+`
+
 const Section = styled(SectionBase)`
 	margin-top: 60px;
 	margin-bottom: -66px;
@@ -64,6 +73,6 @@ export function Header() {
 		<Resume>
 			Scroll down to know more about me or <Button href={cv} download>Download Resume</Button>
 		</Resume>
-		<Mouse className="mouse" size="large" />
+		<Scroll />
 	</Section>
 }
