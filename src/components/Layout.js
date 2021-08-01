@@ -22,7 +22,6 @@ const Hello = styled.div`
   font-size: 12px;
 `
 
-
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -34,11 +33,11 @@ const Layout = ({ children }) => {
     }
   `)
 
-  const session = useContext(sessionContext)
+  const { theme } = useContext(sessionContext)
 
-  return <ThemeProvider theme={session.theme}>
+  return <ThemeProvider theme={theme}>
     <GlobalStyles />
-    <main className={session.theme.name}>
+    <main>
       <Controls>
         <Hello>Weeeelcome, stranger!</Hello>
         <ThemeToggle />
