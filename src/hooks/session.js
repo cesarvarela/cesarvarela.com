@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { lightTheme, darkTheme, ssrTheme } from '../lib/theme'
+import defaultTheme from '../lib/theme'
 
 const sessionContext = React.createContext(null)
 const { Consumer, Provider } = sessionContext
@@ -9,11 +9,11 @@ const themeFromBrowser = () => {
     if (window.matchMedia) {
 
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return darkTheme
+            return 'dark'
         }
         else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
 
-            return lightTheme
+            return 'light'
         }
     }
 
@@ -24,39 +24,34 @@ const themeFromLocalStorage = () => {
 
     const stored = window.localStorage.getItem('theme')
 
-    return stored ? stored === 'light' ? lightTheme : darkTheme : null
+    return stored ? stored : null
 }
 
 function SessionProvider({ children }) {
 
-    const [theme, setTheme] = useState(ssrTheme)
+    const [themeMode, setThemeMode] = useState(themeFromLocalStorage() || themeFromBrowser() || 'light')
 
-    const value = {
-        theme,
-        toggleTheme() {
+    const toggleTheme = () => {
 
-            const newTheme = theme.name === 'light' ? darkTheme : lightTheme
-
-            setTheme(newTheme)
-            localStorage.setItem('theme', newTheme.name)
-        }
+        setThemeMode(mode => mode === 'dark' ? 'light' : 'dark')
     }
+
+    const [value, setValue] = useState({ theme: { ...defaultTheme, mode: themeMode }, toggleTheme })
 
     useEffect(() => {
 
-        const initialTheme = themeFromLocalStorage() || themeFromBrowser() || ssrTheme
-        setTheme(initialTheme)
-    }, [])
+        setValue({ theme: { ...defaultTheme, mode: themeMode }, toggleTheme })
+        localStorage.setItem('theme', themeMode)
+
+    }, [themeMode])
 
     return <Provider value={value}>{children}</Provider>
 }
 
 function SessionProviderSsr({ children }) {
 
-    const theme = ssrTheme
-
     const value = {
-        theme,
+        theme: 'light',
     }
 
     return <Provider value={value}>{children}</Provider>
