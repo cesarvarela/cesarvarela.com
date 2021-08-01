@@ -1,13 +1,24 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { sessionContext } from '../hooks/session'
-import { Moon, Sun } from 'grommet-icons';
+import Moon from '../images/moon.svg'
+import Sun from '../images/sun.svg'
+import { getColor } from '../lib/theme'
 
 const Toggle = styled.div`
     cursor: pointer;
     width: 24px;
     height: 24px;
 `
+
+const Icon = styled.div`
+    width: 24px;
+    height: 24px;
+    svg {
+        fill: ${getColor('foreground')};
+    }
+`
+
 function ThemeToggle({ className }) {
 
     const session = useContext(sessionContext)
@@ -17,7 +28,7 @@ function ThemeToggle({ className }) {
         session.toggleTheme()
     }
 
-    return <Toggle className={className} onClick={onClick}> {session.theme.name === 'light' ? <Moon /> : <Sun />}</Toggle>
+    return <Toggle className={className} onClick={onClick}> {session.theme.mode === 'light' ? <Icon><Moon /></Icon> : <Icon><Sun /></Icon>}</Toggle>
 }
 
 export default styled(ThemeToggle)``
