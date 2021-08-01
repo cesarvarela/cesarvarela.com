@@ -12,7 +12,6 @@ const Item = styled.li`
   margin-top: 12px;
 `
 const Link = styled(GastbyLink)`
-  color: #fff;
   text-decoration: none;
 `
 const Wrapper = styled.div`

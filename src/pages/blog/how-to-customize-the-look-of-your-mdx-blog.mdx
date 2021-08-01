@@ -1,13 +1,11 @@
 ---
-title:  How to customize the look of your MDX Gastby blog
+title: How to customize the look of your MDX Gatsby blog
 date: 2021-07-31
 ---
 
-# How to customize the look of your MDX Gastby blog
-
 This post is the continuation of How to add a blog to your Gatsby site. What we did in the first part works, but it probably won't look the best.
 
-## Using MdxProvider
+## Using MDXProvider
 
 Just rendering the `{children}` prop that we receive in our layout file works, but if we want to have total control over how the HTML components are rendered and make it easier to use custom ones, we have to use the `MDXProvider`:
 
@@ -31,7 +29,7 @@ Now we have opened the door world of MDX customization:
 
 ## Customizing how built-in HTML components are rendered, using the components prop
 
-Not sure why would someone want to do this, but you can for example render evenry `h1` as an image or Rick Astley... you get the idea of how powerfull this can be:
+Not sure why would someone want to do this, but you can for example render every `h1` as an image or Rick Astley... you get the idea of how powerful this can be:
 
 ```jsx
 <MDXProvider components={{ h1: ({ children }) => <img src="rickroll.jpg" />}} >
@@ -106,7 +104,7 @@ Voila! Syntax highlighting for our mdx documents!
 
 ### Bonus: Highlighting different languages
 
-Mdx passes the string that's next to the tripple backticks as a class of our custom component, `language-${name}`:
+Mdx passes the string that's next to the triple backticks as a class of our custom component, `language-${name}`:
 
 ```jsx
 // source is the actual string inside the triple backticks
@@ -121,3 +119,5 @@ Then you can pass the language to the `Highlight` component:
 ```
 <Highlight {...defaultProps} code={source} language="javascript">
 ```
+
+
