@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { sessionContext } from '../hooks/session'
-import Moon from '../images/moon.svg'
-import Sun from '../images/sun.svg'
+import Moon from '../svg/moon.svg'
+import Sun from '../svg/sun.svg'
 import { getColor } from '../lib/theme'
 
 const Toggle = styled.div`

@@ -5,12 +5,12 @@ import styled from 'styled-components'
 import { useStaticQuery, graphql } from "gatsby"
 import picture from '../../images/po.png'
 
-import StackOverflow from '../../images/stackoverflow.svg'
-// import Linkedin from '../../images/linkedin.svg'
-import Github from '../../images/github.svg'
-import Lastfm from '../../images/lastfm.svg'
-import Facebook from '../../images/facebook.svg'
-import Twitter from '../../images/twitter.svg'
+import StackOverflow from '../../svg/stackoverflow.svg'
+// import Linkedin from '../../svg/linkedin.svg'
+import Github from '../../svg/github.svg'
+import Lastfm from '../../svg/lastfm.svg'
+import Facebook from '../../svg/facebook.svg'
+import Twitter from '../../svg/twitter.svg'
 
 const iconsMap = {
     'stack-overflow': <StackOverflow />,

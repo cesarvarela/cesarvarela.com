@@ -9,7 +9,6 @@ const StyledSection = styled.section`
     text-align: center;
 
     ::before {
-        background: #ff0;
         width: 8px;
         height: 120px;
         content: '';

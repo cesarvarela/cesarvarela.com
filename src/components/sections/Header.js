@@ -4,7 +4,8 @@ import picture from '../../images/po.png'
 import styled from 'styled-components'
 import Button from '../Button'
 import cv from '../../downloads/cesar-varela-resume.pdf'
-import ScrollSvg from '../../images/scroll.svg'
+import ScrollSvg from '../../svg/scroll.svg'
+import { getColor } from '../../lib/theme'
 
 const Image = styled.img`
 	margin: 0 auto 0;
@@ -40,11 +41,11 @@ const Name = styled.h1`
 `
 
 const Scroll = styled(ScrollSvg)`
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
 	margin: 24px;
 	path {
-		fill: #fff;
+		fill: ${getColor('foreground')};
 	}
 `
 

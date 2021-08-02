@@ -1,21 +1,20 @@
 import React from 'react'
-import { View } from 'grommet-icons';
 import styled from 'styled-components'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { getColor } from '../lib/theme';
-import External from '../images/external.svg'
+import { getColor, getProp } from '../lib/theme';
+import External from '../svg/external.svg'
 
 const StyledCard = styled.div`
     text-align: left;
-    box-shadow: ${({ theme }) => theme.boxShadow};
+    box-shadow: ${getProp('card', 'boxShadow')};
     border-radius: 6px;
-    background: ${({ theme }) => theme.backgropund};
+    background: ${getColor('background')};
     overflow: hidden;
     display: flex;
     flex-direction: column;
 
     .image {
-        border-bottom: 1px solid ${({ theme }) => theme.border};
+        border-bottom: 1px solid ${getColor('foreground')};
     }
 
    h3 {
