@@ -25,33 +25,41 @@ const Wrapper = styled.div`
   max-width: 768px;
   margin: 0 auto; 
 `
+const StyledCodeWindow = styled(CodeWindow)`
+  margin: 48px auto;
+`
 
 function MDXCodeBlock({ children }) {
 
   const { props: { children: source, className: classLanguage } } = children
   const language = classLanguage ? classLanguage.replace(/language-/, '') : ''
 
-  return <CodeWindow language={language} source={source} />
+  return <StyledCodeWindow language={language} source={source} />
 }
 
-const Code = styled.code`
-  padding: 3px;
-  border-radius: 6px; 
-`
 const StyledP = styled.p`
+  margin: 36px auto 0;
+  font-size: 18px;
+
   code {
+    font-family:  Inconsolata, monospace;
     padding: 3px;
     border: 1px solid #aaa;
     border-radius: 6px; 
   }
 `
 const StyledH1 = styled.h1`
+  font-size: 48px;
 `
 
 const StyledH2 = styled.h2`
+  font-size: 30px;
+  margin: 60px auto 0;
 `
 
 const StyledH3 = styled.h3`
+  font-size: 24px;
+  margin: 48px auto 0;
 `
 
 const components = {
@@ -60,7 +68,6 @@ const components = {
   h2: props => <StyledH2 level="2" {...props}>{props.children}</StyledH2>,
   h3: props => <StyledH3 level="3" {...props}>{props.children}</StyledH3>,
   pre: props => <MDXCodeBlock {...props} />,
-  code: props => <Code {...props}>{props.children}</Code>
 }
 
 const PostLayout = (props) => {
