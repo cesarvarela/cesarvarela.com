@@ -16,7 +16,7 @@ const Link = styled(GastbyLink)`
 `
 const Wrapper = styled.div`
 `
-export default function LatestPosts() {
+export default function LatestPosts({ className }) {
 
   const location = useLocation()
 
@@ -37,7 +37,7 @@ export default function LatestPosts() {
 
   const posts = allMdx.edges.filter(({ node }) => !location.pathname.includes(node.slug))
 
-  return <Wrapper>
+  return <Wrapper className={className}>
     <List>
       {posts.map(({ node }) => <Item key={node.slug}>
         <Link to={`/blog/${node.slug}`}>

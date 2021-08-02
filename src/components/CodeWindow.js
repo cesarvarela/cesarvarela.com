@@ -32,6 +32,7 @@ const Dot = ({ color }) => <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/200
 </svg>
 
 const Content = styled.div`
+    overflow: auto;
     > pre {
         margin: 0;
         text-align: initial;

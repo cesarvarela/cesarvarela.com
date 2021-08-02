@@ -9,7 +9,7 @@ This post is the continuation of How to add a blog to your Gatsby site. What we 
 
 Just rendering the `{children}` prop that we receive in our layout file works, but if we want to have total control over how the HTML components are rendered and make it easier to use custom ones, we have to use the `MDXProvider`:
 
-```jsx:layout.js
+```jsx title=layout.js
 import React from "react"
 import { MDXProvider } from "@mdx-js/react"
 

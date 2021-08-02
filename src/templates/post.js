@@ -1,27 +1,13 @@
-import React, { useContext } from "react"
-import { GlobalStyles } from './Global'
-import styled, { ThemeProvider } from 'styled-components'
-import ThemeToggleBase from "./ThemeToggle"
-import { sessionContext } from "../hooks/session"
-import LatestPosts from "./LatestPosts"
+import React from "react"
+import styled from 'styled-components'
+import LatestPostsBase from "../components/LatestPosts"
 import { MDXProvider } from "@mdx-js/react"
-import CodeWindow from "./CodeWindow"
+import CodeWindow from "../components/CodeWindow"
 import thing from '../images/thing.svg'
+import { graphql } from 'gatsby'
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import Layout from "../components/Layout"
 
-const Controls = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 12px;
-  align-items: center;
-  max-width: 768px;
-  margin: 0 auto;
-`
-const ThemeToggle = styled(ThemeToggleBase)`
-`
-const Hello = styled.div`
-  font-size: 12px;
-`
 const Wrapper = styled.div`
   max-width: 768px;
   margin: 0 auto; 
@@ -32,9 +18,8 @@ const StyledCodeWindow = styled(CodeWindow)`
 
 function MDXCodeBlock({ children }) {
 
-  const { props: { children: source, className: classLanguage } } = children
-  const options = classLanguage ? classLanguage.replace(/language-/, '') : ''
-  const [language, title = null] = options.split(':')
+  const { props: { children: source, className: classLanguage, title } } = children
+  const language = classLanguage ? classLanguage.replace(/language-/, '') : ''
 
   return <StyledCodeWindow language={language} source={source} title={title} />
 }
@@ -56,6 +41,7 @@ const StyledH1 = styled.h1`
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	letter-spacing: -0.04em;
+  margin: 30px auto 0;
 `
 
 const StyledH2 = styled.h2`
@@ -87,28 +73,53 @@ const components = {
   pre: props => <MDXCodeBlock {...props} />,
 }
 
+const LatestPosts = styled(LatestPostsBase)`
+  padding: 48px 0;
+`
+const PostInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+`
+const DatePublished = styled.div`
+`
+const TimeToRead = styled.p`
+`
+
 const PostLayout = (props) => {
 
-  const { children, pageContext: { frontmatter } } = props
-  const { theme } = useContext(sessionContext)
+  const { mdx: { body, frontmatter, slug, timeToRead } } = props.data
 
-  return <ThemeProvider theme={theme}>
-    <GlobalStyles />
-    <main>
-      <Controls>
-        <Hello>Weeeelcome, stranger!</Hello>
-        <ThemeToggle />
-      </Controls>
-      <Wrapper>
-        <StyledH1>{frontmatter.title}</StyledH1>
-        <MDXProvider components={components}>
-          {children}
-        </MDXProvider>
-        <h3>Latest posts</h3>
-        <LatestPosts />
-      </Wrapper>
-    </main>
-  </ThemeProvider>
+  return <Layout>
+    <Wrapper>
+      <StyledH1>{frontmatter.title}</StyledH1>
+      <PostInfo>
+        <DatePublished>{frontmatter.date}</DatePublished>
+        <TimeToRead>{timeToRead} min.</TimeToRead>
+      </PostInfo>
+      <MDXProvider components={components}>
+        <MDXRenderer>
+          {body}
+        </MDXRenderer>
+      </MDXProvider>
+      <h3>Latest posts</h3>
+      <LatestPosts />
+    </Wrapper>
+  </Layout >
 }
+
+export const query = graphql`
+query($slug: String!) {
+  mdx(slug: {eq: $slug}) {
+    body
+    frontmatter {
+      date(formatString: "MMMM DD, YYYY")
+      title
+    }
+    slug
+    timeToRead
+  }
+}`
 
 export default PostLayout

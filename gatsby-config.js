@@ -163,7 +163,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `${__dirname}/src/pages/blog`,
+        path: `${__dirname}/src/blog`,
       },
     },
 
@@ -182,14 +182,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
 
     `gatsby-plugin-styled-components`,
-    {
-      resolve: `gatsby-plugin-mdx`,
-      options: {
-        defaultLayouts: {
-          default: require.resolve("./src/components/PostLayout.js"),
-        },
-      },
-    },
+    `gatsby-plugin-mdx`,
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
