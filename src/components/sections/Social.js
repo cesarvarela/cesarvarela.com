@@ -1,18 +1,24 @@
 import React from 'react'
 import { Section as SectionBase } from '../Section'
-import { StackOverflow, Linkedin, Github, Lastfm, Facebook, Twitter } from 'grommet-icons';
 
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from "gatsby"
 import picture from '../../images/po.png'
 
+import StackOverflow from '../../images/stackoverflow.svg'
+// import Linkedin from '../../images/linkedin.svg'
+import Github from '../../images/github.svg'
+import Lastfm from '../../images/lastfm.svg'
+import Facebook from '../../images/facebook.svg'
+import Twitter from '../../images/twitter.svg'
+
 const iconsMap = {
-    'stack-overflow': <StackOverflow size="large" color="#fff" />,
-    'linkedin': <Linkedin size="large" color="#fff" />,
-    'github': <Github size="large" color="#fff" />,
-    'lastfm': <Lastfm size="large" color="#fff" />,
-    'facebook': <Facebook size="large" color="#fff" />,
-    'twitter': <Twitter size="large" color="#fff" />,
+    'stack-overflow': <StackOverflow />,
+    // 'linkedin': <Linkedin size="large" color="#fff" />,
+    'github': <Github />,
+    'lastfm': <Lastfm />,
+    'facebook': <Facebook />,
+    'twitter': <Twitter />,
 }
 
 const List = styled.u`
@@ -26,6 +32,9 @@ const List = styled.u`
         svg {
             width: 32px;
             height: 32px;
+            path {
+                fill: #fff;
+            }
         }
     }
 `
