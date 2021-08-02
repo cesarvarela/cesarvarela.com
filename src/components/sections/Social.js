@@ -6,7 +6,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import picture from '../../images/po.png'
 
 import StackOverflow from '../../svg/stackoverflow.svg'
-// import Linkedin from '../../svg/linkedin.svg'
+import Linkedin from '../../svg/linkedin.svg'
 import Github from '../../svg/github.svg'
 import Lastfm from '../../svg/lastfm.svg'
 import Facebook from '../../svg/facebook.svg'
@@ -14,7 +14,7 @@ import Twitter from '../../svg/twitter.svg'
 
 const iconsMap = {
     'stack-overflow': <StackOverflow />,
-    // 'linkedin': <Linkedin size="large" color="#fff" />,
+    'linkedin': <Linkedin />,
     'github': <Github />,
     'lastfm': <Lastfm />,
     'facebook': <Facebook />,
