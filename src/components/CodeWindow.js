@@ -35,6 +35,9 @@ const Content = styled.div`
         margin: 0;
         text-align: initial;
         font-family: "Inconsolata";
+        .token-line:last-child {
+            display: none;
+        }
     }
 `
 

@@ -6,6 +6,7 @@ import { sessionContext } from "../hooks/session"
 import LatestPosts from "./LatestPosts"
 import { MDXProvider } from "@mdx-js/react"
 import CodeWindow from "./CodeWindow"
+import thing from '../images/thing.svg'
 
 const Controls = styled.div`
   display: flex;
@@ -49,12 +50,27 @@ const StyledP = styled.p`
   }
 `
 const StyledH1 = styled.h1`
-  font-size: 48px;
+  font-size: 60px;
+  background: linear-gradient(266.96deg, #3FC5FF -21.03%, #FF3EC9 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	letter-spacing: -0.04em;
 `
 
 const StyledH2 = styled.h2`
   font-size: 30px;
-  margin: 60px auto 0;
+  margin: 127px auto 0;
+  position: relative;
+  ::before {
+    width: 7px;
+    height: 72px;
+    content: '';
+    left: 3px;
+    position: absolute;
+    bottom: -20px;
+    top: -98px;;
+    background: url(${thing});
+  }
 `
 
 const StyledH3 = styled.h3`
