@@ -1,12 +1,11 @@
 import React, { useContext } from "react"
 import { GlobalStyles } from './Global'
-import styled, { css } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import ThemeToggleBase from "./ThemeToggle"
 import { sessionContext } from "../hooks/session"
 import LatestPosts from "./LatestPosts"
 import { MDXProvider } from "@mdx-js/react"
 import CodeWindow from "./CodeWindow"
-import { Paragraph as GrommetParagraph, Grommet, Heading, grommet } from "grommet"
 
 const Controls = styled.div`
   display: flex;
@@ -27,14 +26,6 @@ const Wrapper = styled.div`
   margin: 0 auto; 
 `
 
-const Paragraph = styled(GrommetParagraph)`
-  code {
-    padding: 3px;
-    border: 1px solid #aaa;
-    border-radius: 6px; 
-  }
-`
-
 function MDXCodeBlock({ children }) {
 
   const { props: { children: source, className: classLanguage } } = children
@@ -47,49 +38,56 @@ const Code = styled.code`
   padding: 3px;
   border-radius: 6px; 
 `
+const StyledP = styled.p`
+  code {
+    padding: 3px;
+    border: 1px solid #aaa;
+    border-radius: 6px; 
+  }
+`
+const StyledH1 = styled.h1`
+`
+
+const StyledH2 = styled.h2`
+`
+
+const StyledH3 = styled.h3`
+`
 
 const components = {
-  p: props => <Paragraph fill {...props}>{props.children}</Paragraph>,
-  h1: props => <Heading level="1" {...props}>{props.children}</Heading>,
-  h2: props => <Heading level="2" {...props}>{props.children}</Heading>,
-  h3: props => <Heading level="3" {...props}>{props.children}</Heading>,
+  p: props => <StyledP {...props}>{props.children}</StyledP>,
+  h1: props => <StyledH1 {...props}>{props.children}</StyledH1>,
+  h2: props => <StyledH2 level="2" {...props}>{props.children}</StyledH2>,
+  h3: props => <StyledH3 level="3" {...props}>{props.children}</StyledH3>,
   pre: props => <MDXCodeBlock {...props} />,
   code: props => <Code {...props}>{props.children}</Code>
 }
 
-const theme = {
-  global: {
-    font: {
-      family: 'Inter',
-      size: '14px',
-      height: '20px',
-    },
-  },
-  code: {
-    background: {
-      light: '#f5f5f5',
-      dark: '#2c2c2c',
-    }
-  }
-};
+const PostLayout = (props) => {
 
-const PostLayout = ({ children, path }) => {
+  const { children, pageContext: { frontmatter } } = props
 
-  const session = useContext(sessionContext)
+  const { theme } = useContext(sessionContext)
 
-  return <Grommet full theme={grommet} themeMode={session.theme.name !== 'ssr' ? session.theme.name : 'light'}>
-    <Controls>
-      <Hello>Weeeelcome, stranger!</Hello>
-      <ThemeToggle />
-    </Controls>
-    <Wrapper>
-      <MDXProvider components={components}>
-        {children}
-      </MDXProvider>
-      <h3>Latest posts</h3>
-      <LatestPosts />
-    </Wrapper>
-  </Grommet>
+  console.log(props)
+
+  return <ThemeProvider theme={theme}>
+    <GlobalStyles />
+    <main>
+      <Controls>
+        <Hello>Weeeelcome, stranger!</Hello>
+        <ThemeToggle />
+      </Controls>
+      <Wrapper>
+        <StyledH1>{frontmatter.title}</StyledH1>
+        <MDXProvider components={components}>
+          {children}
+        </MDXProvider>
+        <h3>Latest posts</h3>
+        <LatestPosts />
+      </Wrapper>
+    </main>
+  </ThemeProvider>
 }
 
 export default PostLayout
