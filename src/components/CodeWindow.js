@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Highlight, { defaultProps } from 'prism-react-renderer'
+import { getProp } from '../lib/theme'
 
 const Header = styled.div`
     display: flex;
@@ -33,7 +34,7 @@ const Content = styled.div`
 `
 
 const Window = styled.div`
-    box-shadow: ${({ theme }) => theme.boxShadow};
+    box-shadow: ${getProp('card', 'boxShadow')};
     overflow: hidden;
     border-radius: 6px;
 `

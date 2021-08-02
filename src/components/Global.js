@@ -25,4 +25,8 @@ export const GlobalStyles = createGlobalStyle`
     background:  ${getColor('background')};
     color: ${getColor('foreground')};
   }
+
+  a {
+    color: ${getColor('foreground')};
+  }
 `
