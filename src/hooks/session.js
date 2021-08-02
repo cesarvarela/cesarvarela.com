@@ -50,9 +50,7 @@ function SessionProvider({ children }) {
 
 function SessionProviderSsr({ children }) {
 
-    const value = {
-        theme: 'light',
-    }
+    const value = { theme: { ...defaultTheme, mode: 'light' } }
 
     return <Provider value={value}>{children}</Provider>
 }
