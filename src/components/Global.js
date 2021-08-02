@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { getColor } from '../lib/theme'
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -6,8 +7,6 @@ export const GlobalStyles = createGlobalStyle`
   *::before {
     box-sizing: border-box;
   }
-
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto&display=swap');
 
   body {
     margin: 0;
@@ -23,7 +22,7 @@ export const GlobalStyles = createGlobalStyle`
 
   main {
     transition: all 0.25s linear;
-    background: ${({ theme }) => theme.background};
-    color: ${({ theme }) => theme.color};
+    background:  ${getColor('background')};
+    color: ${getColor('foreground')};
   }
 `
