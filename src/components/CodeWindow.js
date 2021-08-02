@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import Highlight, { defaultProps } from 'prism-react-renderer'
+import darkTheme from 'prism-react-renderer/themes/vsDark'
+import lightTheme from 'prism-react-renderer/themes/vsLight'
+import { sessionContext } from "../hooks/session"
+
 import { getProp } from '../lib/theme'
 
 const Header = styled.div`
@@ -30,6 +34,7 @@ const Content = styled.div`
     > pre {
         margin: 0;
         text-align: initial;
+        font-family: "Inconsolata";
     }
 `
 
@@ -41,17 +46,19 @@ const Window = styled.div`
 
 function CodeWindow({ className, title, language = "javascript", source }) {
 
+    const { theme } = useContext(sessionContext)
+
     return <Window className={className}>
-        <Header>
+        {title && <Header>
             <Controls>
                 <Dot color="#FF5F56" />
                 <Dot color="#FFBD2E" />
                 <Dot color="#27C93F" />
             </Controls>
             <Name>{title}</Name>
-        </Header>
+        </Header>}
         <Content>
-            <Highlight {...defaultProps} code={source} language={language}>
+            <Highlight {...defaultProps} theme={theme.mode === 'dark' ? darkTheme : lightTheme} code={source} language={language}>
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
                     <pre className={className} style={{ ...style, padding: '20px' }}>
                         {tokens.map((line, i) => (
