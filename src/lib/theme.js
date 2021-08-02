@@ -1,5 +1,5 @@
 const theme = {
-    mode: 'light',
+    mode: 'dark',
     colors: {
         background: {
             light: '#f2f2f2',

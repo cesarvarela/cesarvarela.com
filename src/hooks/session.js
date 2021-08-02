@@ -29,7 +29,7 @@ const themeFromLocalStorage = () => {
 
 function SessionProvider({ children }) {
 
-    const [themeMode, setThemeMode] = useState(themeFromLocalStorage() || themeFromBrowser() || 'light')
+    const [themeMode, setThemeMode] = useState(themeFromLocalStorage() || themeFromBrowser() || 'dark')
 
     const toggleTheme = () => {
 
@@ -50,7 +50,7 @@ function SessionProvider({ children }) {
 
 function SessionProviderSsr({ children }) {
 
-    const value = { theme: { ...defaultTheme, mode: 'light' } }
+    const value = { theme: { ...defaultTheme, mode: 'dark' } }
 
     return <Provider value={value}>{children}</Provider>
 }
