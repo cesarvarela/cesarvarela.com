@@ -29,4 +29,8 @@ export const GlobalStyles = createGlobalStyle`
   a {
     color: ${getColor('foreground')};
   }
+
+  html, body, #___gatsby {
+    height: 100%;
+  }
 `
