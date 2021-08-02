@@ -33,9 +33,10 @@ const StyledCodeWindow = styled(CodeWindow)`
 function MDXCodeBlock({ children }) {
 
   const { props: { children: source, className: classLanguage } } = children
-  const language = classLanguage ? classLanguage.replace(/language-/, '') : ''
+  const options = classLanguage ? classLanguage.replace(/language-/, '') : ''
+  const [language, title = null] = options.split(':')
 
-  return <StyledCodeWindow language={language} source={source} />
+  return <StyledCodeWindow language={language} source={source} title={title} />
 }
 
 const StyledP = styled.p`
@@ -89,10 +90,7 @@ const components = {
 const PostLayout = (props) => {
 
   const { children, pageContext: { frontmatter } } = props
-
   const { theme } = useContext(sessionContext)
-
-  console.log(props)
 
   return <ThemeProvider theme={theme}>
     <GlobalStyles />

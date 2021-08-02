@@ -15,6 +15,12 @@ const theme = {
             light: '8px 8px 16px #d0d0d0,-8px -8px 16px #ffffff',
             dark: '8px 8px 16px #0f0f0f,-8px -8px 16px #292929;',
         },
+    },
+    codeWindow: {
+        headerColor: {
+            light: '#e8e8e8',
+            dark: '#313131',
+        }
     }
 }
 

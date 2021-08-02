@@ -10,6 +10,7 @@ import { getColor, getProp } from '../lib/theme'
 const Header = styled.div`
     display: flex;
     padding: 18px 14px;
+    background: ${getProp('codeWindow', 'headerColor')};
 `
 
 const Name = styled.div`
