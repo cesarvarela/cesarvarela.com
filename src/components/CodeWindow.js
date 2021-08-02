@@ -4,8 +4,7 @@ import Highlight, { defaultProps } from 'prism-react-renderer'
 import vsDark from 'prism-react-renderer/themes/vsDark'
 import vsLight from 'prism-react-renderer/themes/vsLight'
 import { sessionContext } from "../hooks/session"
-
-import { getColor, getProp } from '../lib/theme'
+import defaultTheme, { getProp } from '../lib/theme'
 
 const Header = styled.div`
     display: flex;
@@ -49,8 +48,8 @@ const Window = styled.div`
     border-radius: 6px;
 `
 
-const darkTheme = { ...vsDark, plain: { ...vsDark.plain, backgroundColor: getColor('background') } }
-const lightTheme = { ...vsLight, plain: { ...vsLight.plain, backgroundColor: getColor('background') } }
+const darkTheme = { ...vsDark, plain: { ...vsDark.plain, backgroundColor: defaultTheme.colors.background.dark } }
+const lightTheme = { ...vsLight, plain: { ...vsLight.plain, backgroundColor: defaultTheme.colors.background.light } }
 
 function CodeWindow({ className, title, language = "javascript", source }) {
 
