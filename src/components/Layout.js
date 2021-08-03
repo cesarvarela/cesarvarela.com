@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { GlobalStyles } from './Global'
 import styled, { ThemeProvider } from 'styled-components'
 import ThemeToggleBase from "./ThemeToggle"
-import { sessionContext } from "../hooks/session"
+import { SessionContext } from "../hooks/session"
 
 const Controls = styled.div`
   display: flex;
@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
     }
   `)
 
-  const { theme } = useContext(sessionContext)
+  const { theme } = useContext(SessionContext)
 
   return <ThemeProvider theme={theme}>
     <GlobalStyles />

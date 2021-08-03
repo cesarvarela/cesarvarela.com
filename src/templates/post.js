@@ -42,6 +42,9 @@ const StyledH1 = styled.h1`
 	-webkit-text-fill-color: transparent;
 	letter-spacing: -0.04em;
   margin: 30px auto 0;
+  font-weight: 900;
+  line-height: 1;
+  padding-bottom: 1rem;
 `
 
 const StyledH2 = styled.h2`

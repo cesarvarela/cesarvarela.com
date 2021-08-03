@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import defaultTheme from '../lib/theme'
 
-const sessionContext = React.createContext(null)
-const { Consumer, Provider } = sessionContext
+const SessionContext = React.createContext(null)
+const { Consumer, Provider } = SessionContext
 
-const themeFromBrowser = () => {
+const modeFromBrowser = () => {
 
     if (window.matchMedia) {
 
@@ -20,7 +20,7 @@ const themeFromBrowser = () => {
     return null
 }
 
-const themeFromLocalStorage = () => {
+const modeFromLocalStorage = () => {
 
     const stored = window.localStorage.getItem('theme')
 
@@ -29,30 +29,40 @@ const themeFromLocalStorage = () => {
 
 function SessionProvider({ children }) {
 
-    const [themeMode, setThemeMode] = useState(themeFromLocalStorage() || themeFromBrowser() || 'dark')
+    const [value, setValue] = useState({
+        theme: {
+            ...defaultTheme,
+            mode: 'dark'
+        },
+        toggleTheme: () => {
+            setValue(value => {
 
-    const toggleTheme = () => {
+                const mode = value.theme.mode === 'dark' ? 'light' : 'dark'
+                localStorage.setItem('theme', mode)
 
-        setThemeMode(mode => mode === 'dark' ? 'light' : 'dark')
-    }
-
-    const [value, setValue] = useState({ theme: { ...defaultTheme, mode: themeMode }, toggleTheme })
+                return {
+                    ...value,
+                    theme: {
+                        ...value.theme,
+                        mode,
+                    }
+                }
+            })
+        }
+    })
 
     useEffect(() => {
 
-        setValue({ theme: { ...defaultTheme, mode: themeMode }, toggleTheme })
-        localStorage.setItem('theme', themeMode)
+        const preferredTheme = modeFromLocalStorage() || modeFromBrowser()
 
-    }, [themeMode])
+        if (value.theme.mode != preferredTheme) {
 
-    return <Provider value={value}>{children}</Provider>
-}
+            value.toggleTheme()
+        }
 
-function SessionProviderSsr({ children }) {
-
-    const value = { theme: { ...defaultTheme, mode: 'dark' } }
+    }, [value])
 
     return <Provider value={value}>{children}</Provider>
 }
 
-export { Consumer as SessionContext, SessionProvider, SessionProviderSsr, sessionContext }
+export { Consumer, SessionProvider, SessionContext }

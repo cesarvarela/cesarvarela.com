@@ -1,8 +1,8 @@
-const React = require("react")
-const { SessionProviderSsr } = require("./src/hooks/session")
+import React from "react"
+import { SessionProvider } from './src/hooks/session'
 
-exports.wrapRootElement = ({ element }) => {
-    return <SessionProviderSsr>
+export const wrapRootElement = ({ element }) => {
+    return <SessionProvider>
         {element}
-    </SessionProviderSsr>
+    </SessionProvider>
 }

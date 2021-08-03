@@ -1,4 +1,7 @@
 module.exports = {
+  flags: {
+    DEV_SSR: true
+  },
   siteMetadata: {
     title: `Cesar Varela`,
     description: `Cesar Varela's home page`,
