@@ -3,6 +3,7 @@ import { GlobalStyles } from './Global'
 import styled, { ThemeProvider } from 'styled-components'
 import ThemeToggleBase from "./ThemeToggle"
 import { SessionContext } from "../hooks/session"
+import useIsClient from "../hooks/useIsClient"
 
 const Controls = styled.div`
   display: flex;
@@ -24,9 +25,10 @@ const Hello = styled.div`
 const Layout = ({ children }) => {
 
   const { theme } = useContext(SessionContext)
+  const isClient = useIsClient()
 
   return <ThemeProvider theme={theme}>
-    <GlobalStyles />
+    {isClient && <GlobalStyles />}
     <main>
       <Controls>
         <Hello>Weeeelcome, stranger!</Hello>

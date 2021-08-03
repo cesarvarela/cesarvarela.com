@@ -16,12 +16,25 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-html.dark {
-  background: #1c1c1c;
-  color: #fff;
+:root.dark {
+  --color-background: #1c1c1c;
+  --color-foreground: #fff;
+  --boxShadow: 8px 8px 16px #0f0f0f, -8px -8px 16px #292929;
+  --color-window-header: #313131;
 }
 
-html.light {
-  background: #f2f2f2;
-  color: #000;
+:root.light {
+  --color-background: #f2f2f2;
+  --color-foreground: #000;
+  --boxShadow: 8px 8px 16px #d0d0d0, -8px -8px 16px #ffffff;
+  --color-window-header: #e8e8e8;
+}
+
+html {
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
+a {
+  color: var(--color-foreground);
 }

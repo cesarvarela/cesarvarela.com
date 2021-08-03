@@ -4,12 +4,13 @@ import Highlight, { defaultProps } from 'prism-react-renderer'
 import vsDark from 'prism-react-renderer/themes/vsDark'
 import vsLight from 'prism-react-renderer/themes/vsLight'
 import { SessionContext } from "../hooks/session"
-import defaultTheme, { getProp } from '../lib/theme'
+import defaultTheme from '../lib/theme'
+import useIsClient from '../hooks/useIsClient'
 
 const Header = styled.div`
     display: flex;
     padding: 18px 14px;
-    background: ${getProp('codeWindow', 'headerColor')};
+    background: var(--color-window-header);
 `
 
 const Name = styled.div`
@@ -32,6 +33,8 @@ const Dot = ({ color }) => <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/200
 
 const Content = styled.div`
     overflow: auto;
+    opacity: ${({ isClient }) => isClient ? '1' : '0'};
+    transition: opacity .2s;
     > pre {
         margin: 0;
         text-align: initial;
@@ -43,7 +46,7 @@ const Content = styled.div`
 `
 
 const Window = styled.div`
-    box-shadow: ${getProp('card', 'boxShadow')};
+    box-shadow: var(--boxShadow);
     overflow: hidden;
     border-radius: 6px;
 `
@@ -54,6 +57,7 @@ const lightTheme = { ...vsLight, plain: { ...vsLight.plain, backgroundColor: def
 function CodeWindow({ className, title, language = "javascript", source }) {
 
     const { theme } = useContext(SessionContext)
+    const isClient = useIsClient()
     const editorTheme = theme.mode === 'dark' ? darkTheme : lightTheme
 
     return <Window className={className}>
@@ -65,7 +69,7 @@ function CodeWindow({ className, title, language = "javascript", source }) {
             </Controls>
             <Name>{title}</Name>
         </Header>}
-        <Content>
+        <Content isClient={isClient}>
             <Highlight {...defaultProps} theme={editorTheme} code={source} language={language}>
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
                     <pre className={className} style={{ ...style, padding: '20px' }}>

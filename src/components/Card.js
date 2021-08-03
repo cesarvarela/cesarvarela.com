@@ -1,20 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { getColor, getProp } from '../lib/theme';
+import { getColor } from '../lib/theme';
 import External from '../svg/external.svg'
 
 const StyledCard = styled.div`
     text-align: left;
-    box-shadow: ${getProp('card', 'boxShadow')};
+    box-shadow: var(--boxShadow);
     border-radius: 6px;
-    background: ${getColor('background')};
+    background: var(--color-background);
     overflow: hidden;
     display: flex;
     flex-direction: column;
 
     .image {
-        border-bottom: 1px solid ${getColor('foreground')};
+        border-bottom: 1px solid var(--color-foreground);
     }
 
    h3 {
