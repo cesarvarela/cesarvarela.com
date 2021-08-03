@@ -1,0 +1,27 @@
+---
+title:  How to set body margin to 0 in Gatsby and do not die trying 
+date: 2021-08-02
+---
+
+This is a short and sweet one but might take you a will to realize. Internally Gatsby heavily manipulates the `<body/>` tag, so no matter what you do. Classes and styles won't "stick" to it.
+
+First place these older than the web css rules in a file:
+
+```css title=src/styles.css
+html, 
+body
+#___gatsby {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+``` 
+
+Then create (in case you don't have it already) the following file and import such CSS:
+
+```jsx title=gatsby-browser.js
+import "./styles.css"
+```
+
+Enjoy a new world without margins nor paddings!
