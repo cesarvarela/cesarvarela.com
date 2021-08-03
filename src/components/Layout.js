@@ -1,5 +1,4 @@
 import React, { useContext } from "react"
-import { useStaticQuery, graphql } from "gatsby"
 import { GlobalStyles } from './Global'
 import styled, { ThemeProvider } from 'styled-components'
 import ThemeToggleBase from "./ThemeToggle"
@@ -23,15 +22,6 @@ const Hello = styled.div`
 `
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
 
   const { theme } = useContext(SessionContext)
 

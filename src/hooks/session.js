@@ -4,29 +4,6 @@ import defaultTheme from '../lib/theme'
 const SessionContext = React.createContext(null)
 const { Consumer, Provider } = SessionContext
 
-const modeFromBrowser = () => {
-
-    if (window.matchMedia) {
-
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark'
-        }
-        else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-
-            return 'light'
-        }
-    }
-
-    return null
-}
-
-const modeFromLocalStorage = () => {
-
-    const stored = window.localStorage.getItem('theme')
-
-    return stored ? stored : null
-}
-
 function SessionProvider({ children }) {
 
     const [value, setValue] = useState({
@@ -38,7 +15,7 @@ function SessionProvider({ children }) {
             setValue(value => {
 
                 const mode = value.theme.mode === 'dark' ? 'light' : 'dark'
-                localStorage.setItem('theme', mode)
+                window.theme.setMode(mode)
 
                 return {
                     ...value,
@@ -53,9 +30,7 @@ function SessionProvider({ children }) {
 
     useEffect(() => {
 
-        const preferredTheme = modeFromLocalStorage() || modeFromBrowser()
-
-        if (value.theme.mode != preferredTheme) {
+        if (value.theme.mode != window.theme.mode) {
 
             value.toggleTheme()
         }

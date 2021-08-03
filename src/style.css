@@ -1,0 +1,27 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#___gatsby {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+html.dark {
+  background: #1c1c1c;
+  color: #fff;
+}
+
+html.light {
+  background: #f2f2f2;
+  color: #000;
+}
