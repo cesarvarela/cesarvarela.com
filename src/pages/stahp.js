@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
 import { Grommet, Anchor } from "grommet"
-import { Apple, DownloadOption, Ubuntu, Windows } from "grommet-icons"
+import { Apple, Ubuntu, Windows } from "grommet-icons"
 import styled from "styled-components"
 import logo from '../images/stahp/logo.png'
 import { Link } from 'gatsby'
@@ -39,6 +39,11 @@ const MiniDownloads = styled.div`
     display: none;
     flex-wrap: wrap;
     gap: 12px;
+    svg {
+        path {
+            fill: var(--color-foreground) !important;
+        }
+    }
 `
 
 const Heading = styled.h2`
@@ -52,7 +57,7 @@ const Downloads = styled.div`
     display: flex;
     flex-direction: column;
     gap: 24px;
-    margin: 48px auto 0;
+    margin: 24px auto 0;
     align-items: center;
 
     & > button {
@@ -62,7 +67,7 @@ const Downloads = styled.div`
 
 const Description = styled.p`
     text-align: center;
-    margin: 24px auto 0;
+    margin: 48px auto 0;
     width: 80%;
 `
 const Wrapper = styled(Grommet)`
@@ -101,9 +106,10 @@ const DownloadButton = styled.a`
     display: inline-flex;
     gap: 12px;
     font-size: 16px;
+    text-decoration: none;
     svg {
         path {
-            fill: var(--color-foreground);
+            fill: var(--color-foreground) !important;
         }
     }
 `
@@ -120,20 +126,26 @@ const MainDownload = styled.div`
         color: var(--color-background);
         svg {
            path {
-                fill: var(--color-background);
+                fill: var(--color-background) !important;
             }
         }
     }
 `
+
+const latest = {
+    windows: `https://github.com/cesarvarela/stahp/releases/latest/download/stahp-1.8.0.Setup.exe`,
+    mac: `https://github.com/cesarvarela/stahp/releases/latest/download/stahp-darwin-x64-1.8.0.zip`,
+    ubuntu: `https://github.com/cesarvarela/stahp/releases/latest/download/stahp_1.8.0_amd64.deb`,
+}
 
 const DownloadLinks = () => {
 
     const os = useDownloadOS()
 
     const buttons = {
-        windows: <DownloadButton key={"windows"} >Download for Windows <Windows /></DownloadButton>,
-        mac: <DownloadButton key={"mac"}>Download for macOS <Apple /></DownloadButton>,
-        ubuntu: <DownloadButton key={"ubuntu"}>Download for Ubuntu <Ubuntu /></DownloadButton>,
+        windows: <DownloadButton key={"windows"} href={latest.windows}>Download for Windows <Windows /></DownloadButton>,
+        mac: <DownloadButton key={"mac"} href={latest.mac}>Download for macOS <Apple /></DownloadButton>,
+        ubuntu: <DownloadButton key={"ubuntu"} href={latest.ubuntu}>Download for Ubuntu <Ubuntu /></DownloadButton>,
     }
 
     const renderExcept = (os) => {
