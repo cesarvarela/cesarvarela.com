@@ -1,0 +1,77 @@
+---
+title: How to configure Sentry with Electron Forge
+date: 2021-08-05
+---
+
+Trying to get an electron-forge-based Electron app running is already a task not for the faint of heart. Many worlds are colliding, including the new Electron security practices, Chromium, Node, and the differences between platforms. Add to this the `@sentry/electron` package, and everything gets messier yet.
+
+** if you use `contextIsolation:true`**
+
+After spending a day trying to get Sentry working, these are my discoveries:
+
+## Add both `sentry/electron` and `sentry/react` packages
+
+```shell
+yarn add @sentry/electron @sentry/react
+```
+
+or
+
+```shell
+npm i @sentry/electron @sentry/react --save
+```
+
+## Call `Sentry.init` from the `@sentry/electron` package on your `main` process
+
+```js title="main.ts"
+import * as Sentry from "@sentry/electron"
+
+Sentry.init({ dsn: <your dsn> });
+```
+
+## Call `Sentry.init` from the `@sentry/electron/dist/renderer` package on your `preload` and `renderer` scripts
+
+```js title="preload.ts AND index.tsx"
+import * as Sentry from "@sentry/electron/dist/renderer"
+
+Sentry.init({ dsn: <your dsn> });
+```
+
+**notice that the import sentence uses `dist/renderer`**
+
+This will catch errors on the `Ipc` side that has access to the 'electron' package but not on React views (if you are using the react/webpack template for example).
+
+## Use `sentry/react` in your context isolated views
+
+This was one _tricky_... I found about this somewhere in Sentry's Github:
+
+```jsx title=App.jsx
+import * as Sentry from "@sentry/react"
+
+function FallbackComponent() {
+  return <div>An error has ocurred :(</div>
+}
+export default function App() {
+  return (
+    <Sentry.ErrorBoundary fallback={FallbackComponent} showDialog>
+      <YourMainComponent />
+    </Sentry.ErrorBoundary>
+  )
+}
+```
+
+## Set `electron` as an external dependency in the renderer webpack config
+
+```js title=webpack.renderer.config.js
+  externals: {
+    electron: "commonjs electron",
+  },
+```
+
+If you don't do this, `electron-forge start` will crash with a nasty and unrelated error message.
+
+## There is some stuff left... yet
+
+This will get you something workable, but there is some stuff missing, like `sourcemaps.`, maybe if I have another day to waste.
+
+Good this is that they are aware of this mess: https://github.com/getsentry/sentry-electron/issues/360 so there is hope 🙏
