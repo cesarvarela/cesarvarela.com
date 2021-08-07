@@ -1,0 +1,22 @@
+---
+title:  How fix flash of dark (or light) theme when refreshing
+date: 2021-07-30
+---
+
+
+```js title=gatsby-ssr.js
+export const onRenderBody = ({ setHeadComponents }) => {
+    setHeadComponents([
+        <script key="theme" src={withPrefix('/theme.js')} />
+    ])
+}
+```
+
+  const [client, setClient] = useState(false)
+
+  useEffect(() => {
+    setClient(true)
+  }, [setClient])
+
+  return <ThemeProvider theme={theme}>
+    {client && <GlobalStyles />}

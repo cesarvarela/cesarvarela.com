@@ -53,6 +53,11 @@ const Heading = styled.h2`
     line-height: 1.2;
 `
 
+const SecondaryHeading = styled(Heading)`
+    font-size: 24px;
+    margin: 48px auto 0;
+`
+
 const Downloads = styled.div`
     display: flex;
     flex-direction: column;
@@ -92,9 +97,11 @@ const Wrapper = styled(Grommet)`
             font-size: 64px;
         }
 
+        ${SecondaryHeading} {
+            font-size: 48px;
+        }
+
         ${Downloads} {
-            flex-direction: row;
-            justify-content: space-around;
             button {
                 max-width: unset;
             }
@@ -163,7 +170,6 @@ const DownloadLinks = () => {
 
 const StahpPage = () => {
 
-
     return <Layout>
         <SEO title="Stahp" />
         <Wrapper>
@@ -188,6 +194,10 @@ const StahpPage = () => {
             <Description>
                 You know that sitting for hours without breaks is terrible for your mind and body, but you still do it. You've installed other break reminders, and they work well at first. Still, after a while, you start ignoring them, your brain automatically clicks the "skip break" button. You sit on the chair for hours, your back starts to ache again, your eyes get dry, you look for another app, and the cycle continues...
             </Description>
+
+            <SecondaryHeading>
+                Make it your own
+            </SecondaryHeading>
 
         </Wrapper>
     </Layout >
