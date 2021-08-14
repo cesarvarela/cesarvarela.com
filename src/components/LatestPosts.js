@@ -22,7 +22,7 @@ export default function LatestPosts({ className }) {
 
   const { allMdx } = useStaticQuery(graphql`
   query PostLayoutQuery {
-    allMdx(sort: {fields: frontmatter___date, order: DESC}, limit: 6) {
+    allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {slug: {glob: "!*wip*"}}, limit: 6) {
       edges {
         node {
           frontmatter {

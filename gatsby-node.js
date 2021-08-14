@@ -5,8 +5,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     const result = await graphql(
         `{
-        allMdx {
-            edges {
+            allMdx(filter: {slug: {glob: "!*wip*"}}) {
+                edges {
                 node {
                     slug
                 }
