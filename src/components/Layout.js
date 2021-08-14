@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import ThemeToggleBase from "./ThemeToggle"
 import { SessionContext } from "../hooks/session"
 import useIsClient from "../hooks/useIsClient"
+import { Footer } from "./sections/Footer"
 
 const Controls = styled.div`
   display: flex;
@@ -35,7 +36,9 @@ const Layout = ({ children }) => {
         <ThemeToggle />
       </Controls>
       {children}
+      <Footer />
     </main>
+
   </ThemeProvider>
 }
 

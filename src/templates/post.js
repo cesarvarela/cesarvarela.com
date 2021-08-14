@@ -8,10 +8,6 @@ import { graphql } from 'gatsby'
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "../components/Layout"
 
-const Wrapper = styled.div`
-  max-width: 768px;
-  margin: 0 auto; 
-`
 const StyledCodeWindow = styled(CodeWindow)`
   margin: 48px auto;
 `
@@ -86,8 +82,16 @@ const components = {
   li: props => <StyledLi {...props} />,
 }
 
+const LatestPostHeading = styled.h3`
+  background: linear-gradient(266.96deg, #3FC5FF -21.03%, #FF3EC9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.04em;
+  margin: 54px 0 0;
+`
+
 const LatestPosts = styled(LatestPostsBase)`
-  padding: 48px 0;
+  margin: 24px 0 0;
 `
 const PostInfo = styled.div`
   display: flex;
@@ -98,6 +102,11 @@ const PostInfo = styled.div`
 const DatePublished = styled.div`
 `
 const TimeToRead = styled.p`
+`
+
+const Wrapper = styled.div`
+  max-width: 768px;
+  margin: 0 auto; 
 `
 
 const PostLayout = (props) => {
@@ -116,7 +125,7 @@ const PostLayout = (props) => {
           {body}
         </MDXRenderer>
       </MDXProvider>
-      <h3>Latest posts</h3>
+      <LatestPostHeading>Latest posts</LatestPostHeading>
       <LatestPosts />
     </Wrapper>
   </Layout >
