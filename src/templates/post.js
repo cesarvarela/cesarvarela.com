@@ -4,7 +4,7 @@ import LatestPostsBase from "../components/LatestPosts"
 import { MDXProvider } from "@mdx-js/react"
 import CodeWindow from "../components/CodeWindow"
 import thing from '../images/thing.svg'
-import { graphql } from 'gatsby'
+import { graphql, Link as GastbyLink } from 'gatsby'
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "../components/Layout"
 
@@ -103,7 +103,10 @@ const DatePublished = styled.div`
 `
 const TimeToRead = styled.p`
 `
-
+const LayoutLink = styled(GastbyLink)`
+  text-decoration: none;
+  font-size: 12px;
+`
 const Wrapper = styled.div`
   max-width: 768px;
   margin: 0 auto; 
@@ -113,7 +116,7 @@ const PostLayout = (props) => {
 
   const { mdx: { body, frontmatter, slug, timeToRead } } = props.data
 
-  return <Layout>
+  return <Layout content={<LayoutLink to="/blog">Blog</LayoutLink>}>
     <Wrapper>
       <StyledH1>{frontmatter.title}</StyledH1>
       <PostInfo>

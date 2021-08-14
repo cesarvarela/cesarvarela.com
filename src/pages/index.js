@@ -10,7 +10,7 @@ import SEO from "../components/Seo"
 import { FromTheBlog } from "../components/sections/FromTheBlog"
 
 const IndexPage = () => (
-  <Layout>
+  <Layout contet={null}>
     <SEO title="Home" />
     <Header />
     <Projects />

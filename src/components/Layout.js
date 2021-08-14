@@ -10,7 +10,7 @@ const Controls = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 12px;
+  padding: 12px 0;
   align-items: center;
   max-width: 768px;
   margin: 0 auto;
@@ -23,7 +23,7 @@ const Hello = styled.div`
   font-size: 12px;
 `
 
-const Layout = ({ children }) => {
+const Layout = ({ children, content = <Hello>Weeeelcome, stranger!</Hello> }) => {
 
   const { theme } = useContext(SessionContext)
   const isClient = useIsClient()
@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
     {isClient && <GlobalStyles />}
     <main>
       <Controls>
-        <Hello>Weeeelcome, stranger!</Hello>
+        {content}
         <ThemeToggle />
       </Controls>
       {children}

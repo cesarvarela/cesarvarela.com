@@ -170,7 +170,7 @@ const DownloadLinks = () => {
 
 const StahpPage = () => {
 
-    return <Layout>
+    return <Layout content={<Link to="/">by Cesar Varela</Link>}>
         <SEO title="Stahp" />
         <Wrapper>
             <Header>
