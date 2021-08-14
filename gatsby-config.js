@@ -165,6 +165,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `blog-images`,
+        path: `${__dirname}/src/blog/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `posts`,
         path: `${__dirname}/src/blog`,
       },
@@ -185,7 +192,22 @@ module.exports = {
     `gatsby-transformer-sharp`,
 
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-mdx`,
+    `gatsby-remark-images`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        root: __dirname,
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 500,
+              linkImagesToOriginal: false,
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
