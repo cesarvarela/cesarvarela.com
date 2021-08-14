@@ -68,12 +68,22 @@ const StyledH3 = styled.h3`
   margin: 48px auto 0;
 `
 
+const StyledUl = styled.div`
+  margin: 48px 0 0;
+`
+
+const StyledLi = styled.li`
+  margin: 12px 0 0;
+`
+
 const components = {
   p: props => <StyledP {...props}>{props.children}</StyledP>,
   h1: props => <StyledH1 {...props}>{props.children}</StyledH1>,
   h2: props => <StyledH2 level="2" {...props}>{props.children}</StyledH2>,
   h3: props => <StyledH3 level="3" {...props}>{props.children}</StyledH3>,
   pre: props => <MDXCodeBlock {...props} />,
+  ul: props => <StyledUl {...props} />,
+  li: props => <StyledLi {...props} />,
 }
 
 const LatestPosts = styled(LatestPostsBase)`
