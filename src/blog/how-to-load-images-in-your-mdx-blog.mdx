@@ -1,0 +1,72 @@
+---
+title:  How to load images in your MDX blog
+date: 2021-08-16
+---
+
+If you've followed my previous posts about adding a blog to an existing Gatsby site, you'll notice one thing: images don't load.
+
+Thankfully this is pretty easy to fix, so let's do it:
+
+## Add a `gatsby-source-filesystem` entry for your images
+
+First, we need to let know Gatsby about the existence of our pictures. I want the images to reside inside the `src/blog/images` folder and not in `src/images` (skip this step if you don't care about this).
+
+```js title=gatsby-config.js
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `blog-images`,
+        path: `${__dirname}/src/blog/images`,
+      },
+    },
+```
+## Add the `gatsby-remark-images` package
+
+```sh
+yarn add gatsby-remark-images
+```
+or
+```sh
+npm i gatsby-remark-images
+```
+And add it to your Gatsby config:
+
+```js title=gatsby-config.js
+...
+    `gatsby-remark-images`,
+...
+```
+## Configure `gatsby-plugin-mdx`
+
+Next, we need to tell `gatsby-plugin-mdx` to use  `gatsby-remark-images`, and this is done on your Gatsby config too:
+
+```js title=gatsby-config.js
+{
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        root: __dirname,
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 500,
+              linkImagesToOriginal: false,
+            },
+          },
+        ],
+      },
+    },
+```
+## Use them in your `.mdx` files
+
+Once everything is ready, you should be able to include them like you would with `.md` files, using a relative path from the current `.mdx` you are writing on to the image:
+
+```mdx title=some-mdx-file.mdx
+...
+
+![smart screen of death](./images/smart-screen.png)
+
+....
+```
+
+You can check an example [here](https://github.com/cesarvarela/cesarvarela.com/blame/master/src/blog/codesign-electron-on-windows-getting-certificate.mdx#L45)
