@@ -1,0 +1,37 @@
+---
+title: Fix the infamous "Source file requires different compiler version"
+tags: dapp, solidity, ethereum
+date: 2021-08-18
+---
+One of the first things you do when starting a new development path is setting up your dev environment. Personally, as a Visual Studio Code believer, I browse the available extensions and install the ones with the most stars ⭐
+
+In my case, I'm starting a new adventure towards the Dapp developer path, so I installed all the solidity/ethereum related extensions I saw. Then, I played around with [Cryptozombies](https://cryptozombies.io/) and the [Truffle tutorial](https://www.trufflesuite.com/tutorial). Both, to my dismay, greeted me with an error when I followed through them in my editor:
+
+```
+Source file requires different compiler version (current compiler is *something*) - note that nightly builds are considered to be strictly less than the released version
+❗ avoid using experimental features! avoid specifying version ^
+```
+
+And I haven't written even one line of code of my own!!!
+
+## Ok, to the point
+
+What's causing the `Source file requires different compiler version` error, and how to fix it?
+
+### Who:
+
+It's the [solidity](https://github.com/juanfranblanco/vscode-solidity) extension.
+
+### Why:
+
+Because it comes bundled with its own solidity compiler (which is the latest), and most of the tutorials around are using an older version of the language.
+
+### Fix:
+
+Change the source of the compiler for the extension:
+
+- Open the command palette `ctrl+p`
+- Type `>` followed by `Change the default workspace`
+- Select `remote` and then `Change Global compiler version (Remote)` to your version, or an option that suits your project the best. You can read more about it [here](https://github.com/juanfranblanco/vscode-solidity#using-a-different-version-of-the-solidity-compiler)
+- Keep the grind
+

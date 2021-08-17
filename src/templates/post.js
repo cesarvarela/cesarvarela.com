@@ -25,6 +25,7 @@ function MDXCodeBlock({ children }) {
 const StyledP = styled.p`
   margin: 36px auto 0;
   font-size: 18px;
+  line-height: 1.9;
 
   code {
     font-family:  Inconsolata, monospace;
@@ -72,6 +73,7 @@ const StyledUl = styled.div`
 
 const StyledLi = styled.li`
   margin: 12px 0 0;
+  line-height: 1.9;
 `
 
 const components = {
