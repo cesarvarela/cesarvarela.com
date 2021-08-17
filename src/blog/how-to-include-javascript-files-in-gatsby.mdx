@@ -1,0 +1,110 @@
+---
+title: How to include Javascript files in Gatsby
+date: 2021-08-18
+tags: gatsby, ssr, how-to, jQuery
+---
+
+A few years ago, something like loading an external or local script file was a matter of adding a `script` tag linking to it in your `index.html` and deploying it. With the advent of modern frontend frameworks, this has become something pretty complicated or at least cryptic.
+
+There are many ways to get this working with Gatbsy. What you choose will depend on how your project is structured:
+
+## 1. Load an external or local Script before anything else using `gatsby-ssr.js`
+
+For error logging libraries like Rollbar, you don't want any other part of your app to execute before it since you want to track as many potential causes of error as possible.
+
+Depending on the length of your Script and your personal preference, there are two ways to do this:
+
+### Use `gatsby-ssr.js` and `dangerouslySetInnerHTML`
+
+```jsx title=gatsby-ssr.js
+import React from 'react';
+
+const HeadComponents = [<script key="some-key" dangerouslySetInnerHTML={{__html: `
+	/* copy and paste you js script here */
+`}}/>];
+
+const onRenderBody = ({ setHeadComponents }) => {
+  setHeadComponents(HeadComponents);
+};
+
+export { onRenderBody };
+```
+
+### Use `gatsby-ssr.js` and the `static` folder
+
+First, we need to copy our Script to Gatsby's `/static` folder. **Note that this means the root `/` of your project and not inside `/src`. In this example, I've copied Rollbars embed code in `/static/rollbar.js`.
+
+Then we just set the `src` of our script tag to it:
+
+```js title=gatsby-ssr.js
+import React from 'react';
+
+const HeadComponents = [<script key="rollbar" src="/rollbar.js" />];
+
+const onRenderBody = ({ setHeadComponents }) => {
+  setHeadComponents(HeadComponents);
+};
+
+export { onRenderBody };
+```
+
+With this method, you can also append scripts to the `body` of your Gatsby site, like the old days of `jQuery`.
+
+*If you are using a subpath for your Gatsby projects, remember to check `withPrefix`*
+
+
+## 2. Use `gatsby-plugin-helmet`
+
+This one is more involved to me, but it might be faster to implement if you already use `react-helmet` for SEO purposes.
+
+If you don't have `react-helmet` yet, you have to install it first:
+
+```sh
+npm i gatsby-plugin-react-helmet react-helmet --save
+```
+or
+
+```sh
+yarn add gatsby-plugin-react-helmet react-helmet
+```
+Then you have to add  the plugin to your Gatsby config:
+
+```js title=gastby-config.js
+plugins: [`gatsby-plugin-react-helmet`]
+```
+And finally, you can include the script tags you need. 
+
+```jsx title=layout.js
+import React from "react";
+import {Helmet} from "react-helmet";
+export default function Layout({children}) {
+  render () {
+    return (
+        <div className="application">
+            <Helmet>
+                <script src="/my-static-script.js" />
+                <script src="https://external-domain.com/my-static-script.js" />
+            </Helmet>
+            ...
+        </div>
+    );
+  }
+};
+```
+The good thing about this method is that it can easily control which pages load which scripts, and if you add a `script` in our `Layout` file, it will load on all the pages of your site.
+
+## BONUS: The quickest way to add jQuery to a Gatsby site
+
+For some reason, you need to, and I won't ask why. I'll keep it between us:
+
+```js title=gatsby-ssr.js
+import React from 'react';
+
+const HeadComponents = [<script  key="jquery"  src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossOrigin="anonymous" />];
+
+const onRenderBody = ({ setHeadComponents }) => {
+  setHeadComponents(HeadComponents);
+};
+
+export { onRenderBody };
+```
