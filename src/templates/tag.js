@@ -1,8 +1,7 @@
 import React from "react"
 import styled from 'styled-components'
-import thing from '../images/thing.svg'
 import Layout from "../components/Layout"
-import { useStaticQuery, graphql, Link as GastbyLink } from "gatsby"
+import { graphql, Link as GastbyLink } from "gatsby"
 import SEO from "../components/Seo"
 
 const StyledH1 = styled.h1`
@@ -31,36 +30,19 @@ const LayoutLink = styled(GastbyLink)`
   text-decoration: none;
   font-size: 12px;
 `
-
 const Wrapper = styled.div`
   max-width: 768px;
   margin: 0 auto; 
 `
 
-const BlogPage = (props) => {
-
-  const { allMdx } = useStaticQuery(graphql`
-    query BlogQuery {
-      allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {slug: {glob: "!*wip*"}}) {
-        edges {
-          node {
-            frontmatter {
-              title
-              date
-              tags
-            }
-            slug
-          }
-        }
-      }
-    }`)
+export default function TagPage({ data: { allMdx }, pageContext: { tag, slugs } }) {
 
   const posts = allMdx.edges
 
   return <Layout content={<LayoutLink to="/">About me</LayoutLink>}>
-    <SEO title="Blog" />
+    <SEO title={`#${tag}`} />
     <Wrapper>
-      <StyledH1>Blog</StyledH1>
+      <StyledH1>#{tag}</StyledH1>
       <List>
         {posts.map(({ node }) => <Item key={node.slug}>
           <Link to={`/blog/${node.slug}`}>
@@ -72,4 +54,19 @@ const BlogPage = (props) => {
   </Layout >
 }
 
-export default BlogPage
+export const pageQuery = graphql`
+  query($slugs: [String]) {
+    allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {slug: {in: $slugs }}) {
+      edges {
+        node {
+          frontmatter {
+            title
+            date
+            tags
+          }
+          slug
+        }
+      }
+    }
+  }
+`

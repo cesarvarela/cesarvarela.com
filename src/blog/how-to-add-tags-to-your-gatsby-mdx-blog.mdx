@@ -1,0 +1,192 @@
+---
+title: How to add tags to your Gatsby MDX Blog
+date: 2021-08-17
+tags: gatsby, mdx, tags, how-to
+---
+If you've read my previous posts, you have a working MDX blog with customized styles and images. Now, it's time to add tags support to make it easier for your readers to browse through it.
+
+## Add tags to each post's frontmatter
+I'll use a plain old string, then later I'll split it by `,`, so these need to be one or multiple comma-separated words like so:
+
+```md
+---
+title: How to add tags to your Gatsby MDX Blog
+date: 2021-08-17
+tags: gatsby, mdx, tags, how-to
+---
+```
+You can check that this is working browsing to http://localhost:8000/___graphql and pasting this query:
+
+```graphql
+query {
+  allMdx(filter: {fileAbsolutePath: {glob: "**/blog/**/*"}}) {
+    edges {
+      node {
+        slug
+        frontmatter{
+        	tags
+        }
+      }
+    }
+  }
+}
+```
+You should see the newly added tags in the results pane. If you don't, you can restart `gatsby develop` or run `gatsby clean`.
+
+## Display the new tags below the post title
+
+This one will be easy too. We need to add the `tags` field to our post's graphql query and a component to display them.
+
+```jsx title=Tags.tsx
+import React from 'react'
+import styled from 'styled-components'
+import { Link as LinkBase } from 'gatsby'
+
+const Link = styled(LinkBase)`
+    text-decoration: none;
+`
+
+const Tag = styled.li`
+    display: inline-block;
+    padding: 3px 6px;
+    font-style: italic;
+    opacity: 0.6;
+    &:first-child {
+        padding-left: 0;
+    }
+`
+
+const Wrapper = styled.ul`
+`
+
+export default function Tags({ className, tags = "" }: { className: string; tags: string; }) {
+
+    return <Wrapper className={className}>
+        {tags.split(",")
+            .map(tag => tag.trim())
+            .filter(tag => tag.length > 0)
+            .map(tag => <Tag key={tag}><Link to={`/blog/tags/${tag}`}>{tag}</Link></Tag>)}
+    </Wrapper >
+}
+```
+
+Simple stuff, right? A split here, a trim there, filter to avoid rendering empty tags, and the only thing that jumps out is the Gatsby `Link` to pages that don't exis... yeah, let's add them.
+
+## Generate tag-specific pages
+
+The point of tags is that you can browse them, so let's add a tag page generator to our `gatsby-node.js`:
+
+```js title=gatsby-node.js
+
+// somewhere before this I'm fetching allMdx posts, so here I'm reusing the `edges` collection
+    const tags = {}
+    const tagTemplate = path.resolve(`src/templates/tag.js`)
+
+    result.data.allMdx.edges.filter(({ node }) => node.frontmatter.tags).forEach(({ node }) => {
+
+        const tagsList = node.frontmatter.tags
+            .split(",")
+            .map(tag => tag.trim())
+            .filter(tag => tag.length > 0)
+
+        tagsList.forEach(tag => {
+            if (!tags[tag]) {
+                tags[tag] = []
+            }
+            tags[tag].push(node.slug)
+        })
+    })
+
+    Object.keys(tags).forEach(tag => {
+        createPage({
+            path: `/blog/tags/${tag}`,
+            component: tagTemplate,
+            context: {
+                tag,
+                slugs: tags[tag]
+            },
+        })
+    })
+```
+
+This code might not be elegant, but it works, maybe if you have thousands of posts, you need to do something better, but this will work for most needs. It just iterates over the list of posts, extracts the tags, and creates a slug collection for each one. 
+
+As a side note: **most of the code here was suggested by Github's Copilot 😲**
+
+## Add a tag page template
+
+```jsx title=tag.js
+import React from "react"
+import styled from 'styled-components'
+import Layout from "../components/Layout"
+import { graphql, Link as GastbyLink } from "gatsby"
+import Seo from "../components/Seo"
+
+const StyledH1 = styled.h1`
+  font-size: 60px;
+`
+const List = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+const Item = styled.li`
+  margin-top: 24px;
+`
+const Link = styled(GastbyLink)`
+  text-decoration: none;
+`
+const LayoutLink = styled(GastbyLink)`
+  text-decoration: none;
+  font-size: 12px;
+`
+
+const Wrapper = styled.div`
+  max-width: 768px;
+  margin: 0 auto; 
+`
+
+export default function TagPage({ data: { allMdx }, pageContext: { tag, slugs } }) {
+
+  const posts = allMdx.edges
+
+  return <Layout content={<LayoutLink to="/">About me</LayoutLink>}>
+    <Seo title={`#${tag}`} />
+    <Wrapper>
+      <StyledH1>#{tag}</StyledH1>
+      <List>
+        {posts.map(({ node }) => <Item key={node.slug}>
+          <Link to={`/blog/${node.slug}`}>
+            {node.frontmatter.title}
+          </Link>
+        </Item>)}
+      </List>
+    </Wrapper>
+  </Layout >
+}
+
+export const pageQuery = graphql`
+  query($slugs: [String]) {
+    allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {slug: {in: $slugs }}) {
+      edges {
+        node {
+          frontmatter {
+            title
+            date
+            tags
+          }
+          slug
+        }
+      }
+    }
+  }
+`
+```
+
+Nothing fancy here either. You are probably already familiar with exporting GraphQL queries in Gatsby and accessing its result in the page's `data` property, which is exactly what I'm doing here. If this looks too magical, you can read more about it here: https://www.gatsbyjs.com/docs/how-to/querying-data/page-query/
+
+And that's it! We have tags now! 
+
+Our blog is looking better and better~
+
+As always, you can check the full implementation here: https://github.com/cesarvarela/cesarvarela.com

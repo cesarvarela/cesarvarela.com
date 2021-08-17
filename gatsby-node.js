@@ -9,6 +9,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 edges {
                 node {
                     slug
+                    frontmatter {
+                        tags
+                    }
                 }
             }
         }
@@ -20,7 +23,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         return
     }
 
-    const component = path.resolve(`src/templates/post.js`)
+    const postTemplate = path.resolve(`src/templates/post.js`)
 
     result.data.allMdx.edges.forEach(({ node }) => {
 
@@ -28,9 +31,35 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
         createPage({
             path: postPath,
-            component,
+            component: postTemplate,
             context: {
                 slug: node.slug
+            },
+        })
+    })
+
+    const tags = {}
+    const tagTemplate = path.resolve(`src/templates/tag.js`)
+
+    result.data.allMdx.edges.filter(({ node }) => node.frontmatter.tags).forEach(({ node }) => {
+
+        const tagsList = node.frontmatter.tags.split(",").map(tag => tag.trim()).filter(tag => tag.length > 0)
+
+        tagsList.forEach(tag => {
+            if (!tags[tag]) {
+                tags[tag] = []
+            }
+            tags[tag].push(node.slug)
+        })
+    })
+
+    Object.keys(tags).forEach(tag => {
+        createPage({
+            path: `/blog/tags/${tag}`,
+            component: tagTemplate,
+            context: {
+                tag,
+                slugs: tags[tag]
             },
         })
     })

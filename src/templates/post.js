@@ -8,6 +8,7 @@ import { graphql, Link as GastbyLink } from 'gatsby'
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
+import Tags from "../components/Tags"
 
 const StyledCodeWindow = styled(CodeWindow)`
   margin: 48px auto;
@@ -108,6 +109,11 @@ const LayoutLink = styled(GastbyLink)`
   text-decoration: none;
   font-size: 12px;
 `
+
+const StyledTags = styled(Tags)`
+
+`
+
 const Wrapper = styled.div`
   max-width: 768px;
   margin: 0 auto; 
@@ -125,6 +131,7 @@ const PostLayout = (props) => {
         <DatePublished>{frontmatter.date}</DatePublished>
         <TimeToRead>{timeToRead} min.</TimeToRead>
       </PostInfo>
+      <StyledTags tags={frontmatter.tags} />
       <MDXProvider components={components}>
         <MDXRenderer>
           {body}
@@ -143,6 +150,7 @@ query($slug: String!) {
     frontmatter {
       date(formatString: "MMMM DD, YYYY")
       title
+      tags
     }
     slug
     timeToRead
