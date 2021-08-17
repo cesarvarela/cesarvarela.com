@@ -18,7 +18,6 @@ const IndexPage = () => (
     <Social />
     <Contact />
     <FromTheBlog />
-    <Footer />
   </Layout>
 )
 
