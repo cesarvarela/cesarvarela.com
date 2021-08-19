@@ -1,18 +1,17 @@
 import React from 'react'
 import { Section as SectionBase } from '../Section'
-import picture from '../../images/po.png'
 import styled from 'styled-components'
 import Button from '../Button'
 import cv from '../../downloads/cesar-varela-resume.pdf'
 import ScrollSvg from '../../svg/scroll.svg'
 import { getColor } from '../../lib/theme'
+import { StaticImage } from "gatsby-plugin-image"
 
-const Image = styled.img`
-	margin: 0 auto 0;
-	display: block;
-	width: 180px;
-	height: 180px;
+const ImageWrapper = styled.div`
 	border-radius: 100%;
+	width: max-content;
+	margin: 0 auto 0;
+	overflow: hidden;
 `
 
 const Quote = styled.div`
@@ -62,8 +61,12 @@ const Section = styled(SectionBase)`
 
 export function Header() {
 
+
+
 	return <Section id="head">
-		<Image src={picture} alt="po face" />
+		<ImageWrapper>
+			<StaticImage width={200} height={200} src="../../images/po.png" alt="A dinosaur" />
+		</ImageWrapper>
 		<Name>Cesar Varela</Name>
 
 		<Quote className="quote">
