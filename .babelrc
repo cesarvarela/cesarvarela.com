@@ -1,5 +1,8 @@
 {
   "presets": [
     "babel-preset-gatsby"
+  ],
+  "plugins": [
+    "@loadable/babel-plugin"
   ]
 }

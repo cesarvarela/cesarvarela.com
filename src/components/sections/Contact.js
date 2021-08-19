@@ -28,7 +28,7 @@ const Links = styled.ul`
 	}
 `
 
-export function Contact() {
+export default function Contact() {
 
 	return <Section id="contact" subtitle="Contact">
 		<MECard>

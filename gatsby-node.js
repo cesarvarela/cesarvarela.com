@@ -64,3 +64,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         })
     })
 }
+
+const LoadablePlugin = require('@loadable/webpack-plugin')
+
+exports.onCreateWebpackConfig = ({
+    stage,
+    rules,
+    loaders,
+    plugins,
+    actions,
+}) => {
+    actions.setWebpackConfig({
+        module: {
+        },
+        plugins: [new LoadablePlugin()]
+    })
+}

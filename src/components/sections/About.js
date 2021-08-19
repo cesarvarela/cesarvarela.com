@@ -43,7 +43,7 @@ const Section = styled(SectionBase)`
     }
 `
 
-export function About() {
+export default function About() {
 
     const { site: { siteMetadata: { skills } } } = useStaticQuery(graphql`
     query{

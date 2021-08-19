@@ -101,7 +101,7 @@ const Section = styled(SectionBase)`
     }
 `
 
-export function Social() {
+export default function Social() {
 
     const { site: { siteMetadata: { socialItems: items } } } = useStaticQuery(graphql`
     query {

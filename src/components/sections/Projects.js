@@ -22,7 +22,7 @@ const Cards = styled.div`
     }
 `
 
-export function Projects() {
+export default function Projects() {
 
   const { items } = useStaticQuery(graphql`query MyQuery {
         items: allProjectsJson {

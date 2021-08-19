@@ -1,22 +1,25 @@
 import React from "react"
-import { Header } from '../components/sections/Header'
-import { Contact } from '../components/sections/Contact'
-import { About } from '../components/sections/About'
-import { Social } from '../components/sections/Social'
-import { Projects } from '../components/sections/Projects'
 import Layout from "../components/Layout"
-import SEO from "../components/Seo"
-import { FromTheBlog } from "../components/sections/FromTheBlog"
+import Seo from "../components/Seo"
+import { Header } from '../components/sections/Header'
+
+import loadable from '@loadable/component'
+
+// const Contact = loadable(() => import('../components/sections/Contact'))
+// const About = loadable(() => import('../components/sections/About'))
+// const Social = loadable(() => import('../components/sections/Social'))
+const Projects = loadable(() => import('../components/sections/Projects'))
+// const FromTheBlog = loadable(() => import('../components/sections/FromTheBlog'))
 
 const IndexPage = () => (
   <Layout contet={null}>
-    <SEO title="Home" />
+    <Seo title="Home" />
     <Header />
     <Projects />
-    <About />
+    {/* <About />
     <Social />
     <Contact />
-    <FromTheBlog />
+    <FromTheBlog /> */}
   </Layout>
 )
 
