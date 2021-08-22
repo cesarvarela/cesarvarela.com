@@ -58,7 +58,7 @@ const BlogPage = (props) => {
   const posts = allMdx.edges
 
   return <Layout content={<LayoutLink to="/">About me</LayoutLink>}>
-    <SEO title="Blog" />
+    <Seo title="Blog" />
     <Wrapper>
       <StyledH1>Blog</StyledH1>
       <List>

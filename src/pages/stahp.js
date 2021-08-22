@@ -171,7 +171,7 @@ const DownloadLinks = () => {
 const StahpPage = () => {
 
     return <Layout content={<Link to="/">by Cesar Varela</Link>}>
-        <SEO title="Stahp" />
+        <Seo title="Stahp" />
         <Wrapper>
             <Header>
                 <LogoLink to="/stahp">

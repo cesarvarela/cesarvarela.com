@@ -7,7 +7,7 @@ import thing from '../images/thing.svg'
 import { graphql, Link as GastbyLink } from 'gatsby'
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 import Tags from "../components/Tags"
 
 const StyledCodeWindow = styled(CodeWindow)`
@@ -126,7 +126,7 @@ const PostLayout = (props) => {
   const { mdx: { body, frontmatter, slug, timeToRead } } = props.data
 
   return <Layout content={<LayoutLink to="/blog">Blog</LayoutLink>}>
-    <SEO title={frontmatter.title} />
+    <Seo title={frontmatter.title} />
     <Wrapper>
       <StyledH1>{frontmatter.title}</StyledH1>
       <PostInfo>

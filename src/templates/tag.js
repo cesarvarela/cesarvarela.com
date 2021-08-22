@@ -40,7 +40,7 @@ export default function TagPage({ data: { allMdx }, pageContext: { tag, slugs } 
   const posts = allMdx.edges
 
   return <Layout content={<LayoutLink to="/blog">Blog</LayoutLink>}>
-    <SEO title={`#${tag}`} />
+    <Seo title={`#${tag}`} />
     <Wrapper>
       <StyledH1>#{tag}</StyledH1>
       <List>

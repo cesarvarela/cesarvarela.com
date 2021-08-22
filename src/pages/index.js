@@ -10,7 +10,7 @@ import { FromTheBlog } from "../components/sections/FromTheBlog"
 
 const IndexPage = () => (
   <Layout contet={null}>
-    <SEO title="Home" />
+    <Seo title="Home" />
     <Header />
     <Projects />
     <About />

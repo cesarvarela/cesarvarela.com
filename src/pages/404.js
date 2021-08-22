@@ -26,7 +26,7 @@ const NotFound = styled.div`
 
 const NotFoundPage = () => (
   <Layout>
-    <SEO title="404: Not found" />
+    <Seo title="404: Not found" />
     <NotFound>
       <p>Not sure how you got here but you should probably <Link to={"/"}>go home</Link></p>
     </NotFound>
