@@ -2,7 +2,7 @@ import React from "react"
 import styled from 'styled-components'
 import Layout from "../components/Layout"
 import { graphql, Link as GastbyLink } from "gatsby"
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 
 const StyledH1 = styled.h1`
   font-size: 60px;

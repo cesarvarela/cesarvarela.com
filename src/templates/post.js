@@ -9,6 +9,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import Tags from "../components/Tags"
+import { helmetJsonLdProp } from "react-schemaorg";
 
 const StyledCodeWindow = styled(CodeWindow)`
   margin: 48px auto;
@@ -123,10 +124,23 @@ const Wrapper = styled.div`
 
 const PostLayout = (props) => {
 
-  const { mdx: { body, frontmatter, slug, timeToRead } } = props.data
+  const { mdx: { body, frontmatter, parent, timeToRead } } = props.data
+
+  const jsonLd = helmetJsonLdProp({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": frontmatter.title,
+    "datePublished": frontmatter.date,
+    "dateModified": parent.modifiedTime,
+    "author": [{
+      "@type": "Person",
+      "name": "Cesar Varela",
+      "url": "https://cesarvarela.com"
+    }]
+  })
 
   return <Layout content={<LayoutLink to="/blog">Blog</LayoutLink>}>
-    <Seo title={frontmatter.title} />
+    <Seo title={frontmatter.title} script={jsonLd} />
     <Wrapper>
       <StyledH1>{frontmatter.title}</StyledH1>
       <PostInfo>
@@ -156,6 +170,13 @@ query($slug: String!) {
     }
     slug
     timeToRead
+    parent {
+      ... on File {
+        id
+        name
+        modifiedTime(formatString: "MMMM DD, YYYY")
+      }
+    }
   }
 }`
 

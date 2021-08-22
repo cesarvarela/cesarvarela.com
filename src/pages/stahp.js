@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 import { Grommet, Anchor } from "grommet"
 import { Apple, Ubuntu, Windows } from "grommet-icons"
 import styled from "styled-components"

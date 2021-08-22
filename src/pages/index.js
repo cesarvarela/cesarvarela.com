@@ -5,7 +5,7 @@ import { About } from '../components/sections/About'
 import { Social } from '../components/sections/Social'
 import { Projects } from '../components/sections/Projects'
 import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 import { FromTheBlog } from "../components/sections/FromTheBlog"
 
 const IndexPage = () => (

@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import mario from '../images/404.gif'
