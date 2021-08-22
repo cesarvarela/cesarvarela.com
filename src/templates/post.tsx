@@ -10,6 +10,7 @@ import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import Tags from "../components/Tags"
 import { helmetJsonLdProp } from "react-schemaorg";
+import { BlogPosting } from "schema-dts";
 
 const StyledCodeWindow = styled(CodeWindow)`
   margin: 48px auto;
@@ -124,18 +125,18 @@ const Wrapper = styled.div`
 
 const PostLayout = (props) => {
 
-  const { mdx: { body, frontmatter, parent, timeToRead } } = props.data
+  const { mdx: { body, frontmatter, parent, timeToRead, slug } } = props.data
 
-  const jsonLd = helmetJsonLdProp({
+  const jsonLd = helmetJsonLdProp<BlogPosting>({
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     "headline": frontmatter.title,
     "datePublished": frontmatter.date,
     "dateModified": parent.modifiedTime,
     "author": [{
       "@type": "Person",
       "name": "Cesar Varela",
-      "url": "https://cesarvarela.com"
+      "url": `https://cesarvarela.com/blog/${slug}`
     }]
   })
 

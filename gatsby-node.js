@@ -23,7 +23,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         return
     }
 
-    const postTemplate = path.resolve(`src/templates/post.js`)
+    const postTemplate = path.resolve(`src/templates/post.tsx`)
 
     result.data.allMdx.edges.forEach(({ node }) => {
 

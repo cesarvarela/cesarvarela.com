@@ -20,9 +20,9 @@ const Wrapper = styled.ul`
     padding: 0;
 `
 
-export default function Tags({ className, tags = "" }: { className: string; tags: string; }) {
+export default function Tags({ className, tags = "" }: { className?: string; tags: string; }) {
 
-    if(!tags) {
+    if (!tags) {
         return null
     }
 

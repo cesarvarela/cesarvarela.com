@@ -31,7 +31,7 @@ const Dot = ({ color }) => <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/200
     <circle cx="9" cy="9" r="9" fill={color} />
 </svg>
 
-const Content = styled.div`
+const Content = styled.div<{ isClient: boolean }> `
     overflow: auto;
     opacity: ${({ isClient }) => isClient ? '1' : '0'};
     transition: opacity .2s;
@@ -54,7 +54,7 @@ const Window = styled.div`
 const darkTheme = { ...vsDark, plain: { ...vsDark.plain, backgroundColor: defaultTheme.colors.background.dark } }
 const lightTheme = { ...vsLight, plain: { ...vsLight.plain, backgroundColor: defaultTheme.colors.background.light } }
 
-function CodeWindow({ className, title, language = "javascript", source }) {
+function CodeWindow({ className, title, language = "javascript", source }: { className?: string, title: string, language?: string, source: string }) {
 
     const { theme } = useContext(SessionContext)
     const isClient = useIsClient()

@@ -30,7 +30,7 @@ function SessionProvider({ children }) {
 
     useEffect(() => {
 
-        if (value.theme.mode != window.theme.mode) {
+        if (value.theme.mode !== window.theme.mode) {
 
             value.toggleTheme()
         }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Section as SectionBase } from '../Section'
 import styled from 'styled-components'
-import { useStaticQuery, graphql } from "gatsby"
 import Codewindow from '../CodeWindow'
 
 const code = `class Cesar extends Human {
@@ -44,20 +43,6 @@ const Section = styled(SectionBase)`
 `
 
 export function About() {
-
-    const { site: { siteMetadata: { skills } } } = useStaticQuery(graphql`
-    query{
-        site {
-            siteMetadata {
-                skills {
-                    name
-                    items {
-                        name
-                    }
-                }
-            }
-        }
-    }`)
 
     return <Section subtitle="Tech">
         <Description>Over the years I've worked on <b>many</b> different projects each with different requirements and challenges, here are some of the tools that helped me</Description>

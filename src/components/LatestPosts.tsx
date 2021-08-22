@@ -16,7 +16,7 @@ const Link = styled(GastbyLink)`
 `
 const Wrapper = styled.div`
 `
-export default function LatestPosts({ className }) {
+export default function LatestPosts({ className }: { className?: string }) {
 
   const location = useLocation()
 

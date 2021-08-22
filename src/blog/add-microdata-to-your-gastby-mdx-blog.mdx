@@ -1,0 +1,72 @@
+---
+title: Improve your SEO with Microdata on your Gatsby MDX blog
+date: 2021-22-08
+tags: SEO, microdata, gatsby, mdx, how-to
+---
+Microdata is an essential part of improving the SEO of your blog, and if you are new to it, it might get a bit confusing. I'll try to make it a bit easier for you to get microdata working on your blog in this post.
+
+Thankfully, a couple of packages make creating the proper structure of the microdata for our pages more straightforward, especially if you are using typescript:
+
+```sh
+npm i schema-dts react-schemaorg
+```
+or
+```sh
+yarn add schema-dts react-schemaorg
+```
+Next, we have to add a new prop to our `<Seo />` component (that comes already created with almost all Gatsby starters) to handle our new Microdata structure. I'll add it in a parameter called `script`:
+
+```jsx title=Seo.js
+...
+
+export default function Seo({ title, script = [] }) {
+
+...
+
+return <Helmet
+      title={title}
+      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      
+      //this is the key line
+      script={[].concat(script)}
+    />
+}
+```
+Then when can start adding each microdata structure to our pages and templates. For example, in my post templates, first, I'll import the `helmetJsonLdProp` helper and the schema type that most reflects a blog post:
+
+```jsx
+import { helmetJsonLdProp } from "react-schemaorg";
+import { BlogPosting } from "schema-dts";
+```
+*It's important to use the `helmetJsonLdProp` helper because it plays nicely with `react-helmet`*
+
+Then we define the actual Microdata content in the post template render, and send it to our `<Seo>` component:
+
+```jsx
+const Post = (props) => {
+
+  const { mdx: { body, frontmatter, parent, timeToRead, slug } } = props.data
+
+  const jsonLd = helmetJsonLdProp<BlogPosting>({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": frontmatter.title,
+    "datePublished": frontmatter.date,
+    "dateModified": parent.modifiedTime,
+    "author": [{
+      "@type": "Person",
+      "name": "Cesar Varela",
+      "url": `https://cesarvarela.com/blog/${slug}`
+    }]
+  })
+
+  return <Layout content={<LayoutLink to="/blog">Blog</LayoutLink>}>
+
+    // pass the jsonLd data to our Seo component
+    <Seo title={frontmatter.title} script={jsonLd} />
+
+	/* my custom post template jsx goes here, yours will vary obsviously  */
+ </Layout>
+```
+
+Done! If everything worked nicely, you should see your new Microdata [here](https://validator.schema.org/). And you can read more about it [here](https://schema.org/docs/gs.html#microdata_how)
