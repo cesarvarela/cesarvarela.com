@@ -125,7 +125,7 @@ const Wrapper = styled.div`
 
 const PostLayout = (props) => {
 
-  const { mdx: { body, frontmatter, parent, timeToRead, slug } } = props.data
+  const { mdx: { body, frontmatter, parent, timeToRead, slug }, site: {siteMetadata} } = props.data
 
   const jsonLd = helmetJsonLdProp<BlogPosting>({
     "@context": "https://schema.org",
@@ -133,10 +133,11 @@ const PostLayout = (props) => {
     "headline": frontmatter.title,
     "datePublished": frontmatter.date,
     "dateModified": parent.modifiedTime,
+    "url": `${siteMetadata.url}/blog/${slug}`,
     "author": [{
       "@type": "Person",
       "name": "Cesar Varela",
-      "url": `https://cesarvarela.com/blog/${slug}`
+      "url": siteMetadata.url,
     }]
   })
 
@@ -177,6 +178,11 @@ query($slug: String!) {
         name
         modifiedTime(formatString: "MMMM DD, YYYY")
       }
+    }
+  }
+  site {
+    siteMetadata {
+      url
     }
   }
 }`
