@@ -234,6 +234,64 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `
+        {
+          site {
+            siteMetadata {
+              url
+            }
+          }
+          allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {slug: {glob: "!*wip*"}}) {
+            nodes {
+              frontmatter {
+                date(formatString: "YYYY-MM-DD")
+              }
+              slug
+            }
+          }
+        }
+      `,
+        resolveSiteUrl: ({ site: { siteMetadata: { url } } }) => url,
+        resolvePages: ({ allMdx: { nodes: mdxs } }) => {
+
+          const posts = mdxs.map(mdx => {
+            return {
+              path: `/blog/${mdx.slug}`,
+              lastmod: mdx.frontmatter.date,
+              changefreq: 'weekly',
+              priority: 0.7,
+            }
+          })
+
+          const home = {
+            path: '/',
+            lastmod: posts[0].lastmod,
+            changefreq: 'daily',
+            priority: 0.3,
+          }
+
+          const blog = {
+            path: '/blog',
+            lastmod: posts[0].lastmod,
+            changefreq: 'daily',
+            priority: 0.3,
+          }
+
+          return [...posts, home, blog]
+        },
+        serialize: ({ path, lastmod, changefreq, priority }) => {
+          return {
+            url: path,
+            lastmod,
+            changefreq,
+            priority,
+          }
+        },
+      },
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
