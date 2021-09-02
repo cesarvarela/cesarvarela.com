@@ -4,7 +4,7 @@ module.exports = {
   },
   siteMetadata: {
     title: `Cesar Varela`,
-    description: `Web3, Gatsby, Solidity, React and more development Blog & Tutorials`,
+    description: `Web3, Solidity, Gatsby and React Development Tutorials`,
     author: `@cesarvarela`,
     url: `https://cesarvarela.com`,
     socialItems:

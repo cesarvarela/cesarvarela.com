@@ -26,7 +26,7 @@ const IndexPage = () => {
   })
 
   return <Layout content={null}>
-    <Seo title="Home" script={jsonLd} />
+    <Seo title="Cesar Varela" script={jsonLd} />
     <Header />
     <Projects />
     <About />

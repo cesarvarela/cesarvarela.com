@@ -22,7 +22,6 @@ function Seo({ title, script = [] }: { title: string, script: [] | any }) {
     <Helmet
       htmlAttributes={{ lang: "en" }}
       title={title}
-      titleTemplate={`%s | ${siteMetadata.title}`}
       script={[].concat(script)}
     >
       <meta name="description" content={siteMetadata.description} />
