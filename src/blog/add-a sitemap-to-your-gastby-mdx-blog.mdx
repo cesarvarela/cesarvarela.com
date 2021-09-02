@@ -1,0 +1,238 @@
+---
+title: Improve your SEO by adding a sitemap to your Gatsby MDX blog
+date: 2021-09-01
+tags: how-to, gatsby, SEO
+---
+Our blog is getting better and better. Now it's time to add a sitemap.
+
+Strictly speaking, it is not clear if a sitemap is required since Google's page rank algorithm is a black box. BUT Google recommends adding one so let's do it:
+
+## Adding `gatsby-plugin-sitemap`
+
+First, we need to add the official Gatsby sitemap plugin:
+
+```sh
+npm i gatsby-plugin-sitemap
+```
+or
+```sh
+yarn add gatsby-plugin-sitemap
+```
+Next, as always, we have to add the newly installed plugin to our config file:
+
+```jsx title=gatsby-node.js
+...
+{
+      resolve: `gatsby-plugin-sitemap`,
+      options: {      
+      },
+...
+```
+This will get the plugin loaded, but we need to specify its options because the defaults will do more harm than good otherwise.
+
+### 1. Set the `query` option:
+
+```js
+...
+  query: `
+        {
+          site {
+            siteMetadata {
+              url
+            }
+          }
+          allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {slug: {glob: "!*wip*"}}) {
+            nodes {
+              frontmatter {
+                date(formatString: "YYYY-MM-DD")
+              }
+              slug
+            }
+          }
+        }
+      `,
+...
+```
+This option lets us get a list of all the pages we'll want to add to our site. We can add more entries manually too, which I'll do next.
+
+### 2. Set the `resolveSiteUrl`
+
+```js
+...
+        resolveSiteUrl: ({ site: { siteMetadata: { url } } }) => url,
+...
+```
+The plugin uses this setting to set an absolute URL in the sitemap, and as you can see, it references the GraphQL result from the previous query setting.
+
+### 3. Set the `resolvePages` option
+
+```js
+        resolvePages: ({ allMdx: { nodes: mdxs } }) => {
+
+          const posts = mdxs.map(mdx => {
+            return {
+              path: `/blog/${mdx.slug}`,
+              lastmod: mdx.frontmatter.date,
+              changefreq: 'weekly',
+              priority: 0.7,
+            }
+          })
+
+	// I manually add home and blog entries here
+
+          const home = {
+            path: '/',
+            lastmod: posts[0].lastmod,
+            changefreq: 'daily',
+            priority: 0.3,
+          }
+          const blog = {
+            path: '/blog',
+            lastmod: posts[0].lastmod,
+            changefreq: 'daily',
+            priority: 0.3,
+          }
+          return [...posts, home, blog]
+        },
+```
+We build an array of entries that will form the `sitemap.xml` file. Because posts are added constantly, I'm making a list dynamically from the results of the previous GraphQL query. And then, because the Homepage and the Blog index page do not change their attributes often, I manually add them to the list of entries.'
+
+### 4. Set the serialize option
+
+```js
+...
+        serialize: ({ path, lastmod, changefreq, priority }) => {
+          return {
+            url: path,
+            lastmod,
+            changefreq,
+            priority,
+          }
+        },
+...
+```
+Finally, we need to map the array we built in the `resolvePages` option to the sitemap entries themselves. This will be only a passthrough of properties most of the time because `resolvePages` does most of the work.
+
+For your copy/pasting pleasure, the final code looks like this:
+
+```js title=gatsby-node.js
+ {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `
+        {
+          site {
+            siteMetadata {
+              url
+            }
+          }
+          allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {slug: {glob: "!*wip*"}}) {
+            nodes {
+              frontmatter {
+                date(formatString: "YYYY-MM-DD")
+              }
+              slug
+            }
+          }
+        }
+      `,
+        resolveSiteUrl: ({ site: { siteMetadata: { url } } }) => url,
+        resolvePages: ({ allMdx: { nodes: mdxs } }) => {
+
+          const posts = mdxs.map(mdx => {
+            return {
+              path: `/blog/${mdx.slug}`,
+              lastmod: mdx.frontmatter.date,
+              changefreq: 'weekly',
+              priority: 0.7,
+            }
+          })
+
+          const home = {
+            path: '/',
+            lastmod: posts[0].lastmod,
+            changefreq: 'daily',
+            priority: 0.3,
+          }
+
+          const blog = {
+            path: '/blog',
+            lastmod: posts[0].lastmod,
+            changefreq: 'daily',
+            priority: 0.3,
+          }
+
+          return [...posts, home, blog]
+        },
+        serialize: ({ path, lastmod, changefreq, priority }) => {
+          return {
+            url: path,
+            lastmod,
+            changefreq,
+            priority,
+          }
+        },
+      },
+    }
+
+```
+
+### 5. View your sitemap
+
+If you want to test your newly added sitemap, you have to run `gatsby build` (because the plugin only gets executed in the build phase) and then `gatsby serve`, which will run a web server usually at `http://localhost:9000`.
+
+You can then navigate to `localhost:8000/sitemap/sitemap-index.xml` and it should look something like this:
+
+```xml
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap>
+<loc>https://cesarvarela.com/sitemap/sitemap-0.xml</loc>
+</sitemap>
+</sitemapindex>
+```
+There you can follow the first link where you will finally see all your blog entries:
+
+```xml
+...
+<url>
+<loc>https://cesarvarela.com/blog/add-microdata-to-your-gastby-mdx-blog</loc>
+<lastmod>2022-10-08T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://cesarvarela.com/blog/fix-source-file-requires-different-compiler-version</loc>
+<lastmod>2021-08-18T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://cesarvarela.com/blog/how-to-include-javascript-files-in-gatsby</loc>
+<lastmod>2021-08-18T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.7</priority>
+</url>
+...
+```
+
+## Bonus: WTF are those Sitemap fields?
+
+If you are new to sitemaps, it will feel a bit cryptic. Let's go over the most relevant options:
+
+### url
+**Must** be the canonical URL of the page, in other words, the original source. Avoid having multiple entries on your sitemap pointing to the same page.
+
+### lastmod
+As you probably guessed, this is the last modified date. 
+** If you mess up this value, Google will simply ignore it** so be careful, but don't worry much about it either since Google's crawler is smart enough to detect page changes all by itself.
+
+### priority
+It is a value from 0.0 to 1. Lets you tell Google which pages are more critical relative to other pages on your site. 
+
+### changefreq
+specifies how often the contents of the page change, some possible values are `always, hourly, daily, weekly`.
+
+
+**Again, these are hints, Google's crawler will do as it pleases, and you might as well have 1# rank with no sitemap. **
+
+
