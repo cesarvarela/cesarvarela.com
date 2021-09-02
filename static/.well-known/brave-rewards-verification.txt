@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: cesarvarela.com
+Token: 15753898f56760914301b934102010738e9baf44276e484c80f100beb45c0026
