@@ -1,0 +1,74 @@
+---
+title: How to get your private Ethereum node for cheap
+date: 2022-05-09
+tags: ethereum, erigon, how-to
+---
+Even though there are already many Ethereum RPC providers such as Alchemy, Infura, and QuickNode, sometimes, you might want to have your own Ethereum node or nodes. Especially if you want total control over latency (Flashbots 😳)
+
+There are a few Ethereum clients but in this guide, we’ll be using `Erigon` 9which is a continuation of the `Open Ethereum` project), because it is much faster to get it up and running compared to the other clients (`geth`) and it also requires less disk space.
+
+**I can’t vouch for Erigon’s performance yet**
+
+## Find a server
+At the moment Ethereum node requirements are not that steep (at least when compared to something like Solana), so a small to medium range   VPS or dedicated server will do, something like the `AX41` from Hetzner or a `VPS L` from Contabo.
+
+In general, the requirements for an Ethereum node are:
+
+```
+33/64 GB Ram
+8/16 CPU cores
+1TB SSD or Nvme Drive
+```
+
+## Install required software
+Most of the time Ubuntu will be good enough, you can set up this when you buy your server. Then we’ll have to install `git`, `go`, and `build-essential`:
+
+First git:
+
+```
+sudo apt install git
+```
+
+Second, `build-essential`, which includes `GCC` and `make`:
+
+```
+sudo apt install build-essential
+```
+
+Third comes `go`:
+
+```
+// download an install binaries
+wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz
+
+// add it to your PATH (you'll probably want to add it to your profile ~/.zshrc)
+export PATH=$PATH:/usr/local/go/bin
+```
+
+Finally, we clone Erigon’s repo and run `make`:
+
+```
+git clone --recurse-submodules -j8 https://github.com/ledgerwatch/erigon.git
+cd erigon
+```
+
+## Start your Ethereum node
+After the build process is done just start your Erigon instance:
+
+```
+./build/bin/erigon --http --ws
+```
+
+
+Erigon now will start syncing with the Ethereum blockchain downloading a snapshot of the chain state. The flags as you might have guessed, tell Erigon to enable both the `HTTP` and `WebSocket` endpoints, so you can query the Ethereum blockchain through this node.
+
+After a few hours, you should have your own private Ethereum node!
+
+The message you want to see looks like this, which means that your node is getting new blocks:
+
+```
+INFO[05-09|13:42:42.310] [6/16 Execution] Executed blocks         number=6149249 blk/s=11.4 tx/s=1430.2 Mgas/s=75.9 gasState=0.43 batch=446.6Mb alloc=8.4Gb sys=18.3Gb                       
+```
+
+**Please note that you shouldn’t leave your server like this for too long because it is really insecure, you should set up a firewall**
