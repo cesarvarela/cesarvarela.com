@@ -34,7 +34,7 @@ const Layout = ({ children, content = <Hello>Weeeelcome, stranger!</Hello> }: La
 
   return (
     <ThemeProvider theme={theme}>
-      {isClient && <GlobalStyles />}
+      {isClient && <GlobalStyles theme={theme} />}
       <main>
         <Controls>
           {content}

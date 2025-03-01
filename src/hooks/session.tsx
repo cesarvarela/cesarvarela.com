@@ -51,10 +51,18 @@ export function SessionProvider({ children }: SessionProviderProps) {
   })
 
   useEffect(() => {
-    if (isClient && typeof window !== 'undefined' && window.theme && value.theme.mode !== window.theme.mode) {
-      value.toggleTheme()
+    if (isClient && typeof window !== 'undefined' && window.theme) {
+      // Initialize theme from window.theme
+      const windowTheme = window.theme;
+      setValue(prev => ({
+        ...prev,
+        theme: {
+          ...prev.theme,
+          mode: windowTheme.mode as 'dark' | 'light'
+        }
+      }))
     }
-  }, [isClient, value])
+  }, [isClient])
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>
 }

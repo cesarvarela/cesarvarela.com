@@ -24,7 +24,6 @@ function ThemeToggle({ className }) {
     const session = useContext(SessionContext)
 
     const onClick = () => {
-
         session.toggleTheme()
     }
 

@@ -19,10 +19,17 @@ export const themeScript = `
   }
 
   const mode = getInitialTheme();
+  
+  // Apply the theme class to the root element
+  document.documentElement.classList.add(mode);
 
   window.theme = {
     mode,
     setMode: function(newMode) {
+      // Remove the old theme class and add the new one
+      document.documentElement.classList.remove(window.theme.mode);
+      document.documentElement.classList.add(newMode);
+      
       window.theme.mode = newMode;
       window.localStorage.setItem('theme-mode', newMode);
     }
