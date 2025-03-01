@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Section } from '../Section'
 import styled from 'styled-components'
 import Card from '../Card'
+import projectsJson from '../../data/projects.json'
 
 const Cards = styled.div`
     margin: 12px auto 0;
@@ -21,31 +22,19 @@ const Cards = styled.div`
     }
 `
 
-// Mock data for projects - in a real app, you would fetch this from an API or import from a JSON file
-const projectsData = [
-  {
-    key: "project1",
-    title: "Project 1",
-    description: "Description for project 1",
-    link: "https://example.com/project1",
-    img: { src: "/images/placeholder.png" }
-  },
-  {
-    key: "project2",
-    title: "Project 2",
-    description: "Description for project 2",
-    link: "https://example.com/project2",
-    img: { src: "/images/placeholder.png" }
-  }
-];
-
 export function Projects() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    // In a real app, you would fetch this data from an API
-    // For now, we'll use the mock data
-    setProjects(projectsData);
+    // Transform the project data to use the correct image paths
+    const transformedProjects = projectsJson.map(project => ({
+      ...project,
+      img: { 
+        src: project.img.replace('../images', '/images') 
+      }
+    }));
+    
+    setProjects(transformedProjects);
   }, []);
 
   return <Section id="projects" subtitle="Projects">

@@ -65,7 +65,7 @@ export function Header() {
 	return <Section id="head">
 		<ImageWrapper>
 			<Image 
-				src="/images/po.png" 
+				src="/po.png" 
 				alt="Cesar Varela" 
 				fill
 				style={{ objectFit: 'cover' }}
