@@ -1,43 +1,44 @@
 import React from "react"
-import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import Head from "next/head"
 
-function Seo({ title, script = [] }: { title: string, script: [] | any }) {
-  const { site: { siteMetadata } } = useStaticQuery(
-    graphql`
-      {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-            url
-          }
-        }
-      }
-    `
-  )
+interface SeoProps {
+  title: string;
+  description?: string;
+  script?: any[];
+}
 
+const siteMetadata = {
+  title: "Cesar Varela",
+  description: "Web3, Solidity, Gatsby and React Development Tutorials",
+  author: "@cesarvarela",
+  url: "https://cesarvarela.com",
+}
+
+function Seo({ title, description = siteMetadata.description, script = [] }: SeoProps) {
   return (
-    <Helmet
-      htmlAttributes={{ lang: "en" }}
-      title={title}
-      script={[].concat(script)}
-    >
-      <meta name="description" content={siteMetadata.description} />
+    <Head>
+      <title>{title}</title>
+      <meta name="description" content={description} />
 
       <meta property="og:title" content={title} />
-      <meta property="og:description" content={siteMetadata.description} />
+      <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:image" content={`${siteMetadata.url}/po.png`} />
       <meta property="og:url" content={siteMetadata.url} />
 
-      <meta property="twiter:card" content="summary" />
+      <meta property="twitter:card" content="summary" />
       <meta name="twitter:creator" content={siteMetadata.author} />
       <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={siteMetadata.description} />
+      <meta name="twitter:description" content={description} />
 
-    </Helmet>
+      {script.map((item, index) => (
+        <script
+          key={index}
+          type={item.type}
+          dangerouslySetInnerHTML={{ __html: item.innerHTML }}
+        />
+      ))}
+    </Head>
   )
 }
 

@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Section as SectionBase } from '../Section'
-
 import styled from 'styled-components'
-import { useStaticQuery, graphql } from "gatsby"
+import Image from 'next/image'
 import picture from '../../images/po.png'
 
 import StackOverflow from '../../svg/stackoverflow.svg'
@@ -67,11 +66,9 @@ const Avatar = styled.div`
     bottom: 5px;
     width: 32px;
     height: 32px;
-    img {
-        height: 100%;
-        width: 100%;
-        border-radius: 100%;
-    }
+    position: relative;
+    border-radius: 100%;
+    overflow: hidden;
 `
 
 const Status = styled.div`
@@ -101,20 +98,38 @@ const Section = styled(SectionBase)`
     }
 `
 
-export function Social() {
+// Mock data for social items - in a real app, you would fetch this from an API or import from a JSON file
+const socialItems = [
+  {
+    key: "github",
+    description: "GitHub",
+    link: "https://github.com/cesarvarela"
+  },
+  {
+    key: "linkedin",
+    description: "LinkedIn",
+    link: "https://www.linkedin.com/in/cesarvarela/"
+  },
+  {
+    key: "twitter",
+    description: "Twitter",
+    link: "https://twitter.com/cesarvarela"
+  },
+  {
+    key: "stack-overflow",
+    description: "Stack Overflow",
+    link: "https://stackoverflow.com/users/1233021/cesar-varela"
+  }
+];
 
-    const { site: { siteMetadata: { socialItems: items } } } = useStaticQuery(graphql`
-    query {
-        site{
-            siteMetadata {
-                socialItems {
-                    description
-                    link
-                    key
-                }
-            }
-        }
-    }`)
+export function Social() {
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        // In a real app, you would fetch this data from an API
+        // For now, we'll use the mock data
+        setItems(socialItems);
+    }, []);
 
     return <Section id="social" subtitle="Social">
         <Chat>
@@ -132,7 +147,12 @@ export function Social() {
                     }
                 </List>
                 <Avatar>
-                    <img src={picture} alt="po face" />
+                    <Image 
+                        src={picture.src} 
+                        alt="po face" 
+                        fill
+                        style={{ objectFit: 'cover' }}
+                    />
                 </Avatar>
                 <Status>Cesar Varela, just now.</Status>
             </Bubble>

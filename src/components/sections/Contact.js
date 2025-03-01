@@ -2,16 +2,20 @@ import React from 'react'
 import { Section } from '../Section'
 import qr from '../../images/MECard.png'
 import styled from 'styled-components'
+import Image from 'next/image'
 
 const MECard = styled.div`
 	max-width: 240px;
 	margin: 48px auto 0;
-	& > img {
+	position: relative;
+	
+	.qr-image {
 		width: 100%;
-		box-shadow: ${({ theme }) => theme.boxShadow};
+		height: auto;
 		border-radius: 6px;
+		box-shadow: var(--boxShadow);
 	}
-	`
+`
 
 const Link = styled.a`
 	text-decoration: none;
@@ -29,10 +33,15 @@ const Links = styled.ul`
 `
 
 export function Contact() {
-
 	return <Section id="contact" subtitle="Contact">
 		<MECard>
-			<img src={qr} alt="qr" />
+			<Image 
+				src={qr.src} 
+				alt="QR code for contact info" 
+				width={240}
+				height={240}
+				className="qr-image"
+			/>
 			<p>Scan this to get my contact info on your smartphone.</p>
 		</MECard>
 		<Links>

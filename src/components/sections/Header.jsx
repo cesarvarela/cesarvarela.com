@@ -5,13 +5,15 @@ import Button from '../Button'
 import cv from '../../downloads/cesar-varela-resume.pdf'
 import ScrollSvg from '../../svg/scroll.svg'
 import { getColor } from '../../lib/theme'
-import { StaticImage } from "gatsby-plugin-image"
+import Image from 'next/image'
 
 const ImageWrapper = styled.div`
 	border-radius: 100%;
-	width: max-content;
+	width: 200px;
+	height: 200px;
 	margin: 0 auto 0;
 	overflow: hidden;
+	position: relative;
 `
 
 const Quote = styled.div`
@@ -60,12 +62,14 @@ const Section = styled(SectionBase)`
 `
 
 export function Header() {
-
-
-
 	return <Section id="head">
 		<ImageWrapper>
-			<StaticImage width={200} height={200} src="../../images/po.png" alt="A dinosaur" />
+			<Image 
+				src="/images/po.png" 
+				alt="Cesar Varela" 
+				fill
+				style={{ objectFit: 'cover' }}
+			/>
 		</ImageWrapper>
 		<Name>Cesar Varela</Name>
 
@@ -79,4 +83,4 @@ export function Header() {
 		</Resume>
 		<Scroll />
 	</Section>
-}
+} 

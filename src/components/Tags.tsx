@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link as LinkBase } from 'gatsby'
+import Link from 'next/link'
 
-const Link = styled(LinkBase)`
+const StyledLink = styled.a`
     text-decoration: none;
+    cursor: pointer;
 `
 
 const Tag = styled.li`
@@ -21,7 +22,6 @@ const Wrapper = styled.ul`
 `
 
 export default function Tags({ className, tags = "" }: { className?: string; tags: string; }) {
-
     if (!tags) {
         return null
     }
@@ -30,6 +30,12 @@ export default function Tags({ className, tags = "" }: { className?: string; tag
         {tags.split(",")
             .map(tag => tag.trim())
             .filter(tag => tag.length > 0)
-            .map(tag => <Tag key={tag}><Link to={`/blog/tags/${tag}`}>{tag}</Link></Tag>)}
-    </Wrapper >
+            .map(tag => (
+                <Tag key={tag}>
+                    <Link href={`/blog/tags/${tag}`} passHref>
+                        <StyledLink>{tag}</StyledLink>
+                    </Link>
+                </Tag>
+            ))}
+    </Wrapper>
 }
