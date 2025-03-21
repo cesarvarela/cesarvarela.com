@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useContext } from "react"
 import { GlobalStyles } from './Global'
 import styled, { ThemeProvider } from 'styled-components'

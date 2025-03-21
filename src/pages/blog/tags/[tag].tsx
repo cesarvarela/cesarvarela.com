@@ -25,11 +25,12 @@ const List = styled.ul`
 const Item = styled.li`
   margin-top: 24px;
 `
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
+  font-weight: 700;
   text-decoration: none;
   cursor: pointer;
 `
-const LayoutLink = styled.a`
+const LayoutLink = styled(Link)`
   text-decoration: none;
   font-size: 12px;
   cursor: pointer;
@@ -46,18 +47,16 @@ interface TagPageProps {
 
 export default function TagPage({ posts, tag }: TagPageProps) {
   return (
-    <Layout content={<Link href="/blog" passHref><LayoutLink>Blog</LayoutLink></Link>}>
+    <Layout content={<LayoutLink href="/blog">Blog</LayoutLink>}>
       <Seo title={`Posts tagged with #${tag}`} />
       <Wrapper>
         <StyledH1>#{tag}</StyledH1>
         <List>
           {posts.map((post) => (
             <Item key={post.slug}>
-              <Link href={`/blog/${post.slug}`} passHref>
-                <StyledLink>
-                  {post.frontmatter.title}
-                </StyledLink>
-              </Link>
+              <StyledLink href={`/blog/${post.slug}`}>
+                {post.frontmatter.title}
+              </StyledLink>
             </Item>
           ))}
         </List>

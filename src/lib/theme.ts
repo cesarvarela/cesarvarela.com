@@ -3,7 +3,7 @@ interface ThemeColors {
   dark: string;
 }
 
-interface Theme {
+export interface Theme {
   mode: 'dark' | 'light';
   colors: {
     background: ThemeColors;

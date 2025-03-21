@@ -1,19 +1,15 @@
 import React, { useState, useEffect, createContext, ReactNode } from 'react'
-import defaultTheme from '../lib/theme'
+import defaultTheme, { Theme } from '../lib/theme'
 import useIsClient from './useIsClient'
 
 interface SessionContextType {
-  theme: {
-    mode: 'dark' | 'light';
-    [key: string]: any;
-  };
+  theme: Theme;
   toggleTheme: () => void;
 }
 
 const initialContext: SessionContextType = {
   theme: {
-    ...defaultTheme,
-    mode: 'dark'
+    ...defaultTheme
   },
   toggleTheme: () => {}
 }
@@ -28,8 +24,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
   const isClient = useIsClient()
   const [value, setValue] = useState<SessionContextType>({
     theme: {
-      ...defaultTheme,
-      mode: 'dark'
+      ...defaultTheme
     },
     toggleTheme: () => {
       setValue(value => {

@@ -34,4 +34,6 @@ function ThemeToggle({ className }) {
     </Toggle>
 }
 
-export default styled(ThemeToggle)``
+export default styled(ThemeToggle)`
+  /* Add your styles here if needed */
+`

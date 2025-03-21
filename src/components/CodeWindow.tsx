@@ -1,6 +1,8 @@
+'use client';
+
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import Highlight, { defaultProps } from 'prism-react-renderer'
+import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import vsDark from 'prism-react-renderer/themes/vsDark'
 import vsLight from 'prism-react-renderer/themes/vsLight'
 import { SessionContext } from "../hooks/session"
@@ -27,7 +29,7 @@ const Controls = styled.div`
     }
 `
 
-const Dot = ({ color }) => <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+const Dot = ({ color }: { color: string }) => <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
     <circle cx="9" cy="9" r="9" fill={color} />
 </svg>
 
@@ -54,7 +56,7 @@ const Window = styled.div`
 const darkTheme = { ...vsDark, plain: { ...vsDark.plain, backgroundColor: defaultTheme.colors.background.dark } }
 const lightTheme = { ...vsLight, plain: { ...vsLight.plain, backgroundColor: defaultTheme.colors.background.light } }
 
-function CodeWindow({ className, title, language = "javascript", source }: { className?: string, title: string, language?: string, source: string }) {
+function CodeWindow({ className, title, language = "javascript" as Language, source }: { className?: string, title: string, language?: Language, source: string }) {
 
     const { theme } = useContext(SessionContext)
     const isClient = useIsClient()

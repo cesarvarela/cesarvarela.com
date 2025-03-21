@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
     text-decoration: none;
     cursor: pointer;
 `
@@ -32,9 +32,9 @@ export default function Tags({ className, tags = "" }: { className?: string; tag
             .filter(tag => tag.length > 0)
             .map(tag => (
                 <Tag key={tag}>
-                    <Link href={`/blog/tags/${tag}`} passHref>
-                        <StyledLink>{tag}</StyledLink>
-                    </Link>
+                    <StyledLink href={`/blog/tags/${tag}`}>
+                        {tag}
+                    </StyledLink>
                 </Tag>
             ))}
     </Wrapper>

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react'
 import defaultTheme from '../lib/theme'
 
@@ -15,7 +17,9 @@ function SessionProvider({ children }) {
             setValue(value => {
 
                 const mode = value.theme.mode === 'dark' ? 'light' : 'dark'
-                window.theme.setMode(mode)
+                if (typeof window !== 'undefined' && window.theme && window.theme.setMode) {
+                    window.theme.setMode(mode)
+                }
 
                 return {
                     ...value,
@@ -29,12 +33,10 @@ function SessionProvider({ children }) {
     })
 
     useEffect(() => {
-
-        if (value.theme.mode !== window.theme.mode) {
-
+        if (typeof window !== 'undefined' && window.theme && 
+            value.theme.mode !== window.theme.mode) {
             value.toggleTheme()
         }
-
     }, [value])
 
     return <Provider value={value}>{children}</Provider>

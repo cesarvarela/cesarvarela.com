@@ -11,7 +11,7 @@ const List = styled.ul`
 const Item = styled.li`
   margin-top: 12px;
 `
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   text-decoration: none;
   cursor: pointer;
 `
@@ -63,11 +63,9 @@ export default function LatestPosts({ className }: { className?: string }) {
       <List>
         {posts.map((post) => (
           <Item key={post.slug}>
-            <Link href={`/blog/${post.slug}`} passHref>
-              <StyledLink>
-                {post.frontmatter.title}
-              </StyledLink>
-            </Link>
+            <StyledLink href={`/blog/${post.slug}`}>
+              {post.frontmatter.title}
+            </StyledLink>
           </Item>
         ))}
       </List>

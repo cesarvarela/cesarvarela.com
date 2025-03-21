@@ -17,6 +17,7 @@ const Controls = styled.div`
 `
 
 const ThemeToggle = styled(ThemeToggleBase)`
+  /* Add your styles here if needed */
 `
 
 const Hello = styled.div`
@@ -38,7 +39,7 @@ const Layout = ({ children, content = <Hello>Weeeelcome, stranger!</Hello> }: La
       <main>
         <Controls>
           {content}
-          <ThemeToggle />
+          <ThemeToggle className="" />
         </Controls>
         {children}
         <Footer />

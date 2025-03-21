@@ -1,7 +1,6 @@
 import React from "react"
 import styled from 'styled-components'
 import LatestPostsBase from "../../components/LatestPosts"
-import { MDXProvider } from "@mdx-js/react"
 import CodeWindow from "../../components/CodeWindow"
 import thing from '../../images/thing.svg'
 import Link from 'next/link'
@@ -11,7 +10,7 @@ import Layout from "../../components/Layout"
 import Seo from "../../components/Seo"
 import Tags from "../../components/Tags"
 import { GetStaticProps, GetStaticPaths } from "next"
-import { getAllPosts, getPostBySlug } from "@/lib/blog"
+import { getAllPosts } from "@/lib/blog"
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -112,7 +111,7 @@ const DatePublished = styled.div`
 `
 const TimeToRead = styled.p`
 `
-const LayoutLink = styled.a`
+const LayoutLink = styled(Link)`
   text-decoration: none;
   font-size: 12px;
   cursor: pointer;
@@ -155,7 +154,7 @@ const PostLayout = ({ source, frontmatter, slug, timeToRead }: PostProps) => {
   };
 
   return (
-    <Layout content={<Link href="/blog" passHref><LayoutLink>Blog</LayoutLink></Link>}>
+    <Layout content={<LayoutLink href="/blog">Blog</LayoutLink>}>
       <Seo 
         title={frontmatter.title} 
         script={[{
@@ -170,9 +169,7 @@ const PostLayout = ({ source, frontmatter, slug, timeToRead }: PostProps) => {
           <TimeToRead>{timeToRead} min.</TimeToRead>
         </PostInfo>
         {frontmatter.tags && <StyledTags tags={frontmatter.tags} />}
-        <MDXProvider components={components}>
-          <MDXRemote {...source} components={components} />
-        </MDXProvider>
+        <MDXRemote {...source} components={components} />
         <LatestPostHeading>Latest posts</LatestPostHeading>
         <LatestPosts />
       </Wrapper>

@@ -25,11 +25,12 @@ const List = styled.ul`
 const Item = styled.li`
   margin-top: 24px;
 `
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
+  font-weight: 700;
   text-decoration: none;
   cursor: pointer;
 `
-const LayoutLink = styled.a`
+const LayoutLink = styled(Link)`
   text-decoration: none;
   font-size: 12px;
   cursor: pointer;
@@ -46,18 +47,16 @@ interface BlogPageProps {
 
 const BlogPage = ({ posts }: BlogPageProps) => {
   return (
-    <Layout content={<Link href="/" passHref><LayoutLink>About me</LayoutLink></Link>}>
+    <Layout content={<LayoutLink href="/">About me</LayoutLink>}>
       <Seo title="Cesar Varela's Blog about Web3, Solidity Gatsby, React and more. " />
       <Wrapper>
         <StyledH1>Blog</StyledH1>
         <List>
           {posts.map((post) => (
             <Item key={post.slug}>
-              <Link href={`/blog/${post.slug}`} passHref>
-                <StyledLink>
-                  {post.frontmatter.title}
-                </StyledLink>
-              </Link>
+              <StyledLink href={`/blog/${post.slug}`}>
+                {post.frontmatter.title}
+              </StyledLink>
             </Item>
           ))}
         </List>
