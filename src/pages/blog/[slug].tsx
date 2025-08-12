@@ -1,5 +1,4 @@
 import React from "react"
-import styled from 'styled-components'
 import LatestPostsBase from "../../components/LatestPosts"
 import CodeWindow from "../../components/CodeWindow"
 import thing from '../../images/thing.svg'
@@ -15,115 +14,39 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
-const StyledCodeWindow = styled(CodeWindow)`
-  margin: 48px auto;
-`
-
 function MDXCodeBlock({ children }: any) {
   const { props: { children: source, className: classLanguage, title } } = children
   const language = classLanguage ? classLanguage.replace(/language-/, '') : ''
 
-  return <StyledCodeWindow language={language} source={source} title={title} />
+  return <CodeWindow language={language} source={source} title={title} className="my-12 mx-auto" />
 }
-
-const StyledP = styled.p`
-  margin: 36px auto 0;
-  font-size: 18px;
-  line-height: 1.9;
-
-  code {
-    font-family: Inconsolata, monospace;
-    padding: 3px;
-    border: 1px solid #aaa;
-    border-radius: 6px; 
-  }
-`
-const StyledH1 = styled.h1`
-  font-size: 60px;
-  background: linear-gradient(266.96deg, #3FC5FF -21.03%, #FF3EC9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.04em;
-  margin: 30px auto 0;
-  font-weight: 900;
-  line-height: 1;
-  padding-bottom: 1rem;
-`
-
-const StyledH2 = styled.h2`
-  font-size: 30px;
-  margin: 127px auto 0;
-  position: relative;
-  ::before {
-    width: 7px;
-    height: 72px;
-    content: '';
-    left: 3px;
-    position: absolute;
-    bottom: -20px;
-    top: -98px;;
-    background: url(${thing.src});
-  }
-`
-
-const StyledH3 = styled.h3`
-  font-size: 24px;
-  margin: 48px auto 0;
-`
-
-const StyledUl = styled.div`
-  margin: 48px 0 0;
-`
-
-const StyledLi = styled.li`
-  margin: 12px 0 0;
-  line-height: 1.9;
-`
 
 const components = {
-  p: (props: any) => <StyledP {...props}>{props.children}</StyledP>,
-  h1: (props: any) => <StyledH1 {...props}>{props.children}</StyledH1>,
-  h2: (props: any) => <StyledH2 {...props}>{props.children}</StyledH2>,
-  h3: (props: any) => <StyledH3 {...props}>{props.children}</StyledH3>,
+  p: (props: any) => (
+    <p {...props} className="mt-9 mx-auto text-lg leading-relaxed [&_code]:font-mono [&_code]:p-1 [&_code]:border [&_code]:border-gray-400 [&_code]:rounded">
+      {props.children}
+    </p>
+  ),
+  h1: (props: any) => (
+    <h1 {...props} className="text-6xl bg-gradient-to-r from-[#3FC5FF] to-[#FF3EC9] bg-clip-text text-transparent tracking-tight mt-8 mb-0 font-black leading-none pb-4">
+      {props.children}
+    </h1>
+  ),
+  h2: (props: any) => (
+    <h2 {...props} className="text-3xl mt-32 mx-auto relative before:w-2 before:h-18 before:content-[''] before:left-1 before:absolute before:-bottom-5 before:-top-24 before:bg-no-repeat before:bg-[url('/images/thing.svg')]">
+      {props.children}
+    </h2>
+  ),
+  h3: (props: any) => (
+    <h3 {...props} className="text-2xl mt-12 mx-auto">
+      {props.children}
+    </h3>
+  ),
   pre: (props: any) => <MDXCodeBlock {...props} />,
-  ul: (props: any) => <StyledUl {...props} />,
-  li: (props: any) => <StyledLi {...props} />,
+  ul: (props: any) => <div {...props} className="mt-12" />,
+  li: (props: any) => <li {...props} className="mt-3 leading-relaxed" />,
 }
 
-const LatestPostHeading = styled.h3`
-  background: linear-gradient(266.96deg, #3FC5FF -21.03%, #FF3EC9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.04em;
-  margin: 54px 0 0;
-`
-
-const LatestPosts = styled(LatestPostsBase)`
-  margin: 24px 0 0;
-`
-const PostInfo = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-`
-const DatePublished = styled.div`
-`
-const TimeToRead = styled.p`
-`
-const LayoutLink = styled(Link)`
-  text-decoration: none;
-  font-size: 12px;
-  cursor: pointer;
-`
-
-const StyledTags = styled(Tags)`
-`
-
-const Wrapper = styled.div`
-  max-width: 768px;
-  margin: 0 auto; 
-`
 
 interface PostProps {
   source: any;
@@ -154,7 +77,7 @@ const PostLayout = ({ source, frontmatter, slug, timeToRead }: PostProps) => {
   };
 
   return (
-    <Layout content={<LayoutLink href="/blog">Blog</LayoutLink>}>
+    <Layout content={<Link href="/blog" className="no-underline text-xs cursor-pointer">Blog</Link>}>
       <Seo 
         title={frontmatter.title} 
         script={[{
@@ -162,17 +85,21 @@ const PostLayout = ({ source, frontmatter, slug, timeToRead }: PostProps) => {
           innerHTML: JSON.stringify(jsonLd)
         }]} 
       />
-      <Wrapper>
-        <StyledH1>{frontmatter.title}</StyledH1>
-        <PostInfo>
-          <DatePublished>{frontmatter.date}</DatePublished>
-          <TimeToRead>{timeToRead} min.</TimeToRead>
-        </PostInfo>
-        {frontmatter.tags && <StyledTags tags={frontmatter.tags} />}
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-6xl bg-gradient-to-r from-[#3FC5FF] to-[#FF3EC9] bg-clip-text text-transparent tracking-tight mt-8 mb-0 font-black leading-none pb-4">
+          {frontmatter.title}
+        </h1>
+        <div className="flex items-center justify-between text-xs">
+          <div>{frontmatter.date}</div>
+          <p className="m-0">{timeToRead} min.</p>
+        </div>
+        {frontmatter.tags && <Tags tags={frontmatter.tags} />}
         <MDXRemote {...source} components={components} />
-        <LatestPostHeading>Latest posts</LatestPostHeading>
-        <LatestPosts />
-      </Wrapper>
+        <h3 className="bg-gradient-to-r from-[#3FC5FF] to-[#FF3EC9] bg-clip-text text-transparent tracking-tight mt-14 mb-0">
+          Latest posts
+        </h3>
+        <LatestPostsBase className="mt-6" />
+      </div>
     </Layout>
   )
 }

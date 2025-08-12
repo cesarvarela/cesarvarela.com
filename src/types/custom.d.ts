@@ -22,4 +22,9 @@ declare module '*.jpg' {
 declare module '*.jpeg' {
   const src: string;
   export default src;
+}
+
+declare module '*.pdf' {
+  const src: string;
+  export default src;
 } 

@@ -1,44 +1,9 @@
 import React from "react"
-import styled from 'styled-components'
 import Layout from "../../../components/Layout"
 import Link from "next/link"
 import Seo from "../../../components/Seo"
 import { GetStaticProps, GetStaticPaths } from "next"
 import { getAllPosts, getPostsByTag, Post } from "@/lib/blog"
-
-const StyledH1 = styled.h1`
-  font-size: 60px;
-  background: linear-gradient(266.96deg, #3FC5FF -21.03%, #FF3EC9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.04em;
-  margin: 30px auto 0;
-  font-weight: 900;
-  line-height: 1;
-  padding-bottom: 1rem;
-`
-const List = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`
-const Item = styled.li`
-  margin-top: 24px;
-`
-const StyledLink = styled(Link)`
-  font-weight: 700;
-  text-decoration: none;
-  cursor: pointer;
-`
-const LayoutLink = styled(Link)`
-  text-decoration: none;
-  font-size: 12px;
-  cursor: pointer;
-`
-const Wrapper = styled.div`
-  max-width: 768px;
-  margin: 0 auto; 
-`
 
 interface TagPageProps {
   posts: Post[];
@@ -47,20 +12,22 @@ interface TagPageProps {
 
 export default function TagPage({ posts, tag }: TagPageProps) {
   return (
-    <Layout content={<LayoutLink href="/blog">Blog</LayoutLink>}>
+    <Layout content={<Link href="/blog" className="no-underline text-xs cursor-pointer">Blog</Link>}>
       <Seo title={`Posts tagged with #${tag}`} />
-      <Wrapper>
-        <StyledH1>#{tag}</StyledH1>
-        <List>
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-6xl bg-gradient-to-r from-[#3FC5FF] to-[#FF3EC9] bg-clip-text text-transparent tracking-tight mt-8 mb-0 font-black leading-none pb-4">
+          #{tag}
+        </h1>
+        <ul className="list-none m-0 p-0">
           {posts.map((post) => (
-            <Item key={post.slug}>
-              <StyledLink href={`/blog/${post.slug}`}>
+            <li key={post.slug} className="mt-6">
+              <Link href={`/blog/${post.slug}`} className="font-bold no-underline cursor-pointer">
                 {post.frontmatter.title}
-              </StyledLink>
-            </Item>
+              </Link>
+            </li>
           ))}
-        </List>
-      </Wrapper>
+        </ul>
+      </div>
     </Layout>
   )
 }

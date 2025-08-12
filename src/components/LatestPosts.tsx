@@ -1,22 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import styled from 'styled-components'
 import { useRouter } from 'next/router'
-
-const List = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`
-const Item = styled.li`
-  margin-top: 12px;
-`
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`
-const Wrapper = styled.div`
-`
 
 // Real slugs based on actual blog post filenames
 const realPosts = [
@@ -59,16 +43,16 @@ export default function LatestPosts({ className }: { className?: string }) {
   }, [currentPath])
 
   return (
-    <Wrapper className={className}>
-      <List>
+    <div className={className}>
+      <ul className="list-none m-0 p-0">
         {posts.map((post) => (
-          <Item key={post.slug}>
-            <StyledLink href={`/blog/${post.slug}`}>
+          <li key={post.slug} className="mt-3">
+            <Link href={`/blog/${post.slug}`} className="no-underline cursor-pointer">
               {post.frontmatter.title}
-            </StyledLink>
-          </Item>
+            </Link>
+          </li>
         ))}
-      </List>
-    </Wrapper>
+      </ul>
+    </div>
   )
 }

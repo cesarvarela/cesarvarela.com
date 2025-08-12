@@ -1,26 +1,23 @@
 import { useEffect, useState } from "react";
 
-export default function useDownloadOS(defaultOs = null) {
+type OS = 'mac' | 'windows' | 'ubuntu' | null;
 
-    const [os, setOs] = useState(defaultOs);
+export default function useDownloadOS(defaultOs: OS = null): OS {
+    const [os, setOs] = useState<OS>(defaultOs);
 
     useEffect(() => {
-
         const userAgent = navigator.appVersion;
 
         if (userAgent.includes('Macintosh')) {
             setOs('mac')
         }
-
         else if (userAgent.includes('Windows')) {
             setOs('windows')
         }
         else if (userAgent.includes('Ubuntu')) {
             setOs('ubuntu')
         }
-
-    }, [setOs]);
-
+    }, []);
 
     return os;
 }

@@ -1,34 +1,17 @@
 import React from "react"
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
-import styled from "styled-components"
 import Link from "next/link"
-import mario from '../images/404.gif'
-
-const NotFound = styled.div`
-  margin: 12px auto 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background-image: url(${mario.src});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: #efefef;
-
-  & > p a {
-    color: #efefef;
-  }
-`
 
 const NotFoundPage = () => (
   <Layout>
     <Seo title="404: Not found" />
-    <NotFound>
+    <div 
+      className="mt-3 mx-auto min-h-screen flex flex-col items-center text-center bg-center bg-no-repeat bg-cover text-gray-100 [&>p_a]:text-gray-100"
+      style={{ backgroundImage: `url('/images/404.gif')` }}
+    >
       <p>Not sure how you got here but you should probably <Link href="/">go home</Link></p>
-    </NotFound>
+    </div>
   </Layout>
 )
 

@@ -1,41 +1,21 @@
 import React from 'react'
-import styled from 'styled-components'
 import Link from 'next/link'
-
-const StyledLink = styled(Link)`
-    text-decoration: none;
-    cursor: pointer;
-`
-
-const Tag = styled.li`
-    display: inline-block;
-    padding: 3px 6px;
-    font-style: italic;
-    opacity: 0.6;
-    &:first-child {
-        padding-left: 0;
-    }
-`
-
-const Wrapper = styled.ul`
-    padding: 0;
-`
 
 export default function Tags({ className, tags = "" }: { className?: string; tags: string; }) {
     if (!tags) {
         return null
     }
 
-    return <Wrapper className={className}>
+    return <ul className={`p-0 ${className || ''}`}>
         {tags.split(",")
             .map(tag => tag.trim())
             .filter(tag => tag.length > 0)
             .map(tag => (
-                <Tag key={tag}>
-                    <StyledLink href={`/blog/tags/${tag}`}>
+                <li key={tag} className="inline-block py-1 px-2 italic opacity-60 first:pl-0">
+                    <Link href={`/blog/tags/${tag}`} className="no-underline cursor-pointer">
                         {tag}
-                    </StyledLink>
-                </Tag>
+                    </Link>
+                </li>
             ))}
-    </Wrapper>
+    </ul>
 }
