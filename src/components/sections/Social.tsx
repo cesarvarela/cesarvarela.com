@@ -77,8 +77,10 @@ export function Social() {
                                             rel="noopener"
                                             className="text-white text-3xl"
                                         >
-                                            <div className="w-8 h-8 md:w-12 md:h-12 fill-white">
-                                                {iconsMap[item.key]}
+                                            <div className="w-6 h-6 fill-white">
+                                                <div className="w-full h-full [&>svg]:w-full [&>svg]:h-full">
+                                                    {iconsMap[item.key]}
+                                                </div>
                                             </div>
                                         </a>
                                     </li>

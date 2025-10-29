@@ -8,8 +8,14 @@ import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import { FromTheBlog } from "../components/sections/FromTheBlog"
 import { WebSite } from "schema-dts"
+import { GetStaticProps } from "next"
+import { getAllPosts, Post } from "@/lib/blog"
 
-const IndexPage = () => {
+interface IndexPageProps {
+  posts: Post[]
+}
+
+const IndexPage = ({ posts }: IndexPageProps) => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -37,9 +43,20 @@ const IndexPage = () => {
       <About />
       <Social />
       <Contact />
-      <FromTheBlog />
+      <FromTheBlog posts={posts} />
     </Layout>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const allPosts = getAllPosts()
+  const posts = allPosts.slice(0, 3) // Get latest 3 posts
+  
+  return {
+    props: {
+      posts,
+    },
+  }
 }
 
 export default IndexPage

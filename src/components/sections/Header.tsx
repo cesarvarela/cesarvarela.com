@@ -11,16 +11,17 @@ export function Header() {
 			id="head" 
 			className="!mt-15 !-mb-16 before:!hidden"
 		>
-			<div className="rounded-full w-50 h-50 mx-auto my-0 overflow-hidden relative">
+			<div className="rounded-full w-48 h-48 mx-auto my-0 overflow-hidden relative">
 				<Image 
 					src="/images/po.png" 
 					alt="Cesar Varela" 
 					fill
 					style={{ objectFit: 'cover' }}
+					priority
 				/>
 			</div>
 			
-			<h1 className="bg-gradient-to-r from-[#3FC5FF] via-[#3FC5FF] to-[#FF3EC9] bg-clip-text text-transparent tracking-tight text-6xl md:text-7xl mt-6 mx-auto">
+			<h1 className="bg-gradient-to-r from-[#3FC5FF] via-[#3FC5FF] to-[#FF3EC9] bg-clip-text text-transparent tracking-tight text-6xl md:text-7xl mt-6 mx-auto font-black">
 				Cesar Varela
 			</h1>
 
@@ -36,7 +37,7 @@ export function Header() {
 				</Button>
 			</div>
 			
-			<ScrollSvg className="w-8 h-8 m-6 fill-[var(--color-foreground)]" />
+			<ScrollSvg className="w-8 h-8 mx-auto mt-6 fill-[var(--color-foreground)]" />
 		</SectionBase>
 	);
 }

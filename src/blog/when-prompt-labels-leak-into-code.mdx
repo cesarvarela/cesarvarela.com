@@ -1,0 +1,33 @@
+---
+title: When Prompt Labels Leak Into Code
+date: 2025-08-27
+tags: ai, prompting, code-quality, naming, hygiene
+---
+
+Small cautionary tale: if you use internal labels to guide deeper analysis in your prompts, those labels can leak into the generated code as names and identifiers.
+
+I once asked for “deeper analysis” using an internal label during exploration, then started seeing that same phrase show up in function names and comments. Not ideal.
+
+### the “ultrathin” leak
+
+In one session I used Claude Code’s analysis mode (“ultrathink”) as a nudge while drafting an architecture note. It leaked into code and docs as “ultrathin” (not a typo; I searched the whole convo), showing up in function names and comments. Exactly what you don’t want from a meta label.
+
+```diff
+// request: use "ultrathink" mode
+// outcome: leaked as "ultrathin" (not a typo)
+- function runPipeline() {}
++ function ultrathinPipeline() {}
+
+- // run the order pipeline
++ // ultrathin: run the order pipeline
+```
+
+
+
+## Why it happens
+
+I’m guessing here based on observed behavior, not official guidance.
+
+- The assistant treats your words as first-class tokens in the context.
+- If you ask it to “lean into X,” it may reuse X as an implementation pattern or name.
+- In constrained contexts (few alternatives, short identifiers), the label becomes the shortest-resistance choice.

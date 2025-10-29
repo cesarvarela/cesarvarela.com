@@ -1,9 +1,14 @@
 import React from 'react'
 import { Section } from '../Section'
 import LatestPosts from '../LatestPosts'
+import { Post } from '@/lib/blog'
 
-export function FromTheBlog() {
+interface FromTheBlogProps {
+    posts: Post[]
+}
+
+export function FromTheBlog({ posts }: FromTheBlogProps) {
     return <Section id="contact" subtitle="From the Blog">
-        <LatestPosts />
+        <LatestPosts posts={posts} />
     </Section>
 }

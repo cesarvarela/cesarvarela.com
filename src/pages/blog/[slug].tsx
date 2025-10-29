@@ -33,12 +33,12 @@ const components = {
     </h1>
   ),
   h2: (props: any) => (
-    <h2 {...props} className="text-3xl mt-32 mx-auto relative before:w-2 before:h-18 before:content-[''] before:left-1 before:absolute before:-bottom-5 before:-top-24 before:bg-no-repeat before:bg-[url('/images/thing.svg')]">
+    <h2 {...props} className="text-3xl mt-32 mx-auto relative font-bold before:w-2 before:h-18 before:content-[''] before:left-1 before:absolute before:-bottom-5 before:-top-24 before:bg-no-repeat before:bg-[url('/images/thing.svg')]">
       {props.children}
     </h2>
   ),
   h3: (props: any) => (
-    <h3 {...props} className="text-2xl mt-12 mx-auto">
+    <h3 {...props} className="text-2xl mt-12 mx-auto font-bold">
       {props.children}
     </h3>
   ),
@@ -57,9 +57,10 @@ interface PostProps {
   };
   slug: string;
   timeToRead: number;
+  latestPosts: any[];
 }
 
-const PostLayout = ({ source, frontmatter, slug, timeToRead }: PostProps) => {
+const PostLayout = ({ source, frontmatter, slug, timeToRead, latestPosts }: PostProps) => {
   const siteUrl = "https://cesarvarela.com";
   
   const jsonLd = {
@@ -98,7 +99,7 @@ const PostLayout = ({ source, frontmatter, slug, timeToRead }: PostProps) => {
         <h3 className="bg-gradient-to-r from-[#3FC5FF] to-[#FF3EC9] bg-clip-text text-transparent tracking-tight mt-14 mb-0">
           Latest posts
         </h3>
-        <LatestPostsBase className="mt-6" />
+        <LatestPostsBase className="mt-6" posts={latestPosts} />
       </div>
     </Layout>
   )
@@ -137,12 +138,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     frontmatter.date = frontmatter.date.toISOString().split('T')[0]
   }
   
+  // Get latest posts for the sidebar
+  const allPosts = getAllPosts()
+  const latestPosts = allPosts.slice(0, 5) // Get latest 5 posts
+  
   return {
     props: {
       source: mdxSource,
       frontmatter,
       slug,
       timeToRead,
+      latestPosts,
     },
   }
 }

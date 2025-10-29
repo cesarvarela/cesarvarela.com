@@ -65,17 +65,25 @@ function CodeWindow({ className, title, language = "javascript" as Language, sou
               className={`${className} m-0 text-left font-mono`} 
               style={{ ...style, padding: '20px' }}
             >
-              {tokens.map((line, i) => (
-                <div 
-                  key={i} 
-                  {...getLineProps({ line, key: i })}
-                  className={i === tokens.length - 1 ? 'hidden' : ''}
-                >
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
-                  ))}
-                </div>
-              ))}
+              {tokens.map((line, i) => {
+                const lineProps = getLineProps({ line, key: i });
+                const { key: lineKey, ...restLineProps } = lineProps;
+                return (
+                  <div 
+                    key={i} 
+                    {...restLineProps}
+                    className={i === tokens.length - 1 ? 'hidden' : ''}
+                  >
+                    {line.map((token, key) => {
+                      const tokenProps = getTokenProps({ token, key });
+                      const { key: tokenKey, ...restTokenProps } = tokenProps;
+                      return (
+                        <span key={key} {...restTokenProps} />
+                      );
+                    })}
+                  </div>
+                );
+              })}
             </pre>
           )}
         </Highlight>
