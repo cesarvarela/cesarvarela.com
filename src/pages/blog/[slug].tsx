@@ -1,7 +1,6 @@
 import React from "react"
 import LatestPostsBase from "../../components/LatestPosts"
 import CodeWindow from "../../components/CodeWindow"
-import thing from '../../images/thing.svg'
 import Link from 'next/link'
 import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -22,6 +21,14 @@ function MDXCodeBlock({ children }: any) {
 }
 
 const components = {
+  img: (props: any) => {
+    // Transform relative blog image paths to absolute public paths
+    let src = props.src;
+    if (src?.startsWith('./images/')) {
+      src = src.replace('./images/', '/images/blog/');
+    }
+    return <img {...props} src={src} className="mt-9 mx-auto rounded-lg" />;
+  },
   p: (props: any) => (
     <p {...props} className="mt-9 mx-auto text-lg leading-relaxed [&_code]:font-mono [&_code]:p-1 [&_code]:border [&_code]:border-gray-400 [&_code]:rounded">
       {props.children}

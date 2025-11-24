@@ -1,0 +1,15 @@
+---
+title: Claude Code Terminal Flicker, Months In
+date: 2025-10-29
+tags: claude, claude code, bug, terminal, tui, ink
+---
+
+Months in and the terminal still flickers. Windows, macOS, Linux. VS Code, Windows Terminal, iTerm2, Warp, IntelliJ, kitty. Long threads and parallel agents make it worse. 2.0.28 still flickers for me (macOS, VS Code terminal, zsh). Looks like a disco strobe. Funny until you try to type.
+
+Quick hits that sometimes help:
+- `!clear` or a fresh terminal
+- Taller terminal window
+- Windows Terminal: set `compatibility.enableUnfocusedAcrylic: false`
+- iTerm2: “Maximize throughput at the cost of higher latency”
+
+Bigger question: are we entering a world where LLMs make us code faster, but basic bugs get harder to squash? Closed source makes that worse. If this were open source, someone would likely have shipped a fix by now.
